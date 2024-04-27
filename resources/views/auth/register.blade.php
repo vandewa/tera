@@ -1,86 +1,264 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <x-validation-errors class="mb-4" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon_io/favicon.ico') }}">
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <div>
-                <x-label for="name" value="{{ __('Nama') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                    autofocus autocomplete="name" />
-            </div>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-            <div class="mt-4">
-                <x-label for="nik" value="{{ __('NIK') }}" />
-                <x-input id="nik" class="block mt-1 w-full" type="number" name="nik" :value="old('nik')"
-                    required autofocus autocomplete="nik" />
-            </div>
-            <div class="mt-4">
-                <x-label for="nik" value="{{ __('Nomor Whatsapp') }}" />
-                <x-input id="wa" class="block mt-1 w-full" type="number" name="wa" :value="old('wa')"
-                    required autofocus autocomplete="wa" />
-            </div>
+    <!-- Fonts -->
+    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                    required autocomplete="username" />
-            </div>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://kit.fontawesome.com/bb9305debb.js" crossorigin="anonymous"></script>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="new-password" />
-            </div>
+    <!-- Styles -->
+    @livewireStyles
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Konfirmasi Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                    name="password_confirmation" required autocomplete="new-password" />
-            </div>
+    <style>
+        body {
+            background-image: linear-gradient(#0080bc, #24a13b);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-family: "Montserrat", sans-serif;
+            font-size: 14px;
+            justify-content: center;
+        }
 
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.2s;
+        }
 
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                    'terms_of_service' =>
-                                        '<a target="_blank" href="' .
-                                        route('terms.show') .
-                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                        __('Terms of Service') .
-                                        '</a>',
-                                    'privacy_policy' =>
-                                        '<a target="_blank" href="' .
-                                        route('policy.show') .
-                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                        __('Privacy Policy') .
-                                        '</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
+        a:hover,
+        a:focus {
+            color: #fdc654;
+            transition: all 0.2s;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .login-card {
+            padding: 32px 32px 0;
+            box-sizing: border-box;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            height: 100%;
+            max-height: 740px;
+            max-width: 350px;
+            flex-direction: column;
+        }
+
+        .login-card-content {
+            flex-grow: 2;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-card-footer {
+            padding: 32px 0;
+        }
+
+        h2 .highlight {
+            color: #fdc654;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        h3 {
+            color: #d61e2d;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            border-radius: 40px;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 16px;
+            background: rgba(255, 255, 255, 0.1);
+            align-items: center;
+        }
+
+        button {
+            background: white !important;
+            display: block;
+            color: #d61e2d;
+            width: 100%;
+            border: none;
+            border-radius: 40px;
+            padding: 12px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 32px;
+            outline: none;
+        }
+
+        .form-field {
+            margin-bottom: 16px;
+            width: 100%;
+            position: relative;
+        }
+
+        .form-field .icon {
+            position: absolute;
+            background: white;
+            color: #d61e2d;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .form-field .icon:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-left: 12px solid white;
+            position: absolute;
+            top: 8px;
+            right: -20px;
+        }
+
+        .form-field input {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 100%;
+            border-radius: 16px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .form-field input::placeholder {
+            color: white;
+        }
+
+        .form-field input:hover,
+        .form-field input:focus {
+            background: white;
+            color: #d61e2d;
+            transition: all 0.2s;
+        }
+
+        .form-field input:hover::placeholder {
+            color: #d61e2d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <div class="login-card-content">
+            <div class="header">
+                <div class="logo">
+                    <div><img src="{{ asset('pemda.png') }}" alt=""></div>
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
+                <h2>PENDAFTARAN</h2>
+                {{-- <h2>Rain<span class="highlight">bo</span></h2> --}}
+                {{-- <h3 style="color: white;">Disdagkopukm Kabupaten Wonosobo</h3> --}}
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+            <form method="post" action="{{ route('login') }}">
+                @csrf
+                <div class="form">
+                    <div class="form-field username">
+                        <div class="icon">
+                            <i class="far fa-user"></i>
+                        </div>
+                        <input type="text" placeholder="Nama" name="name" >
+                    </div>
+                    <div class="form-field">
+                        <div class="icon">
+                            <i class="far fa-address-card"></i>
+                        </div>
+                        <input type="number" placeholder="NIK" name="nik" >
+                    </div>
+                    <div class="form-field">
+                        <div class="icon">
+                            <i class="far fa-solid fa-phone"></i>
+                        </div>
+                        <input type="number" placeholder="Nomor WhatsApp" name="wa" >
+                    </div>
+                    <div class="form-field">
+                        <div class="icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <input type="email" placeholder="Email" name="email" >
+                    </div>
+                    <div class="form-field password">
+                        <div class="icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" placeholder="Password" name="password" >
+                    </div>
+                    <div class="form-field password">
+                        <div class="icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <input type="password" placeholder="Konfirmasi Password" name="password_confirmation">
+                    </div>
+
+                    <button type="submit">
+                        Daftar
+                    </button>
+                    <div>
+                        Sudah punya akun? <a href="/login">Login Sekarang</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="login-card-footer">
+            {{-- <a href="">Forgot password?</a> --}}
+        </div>
+    </div>
+
+    @livewireScripts
+    <script>
+        document.getElementsByTagName("h1")[0].style.fontSize = "80px";
+    </script>
+    <!-- Javascript Requirements -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!}
+</body>
+
+</html>

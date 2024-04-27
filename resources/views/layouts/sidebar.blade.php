@@ -85,6 +85,15 @@
                               </p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="{{ route('data-diri') }}"
+                              class="nav-link  {{ Request::segment(1) == 'data-diri' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-home"></i>
+                              <p>
+                                  UTTP
+                              </p>
+                          </a>
+                      </li>
 
                       <li
                           class="nav-item
