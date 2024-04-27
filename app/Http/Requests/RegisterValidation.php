@@ -25,7 +25,7 @@ class RegisterValidation extends FormRequest
             'name' => 'required',
             'nik' => 'required',
             'wa' => 'required',
-            'email' => 'required|unique:users,email',
+            // 'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required|same:password',
         ];

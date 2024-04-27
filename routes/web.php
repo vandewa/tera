@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Livewire\User;
 use App\Livewire\Dashboard;
 use App\Livewire\DataDiri;
@@ -18,6 +19,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('data-diri', DataDiri::class)->name('data-diri');
+    Route::post('/registerr', [RegisterController::class, 'store'])->name('register.store');
+
 
     Route::group(['prefix' => 'master', 'as' => 'master.'], function () {
         Route::get('user-index', UserIndex::class)->name('user-index');

@@ -195,38 +195,38 @@
                 {{-- <h2>Rain<span class="highlight">bo</span></h2> --}}
                 {{-- <h3 style="color: white;">Disdagkopukm Kabupaten Wonosobo</h3> --}}
             </div>
-            <form method="post" action="{{ route('login') }}">
+            <form method="post" action="{{ route('register.store') }}">
                 @csrf
                 <div class="form">
                     <div class="form-field username">
                         <div class="icon">
                             <i class="far fa-user"></i>
                         </div>
-                        <input type="text" placeholder="Nama" name="name" >
+                        <input type="text" placeholder="Nama" name="name">
                     </div>
                     <div class="form-field">
                         <div class="icon">
                             <i class="far fa-address-card"></i>
                         </div>
-                        <input type="number" placeholder="NIK" name="nik" >
+                        <input type="number" placeholder="NIK" name="nik">
                     </div>
                     <div class="form-field">
                         <div class="icon">
                             <i class="far fa-solid fa-phone"></i>
                         </div>
-                        <input type="number" placeholder="Nomor WhatsApp" name="wa" >
+                        <input type="number" placeholder="Nomor WhatsApp" name="wa">
                     </div>
                     <div class="form-field">
                         <div class="icon">
                             <i class="far fa-envelope"></i>
                         </div>
-                        <input type="email" placeholder="Email" name="email" >
+                        <input type="email" placeholder="Email" name="email">
                     </div>
                     <div class="form-field password">
                         <div class="icon">
                             <i class="fas fa-lock"></i>
                         </div>
-                        <input type="password" placeholder="Password" name="password" >
+                        <input type="password" placeholder="Password" name="password">
                     </div>
                     <div class="form-field password">
                         <div class="icon">
@@ -249,6 +249,21 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        function sweetAlert() {
+            Swal.fire(
+                'Berhasil!',
+                'Menambahkan data.',
+                'success'
+            )
+        }
+
+        @if (session('pesan'))
+            sweetAlert();
+        @endif
+    </script>
+
     @livewireScripts
     <script>
         document.getElementsByTagName("h1")[0].style.fontSize = "80px";
@@ -258,7 +273,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!}
+    {{-- {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!} --}}
 </body>
 
 </html>

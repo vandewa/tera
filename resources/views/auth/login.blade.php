@@ -224,6 +224,22 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        // alert('asu');
+
+        function sweetAlert() {
+            Swal.fire(
+                'Berhasil!',
+                'Menambahkan data.',
+                'success'
+            )
+        }
+
+        @if (session('pesan'))
+            sweetAlert();
+        @endif
+    </script>
     @livewireScripts
     <script>
         document.getElementsByTagName("h1")[0].style.fontSize = "80px";
