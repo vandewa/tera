@@ -67,8 +67,8 @@
                       </li>
 
                       <li class="nav-item">
-                          <a href="{{ route('dashboard') }}"
-                              class="nav-link  {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}{{ Request::segment(1) == '' ? 'active' : '' }}">
+                          <a href="{{ route('permohonan') }}"
+                              class="nav-link  {{ Request::segment(1) == 'permohonan' ? 'active' : '' }}{{ Request::segment(1) == '' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-home"></i>
                               <p>
                                   Permohonan
@@ -118,25 +118,25 @@
                                   <a href="{{ route('master.uttp') }}"
                                       class="nav-link {{ Request::segment(2) == 'uttp' ? 'active' : '' }}">
                                       @if (Request::segment(2) == 'uttp')
-                                          <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
                                       @else
-                                          <i class="far fa-circle nav-icon ml-2"></i>
+                                          <i class="ml-2 far fa-circle nav-icon"></i>
                                       @endif
                                       <p>Jenis UTTP</p>
                                   </a>
                               </li>
                               <li class="nav-item">
                                   <a href="{{ route('master.user-index') }}"
-                                      class="nav-link 
+                                      class="nav-link
                                         {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
                                         {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                       ">
                                       @if (Request::segment(2) == 'user-index')
-                                          <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
                                       @elseif(Request::segment(2) == 'user')
-                                          <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
                                       @else
-                                          <i class="far fa-circle nav-icon ml-2"></i>
+                                          <i class="ml-2 far fa-circle nav-icon"></i>
                                       @endif
                                       <p>User</p>
                                   </a>

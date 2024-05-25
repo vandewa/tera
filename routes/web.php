@@ -4,6 +4,8 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\User;
 use App\Livewire\Dashboard;
 use App\Livewire\DataDiri;
+use App\Livewire\Permohonan\PermohonanFormPage;
+use App\Livewire\Permohonan\PermohonanPage;
 use App\Livewire\UserIndex;
 use App\Livewire\Uttp;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +20,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
+    Route::get('permohonan', PermohonanPage::class)->name('permohonan');
+    Route::get('permohonan/create', PermohonanFormPage::class)->name('permohonan.create');
     Route::get('data-diri', DataDiri::class)->name('data-diri');
     Route::post('/registerr', [RegisterController::class, 'store'])->name('register.store');
 
