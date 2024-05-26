@@ -43,16 +43,56 @@
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <thead>
-                                                            <th>No</th>
-                                                            <th>Nama</th>
+                                                            <th>Nomor</th>
+                                                            <th>Jenis Permohonan</th>
+                                                            <th>Alamat</th>
+                                                            <th>Stattus Pengajuan</th>
+                                                            <th>UTTP</th>
                                                             <th>Aksi</th>
                                                         </thead>
                                                         <tbody>
+                                                            @foreach ($post as $datum)
+                                                                <tr>
+                                                                    <td>
+                                                                        {{ $datum->order_no }}
+                                                                    </td>
+                                                                    <td>{{ $datum->jenisPengajuan->code_nm ?? '-' }}
+                                                                    </td>
+                                                                    <td>{{ $datum->alamat ?? '-' }}
+                                                                    </td>
+                                                                    <td>{{ $datum->statusPengajuan->code_nm ?? '-' }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <ul>
+                                                                            @foreach ($datum->uttpItem as $item)
+                                                                                <li> {{ $item->uttp->nama ?? '-' }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <button type="button"
+                                                                                class="btn btn-default fas fa-bars"
+                                                                                data-toggle="dropdown"
+                                                                                aria-expanded="false">
+                                                                            </button>
+                                                                            <ul class="dropdown-menu" style="">
+                                                                                <li><a class="dropdown-item"
+                                                                                        href="#">Dropdown link</a>
+                                                                                </li>
+                                                                                <li><a class="dropdown-item"
+                                                                                        href="#">Dropdown link</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
 
                                                         </tbody>
                                                     </table>
                                                 </div>
-
+                                                {{ $post->links() }}
                                             </div>
                                         </div>
                                         <!-- /.card -->

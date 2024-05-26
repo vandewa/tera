@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Permohonan;
 
+use App\Models\Pengajuan;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Uttp as ModelUttp;
@@ -99,7 +100,7 @@ class PermohonanPage extends Component
 
     public function render()
     {
-        $data = ModelUttp::all();
+        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->paginate(10);
 
         return view('livewire.permohonan.permohonan-page', [
             'post' => $data,

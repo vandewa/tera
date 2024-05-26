@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pengajuan_uttps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('uttp_id')->nullable();
-            $table->unsignedBigInteger('pemohon_id')->nullable();
+            $table->unsignedBigInteger('pengajuan_id')->nullable();
             $table->string('no_seri')->nullable();
             $table->string('merek')->nullable();
             $table->string('tipe')->nullable()->comment('tipe / kelas');

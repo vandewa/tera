@@ -3,6 +3,8 @@
 namespace App\Livewire\Permohonan;
 
 use App\Models\ComCode;
+use App\Models\Pemohon;
+use App\Models\Pengajuan;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Uttp as ModelUttp;
@@ -49,9 +51,31 @@ class PermohonanFormPage extends Component
 
     public function save() {
         $this->validate([
-            'formUttp.*.uttp_id' => 'required'
+            'formUttp.*.uttp_id' => 'required',
+            'formUttp.*.jumlah' => 'required',
+            'form.pengajuan_tp' => 'required',
+            'form.alamat' => 'required_if:form.pengajuan_tp,PENGAJUAN_TP_02',
         ]);
 
+        $a = Pengajuan::create([
+            'user_id' => auth()->user()->id,
+            'order_no' => genNo(),
+            'pengajuan_st' => 'PENGAJUAN_ST_01',
+        ]+ $this->form);
+
+        foreach($this->formUttp as $item){
+            $a->uttpItem()->create($item);
+        }
+
+
+        $this->redirect(PermohonanPage::class);
+        $this->js(<<<JS
+            Swal.fire({
+            title: "Berhasil!",
+            text: "Anda berhasil meengajuak tera!",
+            icon: "success"
+            });
+        JS);
     }
 
     public function tambahUttp() {

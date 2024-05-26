@@ -46,7 +46,7 @@
                                                             <div class="col-sm-10">
                                                                 <select name="" id=""
                                                                     wire:model.live='form.pengajuan_tp'
-                                                                    class="form-control">
+                                                                    class="form-control @error('form.pengajuan_tp') is-invalid @enderror">
                                                                     <option value="">Pilih Jenis Pengajuan
                                                                     </option>
                                                                     @foreach ($jenisPengajuan as $item)
@@ -62,7 +62,8 @@
                                                                 <label for="inputPassword3"
                                                                     class="col-sm-2 col-form-label">Alamat</label>
                                                                 <div class="col-sm-10">
-                                                                    <textarea name="" class="form-control" id="" cols="30" rows="3"></textarea>
+                                                                    <textarea name="" wire:model='form.alamat' class="form-control @error('form.alamat') is-invalid @enderror"
+                                                                        id="" cols="30" rows="3"></textarea>
                                                                 </div>
                                                             </div>
                                                         @endif
@@ -105,7 +106,7 @@
                                                                         <div class="col-lg-2 col-sm-6 col-xs-12">
                                                                             <label>Jenis</label>
                                                                             <input type="text" class="form-control"
-                                                                                wire:model='formUttp.{{ $index }}.jenis'
+                                                                                wire:model='formUttp.{{ $index }}.tipe'
                                                                                 placeholder="Jenis">
                                                                         </div>
                                                                         <div class="col-lg-2 col-sm-6 col-xs-12">
@@ -116,7 +117,8 @@
                                                                         </div>
                                                                         <div class="col-lg-1 col-sm-6 col-xs-12">
                                                                             <label>Jumlah*</label>
-                                                                            <input type="number" class="form-control"
+                                                                            <input type="number"
+                                                                                class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
                                                                                 wire:model='formUttp.{{ $index }}.jumlah'
                                                                                 placeholder="Jumlah">
                                                                         </div>
