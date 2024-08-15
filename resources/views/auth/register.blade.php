@@ -259,9 +259,10 @@
             )
         }
 
-        @if (session('pesan'))
-            sweetAlert();
-        @endif
+        if ($request - > session() - > has('pesan')) {
+            alert('asu');
+
+        }
     </script>
 
     @livewireScripts
@@ -273,7 +274,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-    {{-- {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!} --}}
+    {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!}
 </body>
 
 </html>

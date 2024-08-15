@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -20,8 +21,11 @@ class RegisterController extends Controller
 
         $a->addrole('3');
 
+        // $request->session()->flash('pesan', 'ok');
 
-        return redirect()->url('/login')->with('pesan', 'ok');
+        Session::flash('pesan', 'ok');
+
+        return redirect()->url('/login');
 
     }
 }

@@ -68,8 +68,8 @@
 
                       <li class="nav-item">
                           <a href="{{ route('permohonan') }}"
-                              class="nav-link  {{ Request::segment(1) == 'permohonan' ? 'active' : '' }}{{ Request::segment(1) == '' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-home"></i>
+                              class="nav-link  {{ Request::segment(1) == 'permohonan' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-pencil-alt"></i>
                               <p>
                                   Permohonan
                               </p>
@@ -79,7 +79,7 @@
                       <li class="nav-item">
                           <a href="{{ route('data-diri') }}"
                               class="nav-link  {{ Request::segment(1) == 'data-diri' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-home"></i>
+                              <i class="nav-icon fas fa-user"></i>
                               <p>
                                   Data Diri
                               </p>

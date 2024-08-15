@@ -46,7 +46,7 @@
                                                             <th>Nomor</th>
                                                             <th>Jenis Permohonan</th>
                                                             <th>Alamat</th>
-                                                            <th>Stattus Pengajuan</th>
+                                                            <th>Status Pengajuan</th>
                                                             <th>UTTP</th>
                                                             <th>Aksi</th>
                                                         </thead>

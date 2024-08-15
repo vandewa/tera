@@ -196,6 +196,15 @@
             </div>
             <form method="post" action="{{ route('login') }}">
                 @csrf
+
+                <x-validation-errors class="mb-4" />
+
+                @if (session('status'))
+                    <div class="alert alert-danger">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 <div class="form">
                     <div class="form-field username">
                         <div class="icon">
@@ -226,8 +235,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        // alert('asu');
-
         function sweetAlert() {
             Swal.fire(
                 'Berhasil!',
@@ -236,9 +243,10 @@
             )
         }
 
-        @if (session('pesan'))
-            sweetAlert();
-        @endif
+        if ($request - > session() - > has('pesan')) {
+            alert('asu');
+
+        }
     </script>
     @livewireScripts
     <script>

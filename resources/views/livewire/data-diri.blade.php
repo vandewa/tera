@@ -92,6 +92,17 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="inputName" class="col-sm-2 col-form-label">Nomor
+                                                WhatsApp</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" wire:model.blur='form.wa'
+                                                    placeholder="Nomor WhatsApp">
+                                                @error('form.wa')
+                                                    <span class="form-text text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
                                                 <input type="email" class="form-control" wire:model.blur='form.email'
