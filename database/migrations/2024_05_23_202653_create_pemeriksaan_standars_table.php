@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pemeriksaan_standars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pemeriksaan_id');
-            $table->unsignedInteger('uder_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

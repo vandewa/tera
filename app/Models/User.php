@@ -71,4 +71,8 @@ class User extends Authenticatable implements LaratrustUser
         }
 
     }
+
+    public function pemohon() {
+        return $this->hasOne(Pemohon::class,'user_id');
+    }
 }

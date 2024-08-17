@@ -75,6 +75,15 @@
                               </p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="{{ route('pemohon') }}"
+                              class="nav-link  {{ Request::segment(1) == 'pemohon' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-pencil-alt"></i>
+                              <p>
+                                  Pemohon
+                              </p>
+                          </a>
+                      </li>
 
                       <li class="nav-item">
                           <a href="{{ route('data-diri') }}"
