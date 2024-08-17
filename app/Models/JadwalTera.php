@@ -9,4 +9,16 @@ class JadwalTera extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function scopeCari($filter, $value)
+    {
+        if ($value) {
+            return $this->where('lokasi', 'like', "%$value%");
+        }
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ComCode::class, 'jadwal_tera_st');
+    }
 }

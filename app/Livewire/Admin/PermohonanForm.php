@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Livewire\Permohonan;
+namespace App\Livewire\Admin;
 
 use App\Models\ComCode;
+use App\Models\JadwalTera;
 use App\Models\Pemohon;
 use App\Models\Pengajuan;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Uttp as ModelUttp;
 
-class PermohonanFormPage extends Component
+class PermohonanForm extends Component
 {
     use WithPagination;
 
@@ -18,6 +19,7 @@ class PermohonanFormPage extends Component
     public $form = [
         'pengajuan_tp' => null,
         'alamat' => null,
+        'jadwal_tera_id' => null,
     ];
 
     public $formUttp = [
@@ -70,7 +72,7 @@ class PermohonanFormPage extends Component
         }
 
 
-        $this->redirect(PermohonanPage::class);
+        $this->redirect(Permohonan::class);
         $this->js(<<<JS
             Swal.fire({
             title: "Berhasil!",
@@ -98,11 +100,13 @@ class PermohonanFormPage extends Component
     {
         $data = ModelUttp::all();
         $jenisPengajuan = ComCode::where('code_group', 'PENGAJUAN_TP')->get();
+        $jadwal = JadwalTera::where('jadwal_tera_st', 'JADWAL_TERA_ST_01')->get();
 
-        return view('livewire.permohonan.permohonan-form-page', [
+        return view('livewire.admin.permohonan-form', [
             'uttp' => $data,
             'uttpForm' => $this->formUttp,
-            'jenisPengajuan' => $jenisPengajuan
+            'jenisPengajuan' => $jenisPengajuan,
+            'jadwal' => $jadwal,
         ]);
     }
 }

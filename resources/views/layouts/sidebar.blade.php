@@ -77,9 +77,19 @@
                       </li>
 
                       <li class="nav-item">
+                          <a href="{{ route('admin.permohonan') }}"
+                              class="nav-link  {{ Request::segment(2) == 'permohonan' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-pencil-alt"></i>
+                              <p>
+                                  Permohonan
+                              </p>
+                          </a>
+                      </li>
+
+                      <li class="nav-item">
                           <a href="{{ route('data-diri') }}"
                               class="nav-link  {{ Request::segment(1) == 'data-diri' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-user"></i>
+                              <i class="nav-icon fas fa-user-edit"></i>
                               <p>
                                   Data Diri
                               </p>
@@ -94,18 +104,32 @@
                               </p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="{{ route('jadwal-tera') }}"
+                              class="nav-link  
+                              {{ Request::segment(1) == 'jadwal-tera' ? 'active' : '' }}
+                              {{ Request::segment(1) == 'detail-jadwal-tera' ? 'active' : '' }}
+                              ">
+                              <i class="nav-icon fas fa-calendar"></i>
+                              <p>
+                                  Jadwal Tera
+                              </p>
+                          </a>
+                      </li>
 
                       <li
                           class="nav-item
                             {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
                         ">
                           <a href="#"
                               class="nav-link
                                 {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
                                 ">
                               <i class="nav-icon fa-solid fa-file-lines"></i>
                               <p>
@@ -123,6 +147,17 @@
                                           <i class="ml-2 far fa-circle nav-icon"></i>
                                       @endif
                                       <p>Jenis UTTP</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="{{ route('master.peralatan') }}"
+                                      class="nav-link {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}">
+                                      @if (Request::segment(2) == 'peralatan')
+                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                      @else
+                                          <i class="ml-2 far fa-circle nav-icon"></i>
+                                      @endif
+                                      <p>Peralatan</p>
                                   </a>
                               </li>
                               <li class="nav-item">
