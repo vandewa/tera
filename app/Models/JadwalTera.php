@@ -18,4 +18,16 @@ class JadwalTera extends Model
     {
         return $this->hasMany(JadwalTeraPetugas::class);
     }
+
+    public function scopeCari($filter, $value)
+    {
+        if ($value) {
+            return $this->where('lokasi', 'like', "%$value%");
+        }
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ComCode::class, 'jadwal_tera_st');
+    }
 }

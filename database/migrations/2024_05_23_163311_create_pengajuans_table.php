@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pemohon_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('order_no');
             $table->string('pengajuan_tp')->nullable();
             $table->string('pengajuan_st')->nullable();

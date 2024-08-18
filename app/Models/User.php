@@ -69,7 +69,11 @@ class User extends Authenticatable implements LaratrustUser
             return $this->where('name', 'like', "%$value%")
                 ->orWhere('email', 'like', "%$value%");
         }
+    }
 
+    public function jadwal()
+    {
+        return $this->hasMany(JadwalTeraPetugas::class, 'user_id');
     }
 
     public function pemohon() {

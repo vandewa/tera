@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $this->call(ComCodeSeeder::class);
         $this->call(LaratrustSeeder::class);
         $this->call(UttpSeeder::class);
     }

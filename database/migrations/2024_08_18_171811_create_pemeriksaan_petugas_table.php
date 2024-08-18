@@ -4,18 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('peralatans', function (Blueprint $table) {
+        Schema::create('pemeriksaan_petugas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->unsignedBigInteger('satuan_id');
-            $table->string('no_seri')->nullable();
-            $table->string('peralatan_st')->nullable();
+            $table->foreignId('pemeriksaan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('peralatans');
+        Schema::dropIfExists('pemeriksaan_petugas');
     }
 };

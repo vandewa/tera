@@ -162,24 +162,34 @@
     @livewireChartsScripts
 
     <script>
-        window.addEventListener('toast', event => {
-            $(document).Toasts('create', {
-                class: event.detail.type ?? 'bg-success',
-                autohide: true,
-                delay: 2000,
-                position: 'topRight',
-                title: event.detail.title,
-                body: event.detail.body
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
             })
 
-        });
-        window.addEventListener('autofocus', event => {
+            window.addEventListener('toast', event => {
+                $(document).Toasts('create', {
+                    class: event.detail.type ?? 'bg-success',
+                    autohide: true,
+                    delay: 2000,
+                    position: 'topRight',
+                    title: event.detail.title,
+                    body: event.detail.body
+                })
 
-            setTimeout(() => {
-                document.getElementById(event.detail.id).focus();
-            }, 300);
+            });
+            window.addEventListener('autofocus', event => {
 
-        });
+                setTimeout(() => {
+                    document.getElementById(event.detail.id).focus();
+                }, 300);
+
+            });
+        })
     </script>
 </body>
 

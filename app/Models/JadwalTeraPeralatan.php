@@ -9,4 +9,14 @@ class JadwalTeraPeralatan extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function jadwal()
+    {
+        return $this->belongsTo(JadwalTera::class, 'jadwal_tera_id');
+    }
+
+    public function peralatan()
+    {
+        return $this->belongsTo(Peralatan::class, 'peralatan_id');
+    }
 }

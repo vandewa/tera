@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pemeriksaan_id');
             $table->unsignedInteger('user_id')->nullable();
+            $table->string('nama')->nullable();
             $table->timestamps();
         });
     }
