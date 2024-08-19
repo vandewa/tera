@@ -108,12 +108,8 @@
                     <label>Standar</label>
                     @foreach ($standars as $index => $standar)
                         <div class="mb-3 input-group">
-                            <select class="form-control" wire:model.defer="standars.{{ $index }}.user_id">
-                                <option value="">Select User</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" wire:model.defer="standars.{{ $index }}.name">
+                            </input>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
                                     wire:click="removeStandar({{ $index }})">Remove</button>
