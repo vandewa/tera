@@ -51,11 +51,32 @@
                                                                     </option>
                                                                     @foreach ($jadwal as $item)
                                                                         <option value="{{ $item->id }}">
-                                                                            {{ $item->lokasi }}
+                                                                            {{ $item->lokasi . ' (' . Carbon\Carbon::parse($item->tanggal_mulai)->isoFormat(' D MMMM Y') . ')' }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                        </div>
+                                                        <div class="mb-2 row">
+                                                            <label for=""
+                                                                class="col-sm-2 col-form-label">Pemohon</label>
+                                                            <div class="col-md-5">
+                                                                <div class="input-group ">
+                                                                    <p class="form-control">{{ $user->name ?? '-' }}</p>
+                                                                    <span class="input-group-append">
+                                                                        <button type="button"
+                                                                            class="btn btn-info btn-flat"
+                                                                            wire:click="$dispatch('show-modal-user')">Pilih</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <button type="button" class="btn btn-danger btn-flat"
+                                                                    wire:click="$dispatchTo('component.modal-tambah-user','show-modal-tambah-user')">
+                                                                    *Klik
+                                                                    disini apabila data pemohon belum ada</button>
+                                                            </div>
+
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inputPassword3"
@@ -181,10 +202,8 @@
             </div>
         </div>
     </section>
-
-    {{-- Modal data --}}
-
-    {{-- end modal  --}}
+    <livewire:component.modal-user wire:key='modal-user'>
+        <livewire:component.modal-tambah-user wire:key='modal-tambah-user'>
 </div>
 
 @push('js')

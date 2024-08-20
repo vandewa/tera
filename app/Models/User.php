@@ -67,7 +67,8 @@ class User extends Authenticatable implements LaratrustUser
     {
         if ($value) {
             return $this->where('name', 'like', "%$value%")
-                ->orWhere('email', 'like', "%$value%");
+                ->orWhere('email', 'like', "%$value%")
+                ->orWhere('nik', 'like', "%$value%");
         }
     }
 
@@ -76,7 +77,8 @@ class User extends Authenticatable implements LaratrustUser
         return $this->hasMany(JadwalTeraPetugas::class, 'user_id');
     }
 
-    public function pemohon() {
-        return $this->hasOne(Pemohon::class,'user_id');
+    public function pemohon()
+    {
+        return $this->hasOne(Pemohon::class, 'user_id');
     }
 }

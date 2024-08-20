@@ -44,6 +44,8 @@
                                                     <table class="table">
                                                         <thead>
                                                             <th>Nomor</th>
+                                                            <th>Jadwal</th>
+                                                            <th>Nama</th>
                                                             <th>Jenis Permohonan</th>
                                                             <th>Alamat</th>
                                                             <th>Status Pengajuan</th>
@@ -55,6 +57,13 @@
                                                                 <tr>
                                                                     <td>
                                                                         {{ $datum->order_no }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ Carbon\Carbon::parse($datum->jadwal->tanggal_mulai ?? '')->isoFormat(' D MMMM Y') }}
+                                                                        ( {{ $datum->jadwal->lokasi ?? '' }})
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $datum->user->name ?? '' }}
                                                                     </td>
                                                                     <td>{{ $datum->jenisPengajuan->code_nm ?? '-' }}
                                                                     </td>
@@ -78,10 +87,16 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"
-                                                                                        href="#">Dropdown link</a>
+                                                                                        href="{{ route('permohonan-proses', $datum->id) }}"><i
+                                                                                            class="far fa-arrow-alt-circle-right mr-2"></i>Proses</a>
                                                                                 </li>
                                                                                 <li><a class="dropdown-item"
-                                                                                        href="#">Dropdown link</a>
+                                                                                        href="{{ route('admin.permohonan.create', $datum->id) }}"><i
+                                                                                            class="far fa-edit mr-2"></i>Edit</a>
+                                                                                </li>
+                                                                                <li><button class="dropdown-item"
+                                                                                        wire:click="delete('{{ $datum->id }}')"><i
+                                                                                            class="far fa-trash-alt mr-2"></i>Hapus</button>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>

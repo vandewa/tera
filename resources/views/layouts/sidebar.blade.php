@@ -75,7 +75,7 @@
                               </p>
                           </a>
                       </li>
-                      <li class="nav-item">
+                      {{-- <li class="nav-item">
                           <a href="{{ route('pemohon') }}"
                               class="nav-link  {{ Request::segment(1) == 'pemohon' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-pencil-alt"></i>
@@ -83,7 +83,7 @@
                                   Pemohon
                               </p>
                           </a>
-                      </li>
+                      </li> --}}
 
                       <li class="nav-item">
                           <a href="{{ route('admin.permohonan') }}"
@@ -104,7 +104,7 @@
                               </p>
                           </a>
                       </li>
-                      <li class="nav-item">
+                      {{-- <li class="nav-item">
                           <a href="{{ route('data-diri') }}"
                               class="nav-link  {{ Request::segment(1) == 'data-diri' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-home"></i>
@@ -112,7 +112,7 @@
                                   UTTP
                               </p>
                           </a>
-                      </li>
+                      </li> --}}
                       <li class="nav-item">
                           <a href="{{ route('jadwal-tera') }}"
                               class="nav-link  

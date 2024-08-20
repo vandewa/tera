@@ -30,6 +30,8 @@ class ComCodeSeeder extends Seeder
             ['com_cd' => 'PERALATAN_ST_03', 'code_nm' => 'Rusak', 'code_group' => 'PERALATAN_ST', 'code_value' => ''],
             ['com_cd' => 'JADWAL_TERA_ST_01', 'code_nm' => 'Aktif', 'code_group' => 'JADWAL_TERA_ST', 'code_value' => ''],
             ['com_cd' => 'JADWAL_TERA_ST_02', 'code_nm' => 'Non Aktif', 'code_group' => 'JADWAL_TERA_ST', 'code_value' => ''],
+            ['com_cd' => 'KEMBALI_ST_01', 'code_nm' => 'Tersedia', 'code_group' => 'KEMBALI_ST', 'code_value' => ''],
+            ['com_cd' => 'KEMBALI_ST_02', 'code_nm' => 'Dipinjam', 'code_group' => 'KEMBALI_ST', 'code_value' => ''],
 
         ];
 

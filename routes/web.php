@@ -39,7 +39,7 @@ Route::middleware([
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('permohonan', Permohonan::class)->name('permohonan');
-        Route::get('permohonan/create', PermohonanForm::class)->name('permohonan.create');
+        Route::get('permohonan/create/{id?}', PermohonanForm::class)->name('permohonan.create');
     });
 
     Route::group(['prefix' => 'master', 'as' => 'master.'], function () {

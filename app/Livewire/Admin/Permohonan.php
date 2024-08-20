@@ -74,7 +74,7 @@ class Permohonan extends Component
 
     public function hapus()
     {
-        ModelUttp::destroy($this->idHapus);
+        Pengajuan::destroy($this->idHapus);
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
