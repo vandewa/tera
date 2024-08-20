@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Livewire\Admin\Permohonan;
+use App\Livewire\ProsesPermohonanPage;
 use Livewire\Component;
 use App\Models\Pengajuan;
 
@@ -45,6 +46,7 @@ class FormPersetujuanComponent extends Component
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_02'
         ]);
+        $this->refreshPage();
     }
     public function tolak()  {
         $this->js(<<<'JS'
@@ -73,5 +75,10 @@ class FormPersetujuanComponent extends Component
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_03'
         ]);
+        $this->refreshPage();
+    }
+
+    public function refreshPage() {
+        $this->dispatch( 'restart');
     }
 }

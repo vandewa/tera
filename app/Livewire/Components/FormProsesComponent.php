@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+
 use App\Models\ComCode;
 use App\Models\User;
 use Livewire\Component;
@@ -9,6 +10,7 @@ use App\Models\Pemeriksaan;
 use Livewire\WithFileUploads;
 use App\Models\PemeriksaanPetugas;
 use App\Models\PemeriksaanStandar;
+use App\Models\Pengajuan;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -22,6 +24,7 @@ class FormProsesComponent extends Component
     public $tampilAlasn = false;
     public $hapusStandar = [];
     public $hapusPetugas = [];
+    public $idnya;
 
     public $standars = [];
     public $hasil = [];
@@ -54,6 +57,7 @@ class FormProsesComponent extends Component
 
     public function mount($id = null)
     {
+        $this->idnya = $id;
         $this->users = User::all();
         $this->standars = PemeriksaanStandar::where('pemeriksaan_id', $id)->get()->toArray();
         $this->petugas = PemeriksaanPetugas::where('pemeriksaan_id', $id)->get()->toArray();
@@ -90,8 +94,8 @@ class FormProsesComponent extends Component
         }
 
         // update lokasi file path cerapan
+        $this->pemeriksaan['status_st'] = 'PENGAJUAN_ST_03';
 
-        $data = Pemeriksaan::find($this->pemeriksaan['id'])->update($this->pemeriksaan);
         // $this->pemeriksaan->save();
 
         // Save related data
@@ -112,8 +116,12 @@ class FormProsesComponent extends Component
         }
         PemeriksaanStandar::whereIn('id', $this->hapusStandar)->delete();
         PemeriksaanPetugas::whereIn('id', $this->hapusPetugas)->delete();
-
+        Pengajuan::find($this->idnya )->update([
+            'pengajuan_st' => 'PENGAJUAN_ST_04'
+        ]);
+        $this->dispatch( 'restart');
         session()->flash('message', 'Data saved successfully.');
+
     }
 
     public function addStandar()
