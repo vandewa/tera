@@ -89,7 +89,7 @@
                           <a href="{{ route('admin.permohonan') }}"
                               class="nav-link  {{ Request::segment(2) == 'permohonan' ? 'active' : '' }}
                                {{ Request::segment(1) == 'permohonan' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-pencil-alt"></i>
+                              <i class="nav-icon fas fa-pen-square"></i>
                               <p>
                                   Permohonan
                               </p>
