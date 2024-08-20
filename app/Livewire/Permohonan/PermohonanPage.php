@@ -74,7 +74,7 @@ class PermohonanPage extends Component
 
     public function hapus()
     {
-        ModelUttp::destroy($this->idHapus);
+        Pengajuan::destroy($this->idHapus);
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -100,7 +100,7 @@ class PermohonanPage extends Component
 
     public function render()
     {
-        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->paginate(10);
+        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->where('user_id', auth()->user()->id)->paginate(10);
 
         return view('livewire.permohonan.permohonan-page', [
             'post' => $data,

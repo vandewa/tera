@@ -38,10 +38,27 @@ class PermohonanFormPage extends Component
         }
     }
 
-    public function mount()
+    public function mount($id = "")
     {
         if (count($this->formUttp) < 1) {
             $this->tambahUttp();
+        }
+
+        if ($id) {
+            $data = Pengajuan::find($id); // Fetch the Pengajuan model instance
+            $this->idnya = $id;
+
+            if ($data) { // Check if the data exists
+                $this->form = $data->only(['pengajuan_tp', 'alamat', 'jadwal_tera_id', 'user_id']);
+                $this->formUttp = $data->uttpItem->toArray(); // Fetch related records and convert to array
+
+                // Form alamat
+                $this->bukaAlamat = $this->form['pengajuan_tp'] === 'PENGAJUAN_TP_02';
+
+            }
+
+            $this->edit = true;
+
         }
     }
 
@@ -52,6 +69,7 @@ class PermohonanFormPage extends Component
 
     public function save()
     {
+
         $this->validate([
             'formUttp.*.uttp_id' => 'required',
             'formUttp.*.jumlah' => 'required',
@@ -59,8 +77,27 @@ class PermohonanFormPage extends Component
             'form.alamat' => 'required_if:form.pengajuan_tp,PENGAJUAN_TP_02',
         ]);
 
+        if ($this->edit) {
+            $this->storeUpdate();
+        } else {
+            $this->store();
+        }
+
+        $this->js(<<<JS
+            Swal.fire({
+            title: "Berhasil!",
+            text: "Anda berhasil meengajuak tera!",
+            icon: "success"
+            });
+        JS);
+        $this->redirect(PermohonanPage::class);
+
+    }
+
+    public function store()
+    {
         $a = Pengajuan::create([
-            'user_id' => auth()->user()->id,
+            // 'user_id' => auth()->user()->id,
             'order_no' => genNo(),
             'pengajuan_st' => 'PENGAJUAN_ST_01',
         ] + $this->form);
@@ -69,16 +106,23 @@ class PermohonanFormPage extends Component
             $a->uttpItem()->create($item);
         }
 
-
-        $this->redirect(PermohonanPage::class);
-        $this->js(<<<JS
-            Swal.fire({
-            title: "Berhasil!",
-            text: "Anda berhasil meengajuak tera!",
-            icon: "success"
-            });
-        JS);
     }
+
+    public function storeUpdate()
+    {
+        // Find the Pengajuan record and update it
+        $pengajuan = Pengajuan::find($this->idnya);
+        $pengajuan->update($this->form);
+
+        // Delete existing uttpItems
+        $pengajuan->uttpItem()->delete();
+
+        // Create new uttpItems
+        foreach ($this->formUttp as $item) {
+            $pengajuan->uttpItem()->create($item);
+        }
+    }
+
 
     public function tambahUttp()
     {

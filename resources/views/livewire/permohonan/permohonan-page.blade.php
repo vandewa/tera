@@ -78,10 +78,12 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"
-                                                                                        href="#">Dropdown link</a>
+                                                                                        href="{{ route('permohonan.create', $datum->id) }}"><i
+                                                                                            class="far fa-edit mr-2"></i>Edit</a>
                                                                                 </li>
-                                                                                <li><a class="dropdown-item"
-                                                                                        href="#">Dropdown link</a>
+                                                                                <li><button class="dropdown-item"
+                                                                                        wire:click="delete('{{ $datum->id }}')"><i
+                                                                                            class="far fa-trash-alt mr-2"></i>Hapus</button>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
