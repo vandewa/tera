@@ -23,12 +23,11 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="hasil_st">Hasil ST</label>
-                    <select id="hasil_st" class="form-control" wire:model.defer="pemeriksaan.hasil_st">
+                    <select id="hasil_st" class="form-control" wire:model.live="pemeriksaan.hasil_st">
                         <option value="">Select Hasil ST</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Failed">Failed</option>
-                        <!-- Add other options as needed -->
+                        @foreach ($hasil as $item)
+                            <option value="{{ $item->com_cd }}">{{ $item->code_nm }}</option>
+                        @endforeach
                     </select>
                     @error('pemeriksaan.hasil_st')
                         <span class="text-danger">{{ $message }}</span>
@@ -37,18 +36,20 @@
             </div>
         </div>
 
-        <div class="row">
-            <!-- Hasil Keterangan -->
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="hasil_keterangan">Hasil Keterangan</label>
-                    <textarea id="hasil_keterangan" class="form-control" rows="4" wire:model.defer="pemeriksaan.hasil_keterangan"></textarea>
-                    @error('pemeriksaan.hasil_keterangan')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+        @if ($tampilAlasn)
+            <div class="row">
+                <!-- Hasil Keterangan -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="hasil_keterangan">Hasil Keterangan</label>
+                        <textarea id="hasil_keterangan" class="form-control" rows="4" wire:model.defer="pemeriksaan.hasil_keterangan"></textarea>
+                        @error('pemeriksaan.hasil_keterangan')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <div class="row">
             <!-- Pegawai Berhak and Penandatanganan -->
@@ -108,12 +109,8 @@
                     <label>Standar</label>
                     @foreach ($standars as $index => $standar)
                         <div class="mb-3 input-group">
-                            <select class="form-control" wire:model.defer="standars.{{ $index }}.user_id">
-                                <option value="">Select User</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" wire:model.defer="standars.{{ $index }}.nama">
+                            </input>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
                                     wire:click="removeStandar({{ $index }})">Remove</button>

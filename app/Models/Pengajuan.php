@@ -31,4 +31,10 @@ class Pengajuan extends Model
     {
         return $this->belongsTo(JadwalTera::class, 'jadwal_tera_id');
     }
+
+    public function pemohon()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }
