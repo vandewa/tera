@@ -20,4 +20,8 @@ class Pengajuan extends Model
     public function statusPengajuan() {
         return $this->belongsTo(ComCode::class, 'pengajuan_st');
     }
+
+    public function pemohon() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
