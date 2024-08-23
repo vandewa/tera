@@ -152,6 +152,11 @@
                     required>
             </div>
             <button type="submit">Reset Password</button>
+            <div>
+                <p>
+                    Sudah punya akun? <a href="{{ route('login') }}">Login Sekarang</a>
+                </p>
+            </div>
         </form>
     </div>
 
