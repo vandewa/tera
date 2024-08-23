@@ -8,8 +8,29 @@ use Session;
 
 class RegisterController extends Controller
 {
+    public function index()
+    {
+        return view('auth.register');
+    }
+
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'nik' => 'required|unique:users,nik',
+                'email' => 'required|unique:users,email',
+                'name' => 'required|string|max:255',
+                'wa' => 'required|numeric',
+                'password' => 'required|confirmed|min:8',
+                'password_confirmation' => 'required|same:password',
+            ],
+            [
+                'nik.required' => 'NIK harus diisi.',
+                'email.required' => 'Email harus diisi.',
+                'nik.unique' => 'NIK sudah terdaftar.',
+                'email.unique' => 'Email sudah terdaftar.',
+            ]
+        );
 
         $a = User::create([
             'name' => $request->name,
@@ -21,9 +42,7 @@ class RegisterController extends Controller
 
         $a->addrole('3');
 
-        Session::flash('pesan', 'ok');
-
-        return redirect()->url('/login');
+        return redirect(route('registrasi.index'))->with('status', 'oke');
 
     }
 }

@@ -226,7 +226,7 @@
                         Login
                     </button>
                     <div>
-                        Belum punya akun? <a href="/register">Daftar Sekarang</a>
+                        Belum punya akun? <a href="{{ route('registrasi.index') }}">Daftar Sekarang</a>
                     </div>
                 </div>
             </form>

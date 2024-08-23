@@ -27,6 +27,8 @@ use App\Livewire\Permohonan\PermohonanFormPage;
 Route::get('show-picture', [HelperController::class, 'showPicture'])->name('helper.show-picture');
 Route::get('password-reset', [PasswordResetController::class, 'index'])->name('password.index');
 Route::post('password-reset', [PasswordResetController::class, 'updatePassword'])->name('password.post');
+Route::get('/registrasi', [RegisterController::class, 'index'])->name('registrasi.index');
+Route::post('/registrasi', [RegisterController::class, 'store'])->name('registrasi.store');
 
 
 
@@ -42,7 +44,6 @@ Route::middleware([
     Route::get('permohonan/proses/{id}', ProsesPermohonanPage::class)->name('permohonan-proses');
     Route::get('permohonan/create/{id?}', PermohonanFormPage::class)->name('permohonan.create');
     Route::get('data-diri', DataDiri::class)->name('data-diri');
-    Route::post('/registerr', [RegisterController::class, 'store'])->name('register.store');
     Route::get('jadwal-tera', JadwalTera::class)->name('jadwal-tera');
     Route::get('detail-jadwal-tera/{id?}', DetailJadwalTera::class)->name('detail-jadwal-tera');
 

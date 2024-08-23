@@ -145,25 +145,44 @@
             <h2>Pendaftaran</h2>
             <p>Silakan isi formulir di bawah untuk mendaftar.</p>
         </div>
-        <form method="post" action="{{ route('register.store') }}">
+        <form method="post" action="{{ route('registrasi.store') }}">
             @csrf
             <div class="form-field">
-                <input type="text" placeholder="Nama Lengkap" name="name" required>
+                <input type="text" placeholder="Nama Lengkap" name="name" value="{{ old('name') }}" required>
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-field">
-                <input type="number" placeholder="NIK" name="nik" required>
+                <input type="number" placeholder="NIK" name="nik" value="{{ old('nik') }}" required>
+                @error('nik')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-field">
-                <input type="number" placeholder="Nomor WhatsApp" name="wa" required>
+                <input type="number" placeholder="Nomor WhatsApp" name="wa" value="{{ old('wa') }}" required>
+                @error('wa')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-field">
-                <input type="email" placeholder="Email" name="email" required>
+                <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                @error('wa')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-field">
-                <input type="password" placeholder="Password" name="password" required>
+                <input type="password" placeholder="Password" name="password" value="{{ old('password') }}" required>
+                @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-field">
-                <input type="password" placeholder="Konfirmasi Password" name="password_confirmation" required>
+                <input type="password" placeholder="Konfirmasi Password" name="password_confirmation"
+                    value="{{ old('password_confirmation') }}" required>
+                @error('password_confirmation')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit">Daftar</button>
@@ -180,17 +199,22 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function sweetAlert() {
-            Swal.fire(
-                'Berhasil!',
-                'Menambahkan data.',
-                'success'
-            )
+            Swal.fire({
+                title: "Berhasil!",
+                text: "Menambahkan data user.",
+                confirmButtonText: "OK",
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire("Silahkan masuk di halaman login!", "", "success");
+                    window.location.href = "{{ route('login') }}";
+                }
+            });
         }
 
-        if ($request->session()-> has('pesan')) {
-            alert('asu');
-
-        }
+        @if (session('status'))
+            sweetAlert();
+        @endif
     </script>
 
     <!-- Font Awesome -->
@@ -200,7 +224,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!}
+    {{-- {!! JsValidator::formRequest('App\Http\Requests\RegisterValidation') !!} --}}
 </body>
 
 </html>

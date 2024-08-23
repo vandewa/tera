@@ -25,7 +25,7 @@ class RegisterValidation extends FormRequest
             'name' => 'required|string|max:255',
             'nik' => 'required|numeric',
             'wa' => 'required|numeric',
-            // 'email' => 'required|email|unique:users,email|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required|same:password',
         ];
