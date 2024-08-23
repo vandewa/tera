@@ -62,6 +62,18 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Password
+                                            <small class="text-danger">*</small>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" wire:model='form.password'
+                                                placeholder="Password">
+                                            @error('form.password')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

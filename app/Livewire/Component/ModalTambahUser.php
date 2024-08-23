@@ -25,11 +25,10 @@ class ModalTambahUser extends Component
         'password' => null,
     ];
 
-    // public function pilih($id)
-    // {
-    //     $this->dispatch('pilih-user', $id);
-    //     $this->showModalnya();
-    // }
+    public function mount()
+    {
+        $this->form['password'] = Str::random(8);
+    }
 
     #[On('show-modal-tambah-user')]
     public function showModalnya()
@@ -46,8 +45,8 @@ class ModalTambahUser extends Component
             'form.nik' => 'required|unique:users,email',
         ]);
 
-        $password = Str::random(8);
-        $this->form['password'] = Hash::make($password);
+
+        $this->form['password'] = bcrypt($this->form['password']);
         $a = User::create($this->form);
         $a->addrole('3');
 

@@ -21,8 +21,6 @@ class RegisterController extends Controller
 
         $a->addrole('3');
 
-        // $request->session()->flash('pesan', 'ok');
-
         Session::flash('pesan', 'ok');
 
         return redirect()->url('/login');

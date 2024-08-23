@@ -22,12 +22,13 @@ class RegisterValidation extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'nik' => 'required',
-            'wa' => 'required',
-            // 'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed',
+            'name' => 'required|string|max:255',
+            'nik' => 'required|numeric',
+            'wa' => 'required|numeric',
+            // 'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required|same:password',
         ];
     }
+
 }

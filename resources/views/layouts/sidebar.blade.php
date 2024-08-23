@@ -133,6 +133,7 @@
                             {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'template-dokumen' ? 'menu-is-opening menu-open' : '' }}
                         ">
                           <a href="#"
                               class="nav-link
@@ -140,6 +141,7 @@
                                 {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}
                                 ">
                               <i class="nav-icon fa-solid fa-file-lines"></i>
                               <p>
@@ -168,6 +170,17 @@
                                           <i class="ml-2 far fa-circle nav-icon"></i>
                                       @endif
                                       <p>Peralatan</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="{{ route('master.template-dokumen') }}"
+                                      class="nav-link {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}">
+                                      @if (Request::segment(2) == 'template-dokumen')
+                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                      @else
+                                          <i class="ml-2 far fa-circle nav-icon"></i>
+                                      @endif
+                                      <p>Template Dokumen</p>
                                   </a>
                               </li>
                               <li class="nav-item">

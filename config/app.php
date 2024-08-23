@@ -54,6 +54,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'token_wa' => env('TOKEN_WA', ''),
+
+    'wa_url' => env('WA_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

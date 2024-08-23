@@ -216,7 +216,10 @@
                         <div class="icon">
                             <i class="fas fa-lock"></i>
                         </div>
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Password" name="password" required> <br>
+                    </div>
+                    <div style="margin-bottom:10px;text-align: right;">
+                        <a href="{{ route('password.index') }}" class="forgot-password">Lupa Password?</a>
                     </div>
 
                     <button type="submit">

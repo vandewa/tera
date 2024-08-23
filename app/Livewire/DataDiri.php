@@ -8,7 +8,7 @@ use App\Models\User as ModelsUser;
 
 class DataDiri extends Component
 {
-    public $id;
+    public $id, $check, $password, $password_confirmation;
 
     #[Validate]
     public $form = [
@@ -18,7 +18,7 @@ class DataDiri extends Component
         'wa' => null,
         'nama_usaha' => null,
         'alamat' => null,
-        // 'password' => null,
+        'password' => null,
     ];
 
     public function mount()
@@ -56,6 +56,14 @@ class DataDiri extends Component
 
     public function storeUpdate()
     {
+        if ($this->password) {
+            $this->validate([
+                'password' => 'confirmed',
+            ]);
+
+            $this->form['password'] = bcrypt($this->password);
+        }
+
         ModelsUser::find($this->id)->update($this->form);
     }
 

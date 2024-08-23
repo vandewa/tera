@@ -7,19 +7,28 @@ use App\Livewire\Dashboard;
 use App\Livewire\Peralatan;
 use App\Livewire\UserIndex;
 use App\Livewire\JadwalTera;
+use App\Livewire\PemohonCrud;
+use App\Livewire\TemplateDokumen;
 use App\Livewire\Admin\Permohonan;
 use App\Livewire\DetailJadwalTera;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\PermohonanForm;
+use App\Livewire\ProsesPermohonanPage;
+use App\Http\Controllers\HelperController;
+use App\Http\Controllers\PasswordResetController;
 use App\Livewire\Permohonan\PermohonanPage;
 use App\Http\Controllers\RegisterController;
 use App\Livewire\Permohonan\PermohonanFormPage;
-use App\Livewire\PemohonCrud;
-use App\Livewire\ProsesPermohonanPage;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('show-picture', [HelperController::class, 'showPicture'])->name('helper.show-picture');
+Route::get('password-reset', [PasswordResetController::class, 'index'])->name('password.index');
+Route::post('password-reset', [PasswordResetController::class, 'updatePassword'])->name('password.post');
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -47,6 +56,8 @@ Route::middleware([
         Route::get('uttp', Uttp::class)->name('uttp');
         Route::get('peralatan', Peralatan::class)->name('peralatan');
         Route::get('user/{id?}', User::class)->name('user');
+        Route::get('template-dokumen', TemplateDokumen::class)->name('template-dokumen');
+
     });
 });
 
