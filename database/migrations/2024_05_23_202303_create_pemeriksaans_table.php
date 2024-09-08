@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('pemeriksaans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pengajuan_id');
+            $table->text('metode')->nullable();
+            $table->text('telusuran')->nullable();
             $table->date('tanggal_pemeriksaan');
             $table->string('upload_cerapan')->nullable();
             $table->string('hasil_st')->nullable();

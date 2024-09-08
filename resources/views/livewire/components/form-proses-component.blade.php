@@ -22,7 +22,7 @@
             <!-- Hasil ST -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="hasil_st">Hasil ST</label>
+                    <label for="hasil_st">Hasil</label>
                     <select id="hasil_st" class="form-control" wire:model.live="pemeriksaan.hasil_st">
                         <option value="">Select Hasil ST</option>
                         @foreach ($hasil as $item)
@@ -103,6 +103,15 @@
         </div>
 
         <div class="row">
+            <div class="col-md-12">
+                <label for="upload_cerapan">Metode</label>
+                <div class="input-group">
+                    <textarea name="" class="form-control" id="" wire.model="pemeriksaan.metode" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 row">
             <!-- Standar Inputs -->
             <div class="col-md-12">
                 <div class="form-group">

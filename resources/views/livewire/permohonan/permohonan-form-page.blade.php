@@ -75,60 +75,89 @@
                                                             <div class="card-body">
                                                                 @foreach ($uttpForm as $index => $item)
                                                                     <div class="mt-2 row">
-                                                                        <div class="col-lg-2 col-sm-6 col-xs-12">
-                                                                            <label>Jenis UTTP *</label>
-                                                                            <select name=""
-                                                                                class="form-control @error('formUttp.' . $index . '.uttp_id') is-invalid @enderror"
-                                                                                wire:model='formUttp.{{ $index }}.uttp_id'
-                                                                                id="uttp">
-                                                                                <option value="">Pilih Jenis UTTP
-                                                                                </option>
-                                                                                @foreach ($uttp as $item)
-                                                                                    <option value="{{ $item->id }}">
-                                                                                        {{ $item->nama }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-lg-2 col-sm-6 col-xs-12">
-                                                                            <label>Merek</label>
-                                                                            <input type="text" class="form-control"
-                                                                                wire:model='formUttp.{{ $index }}.merek'
-                                                                                placeholder="merek">
-                                                                        </div>
-                                                                        <div class="col-lg-2 col-sm-6 col-xs-12">
-                                                                            <label>No Seri</label>
-                                                                            <input type="text" class="form-control"
-                                                                                wire:model='formUttp.{{ $index }}.no_seri'
-                                                                                placeholder="No Seri">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 row">
+                                                                                <div class=" col-sm-6 col-xs-12">
+                                                                                    <label>Jenis UTTP *</label>
+                                                                                    <select name=""
+                                                                                        class="form-control @error('formUttp.' . $index . '.uttp_id') is-invalid @enderror"
+                                                                                        wire:model='formUttp.{{ $index }}.uttp_id'
+                                                                                        id="uttp">
+                                                                                        <option value="">Pilih
+                                                                                            Jenis UTTP
+                                                                                        </option>
+                                                                                        @foreach ($uttp as $item)
+                                                                                            <option
+                                                                                                value="{{ $item->id }}">
+                                                                                                {{ $item->nama }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class=" col-sm-6 col-xs-12">
+                                                                                    <label>Merek</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        wire:model='formUttp.{{ $index }}.merek'
+                                                                                        placeholder="merek">
+                                                                                </div>
+                                                                                <div class="col-sm-6 col-xs-12">
+                                                                                    <label>No Seri</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        wire:model='formUttp.{{ $index }}.no_seri'
+                                                                                        placeholder="No Seri">
+                                                                                </div>
+                                                                                <div class=" col-sm-6 col-xs-12">
+                                                                                    <label>Jenis</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        wire:model='formUttp.{{ $index }}.tipe'
+                                                                                        placeholder="Jenis">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5 row">
+                                                                                <div class="col-sm-6 col-xs-12">
+                                                                                    <label>Kapasitas</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        wire:model='formUttp.{{ $index }}.kapasitas'
+                                                                                        placeholder="Kapasitas">
+                                                                                </div>
+                                                                                <div class="col-sm-6 col-xs-12">
+                                                                                    <label>Jumlah*</label>
+                                                                                    <input type="number"
+                                                                                        class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
+                                                                                        wire:model='formUttp.{{ $index }}.jumlah'
+                                                                                        placeholder="Jumlah">
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-xs-12">
+                                                                                    <label>Keterangan</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
+                                                                                        wire:model='formUttp.{{ $index }}.keterangan'
+                                                                                        placeholder="keterangan">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-1 ">
+                                                                                <div class="mt-3">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-sm btn-block btn-danger"
+                                                                                        wire:click='hapusUttp({{ $index }})'>
+                                                                                        <span
+                                                                                            class="fas fa-trash"></span></button>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
 
-                                                                        <div class="col-lg-2 col-sm-6 col-xs-12">
-                                                                            <label>Jenis</label>
-                                                                            <input type="text" class="form-control"
-                                                                                wire:model='formUttp.{{ $index }}.tipe'
-                                                                                placeholder="Jenis">
-                                                                        </div>
-                                                                        <div class="col-lg-2 col-sm-6 col-xs-12">
-                                                                            <label>Kapasitas</label>
-                                                                            <input type="text" class="form-control"
-                                                                                wire:model='formUttp.{{ $index }}.kapasitas'
-                                                                                placeholder="Kapasitas">
-                                                                        </div>
-                                                                        <div class="col-lg-1 col-sm-6 col-xs-12">
-                                                                            <label>Jumlah*</label>
-                                                                            <input type="number"
-                                                                                class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
-                                                                                wire:model='formUttp.{{ $index }}.jumlah'
-                                                                                placeholder="Jumlah">
-                                                                        </div>
-                                                                        <div class="mt-4 col-lg-1 col-sm-6 col-xs-12">
-                                                                            <button type="button"
-                                                                                class="btn btn-sm btn-block btn-danger"
-                                                                                wire:click='hapusUttp({{ $index }})'>
-                                                                                <span
-                                                                                    class="fas fa-trash"></span></button>
-                                                                        </div>
+
+
+
+
+
+
+
+
                                                                     </div>
                                                                 @endforeach
                                                             </div>

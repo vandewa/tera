@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use function PHPUnit\Framework\returnCallback;
+
 class Pengajuan extends Model
 {
     use HasFactory;
@@ -36,5 +38,7 @@ class Pengajuan extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+   
 
 }

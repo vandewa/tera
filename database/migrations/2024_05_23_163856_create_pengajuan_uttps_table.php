@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('kapasitas')->nullable();
             $table->integer('jumlah')->nullable();
             $table->string('pengajuan_uttp_st')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

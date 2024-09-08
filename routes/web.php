@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CetakController;
 use App\Livewire\User;
 use App\Livewire\Uttp;
 use App\Livewire\DataDiri;
@@ -29,6 +30,8 @@ Route::get('password-reset', [PasswordResetController::class, 'index'])->name('p
 Route::post('password-reset', [PasswordResetController::class, 'updatePassword'])->name('password.post');
 Route::get('/registrasi', [RegisterController::class, 'index'])->name('registrasi.index');
 Route::post('/registrasi', [RegisterController::class, 'store'])->name('registrasi.store');
+
+Route::get('a', [CetakController::class, 'generateData']);
 
 
 

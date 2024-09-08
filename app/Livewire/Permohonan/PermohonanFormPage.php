@@ -97,7 +97,7 @@ class PermohonanFormPage extends Component
     public function store()
     {
         $a = Pengajuan::create([
-            // 'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id,
             'order_no' => genNo(),
             'pengajuan_st' => 'PENGAJUAN_ST_01',
         ] + $this->form);
@@ -133,6 +133,7 @@ class PermohonanFormPage extends Component
             'tipe' => null,
             'kapasitas' => null,
             'jumlah' => null,
+            'keterangan' => null,
         ];
         array_push($this->formUttp, $data);
     }
