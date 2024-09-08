@@ -31,7 +31,7 @@ Route::post('password-reset', [PasswordResetController::class, 'updatePassword']
 Route::get('/registrasi', [RegisterController::class, 'index'])->name('registrasi.index');
 Route::post('/registrasi', [RegisterController::class, 'store'])->name('registrasi.store');
 
-Route::get('a', [CetakController::class, 'generateData']);
+Route::get('a', [CetakController::class, 'generateData'])->name('helper.generate-data');
 
 
 

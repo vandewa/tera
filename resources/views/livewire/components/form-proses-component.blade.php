@@ -106,8 +106,24 @@
             <div class="col-md-12">
                 <label for="upload_cerapan">Metode</label>
                 <div class="input-group">
-                    <textarea name="" class="form-control" id="" wire.model="pemeriksaan.metode" rows="3"></textarea>
+                    <textarea name="" class="form-control" wire:model="pemeriksaan.metode" rows="3"></textarea>
                 </div>
+                @error('pemeriksaan.metode')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="upload_cerapan">Telusuran</label>
+                <div class="input-group">
+                    <textarea name="" class="form-control" wire:model="pemeriksaan.telusuran" rows="3"></textarea>
+                </div>
+                @error('pemeriksaan.telusuran')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+
             </div>
         </div>
 

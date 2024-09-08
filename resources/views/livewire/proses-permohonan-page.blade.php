@@ -33,7 +33,10 @@
                                     {{ $isian->statusPengajuan->code_nm ?? '-' }}</strong>
                                 <p class="text-muted"></p>
                                 <hr>
-
+                                <hr>
+                                <button class="btn btn-block btn-danger" wire:click='confirmPembatalan'>
+                                    Batalkan Persetujuan
+                                </button>
                             </div>
 
                         </div>
@@ -88,6 +91,9 @@
                                 </div>
 
                             </div>
+                        @endif
+                        @if ($isian->pengajuan_st == 'PENGAJUAN_ST_04')
+                            <livewire:components.info-pengajuan-component>
                         @endif
                 </div>
 

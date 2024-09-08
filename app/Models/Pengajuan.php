@@ -25,6 +25,8 @@ class Pengajuan extends Model
     {
         return $this->belongsTo(ComCode::class, 'pengajuan_st');
     }
+
+    // user yang mengajukan
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -39,6 +41,6 @@ class Pengajuan extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-   
+
 
 }

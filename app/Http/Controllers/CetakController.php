@@ -9,6 +9,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\Style\Font;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -16,45 +17,86 @@ class CetakController extends Controller
 {
     public function generateData(Request $request)
     {
+        // Pemeriksaan::with(['pengajuan.user', 'standar', 'petugas', 'penandatangan', 'hasil'])->first();
         $data = Pemeriksaan::with(['pengajuan' => function($a){
-            $a->with(['uttpItem', 'pemohon']);
-        }, 'standar', 'petugas', 'berhak', 'penandatangan'])->first();
+            $a->with(['uttpItem.uttp', 'pemohon']);
+        }, 'standar', 'petugas.user', 'berhak', 'penandatangan', 'hasil'])->find($request->id);
+        // return $data;
         $lokasi = storage_path('app/aa.docx');
         $templateProcessor = new TemplateProcessor($lokasi);
 
         $templateVariables = $templateProcessor->getVariables();
 
+
+
         // utttp
         $standar = [
-            ['standar' => 'Anak Timbangan Kelas F2 '],
 
         ];
-        $pennguji = [
-            ['penguji' => 'devan '],
+        $index = 1;
 
-        ];
+        foreach ($data->standar  as $item) {
+            array_push($standar, [
+                'no_standar' =>  $index."." ,'standar' => $item->nama
+            ]);
+            $index =  $index +1;
+        }
+
+
+        $penguji = [];
+        $index = 1;
+        foreach($data->petugas as $item){
+            array_push($penguji, [
+                'penguji' =>  $index."." , 'penguji_nama' => $item->user->name??""
+            ]);
+            $index =  $index +1;
+        }
+
+        $uttp = [];
+        $index = 1;
+        foreach($data->pengajuan->uttpItem as $item){
+
+            array_push($uttp, [
+                'uttp_no' =>  $index."." ,
+                'nama' => $item->uttp->nama??"",
+                'merek' => $item->merek??"",
+                'tipe' => $item->tipe??"",
+                'no_seri' => $item->no_seri??"",
+                'kapasitas' => $item->kapasitas??"",
+                'keterangan' => $item->keterangan??"",
+                'jumlah' => $item->jumlah??"",
+            ]);
+            $index =  $index +1;
+        }
+        $tanggalDiterima = Carbon::createFromFormat('Y-m-d H:i:s', $data->pengajuan->created_at)
+        ->locale('id')->isoFormat('D MMMM YYYY');
+        $tanggalPemeriksaan = Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
+        ->locale('id')->isoFormat('D MMMM YYYY');
         $templateProcessor->setValues([
-            'nomor' => 'John',
-            'no_order' => 'John',
-            'nama_pemilik' => 'Doe',
-            'alamat' => 'Doe',
-            'tanggaL_diterima' => 'Doe',
-            'metode' => 'Doe',
-            'pegawai_berhak' => 'Doe',
-            'telusuran' => '',
-            'tanggal_pengujian' => '',
-            'lokasi_pengujian' => '',
+            'nomor' => '',
+            'no_order' => $data->pengajuan->order_no,
+            'nama_pemilik' => $data->pengajuan->pemohon->name,
+            'alamat' => $data->pengajuan->pemohon->alamat,
+            'tanggaL_diterima' => $tanggalDiterima,
+            'metode' => $data->metode,
+            'pegawai_berhak' => $data->berhak->name??"",
+            'telusuran' => $data->telusuran,
+            'tanggal_pengujian' => $tanggalPemeriksaan,
+            'hasil' => $data->hasil->code_nm,
+            'tahun' => date('Y', strtotime($data->tanggal_pemeriksaan)),
+
             'tera_kembali' => '',
 
         ]);
-        if (in_array('standar', $templateVariables)) {
-            $templateProcessor->cloneRowAndSetValues('standar', $standar);
+
+        if (in_array('no_standar', $templateVariables)) {
+            $templateProcessor->cloneRowAndSetValues('no_standar', $standar);
         }
-        if (in_array('pennguji', $templateVariables)) {
-            $templateProcessor->cloneRowAndSetValues('pennguji', $standar);
+        if (in_array('penguji', $templateVariables)) {
+            $templateProcessor->cloneRowAndSetValues('penguji', $penguji);
         }
-        if (in_array('uttp', $templateVariables)) {
-            $templateProcessor->cloneRowAndSetValues('uttp', $standar);
+        if (in_array('uttp_no', $templateVariables)) {
+            $templateProcessor->cloneRowAndSetValues('uttp_no', $uttp);
         }
 
         $randomFileName = Str::random(10) . '.docx';

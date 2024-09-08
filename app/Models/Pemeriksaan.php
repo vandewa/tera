@@ -15,7 +15,7 @@ class Pemeriksaan extends Model
     }
 
     public function standar() {
-        return $this->hasMany(PemeriksaanStandar::class, 'pengajuan_id');
+        return $this->hasMany(PemeriksaanStandar::class, 'pemeriksaan_id');
     }
 
     public function petugas() {
@@ -27,5 +27,9 @@ class Pemeriksaan extends Model
     }
     public function penandatangan() {
         return $this->belongsTo(User::class, 'penandatanganan_id');
+    }
+
+    public function hasil() {
+        return $this->belongsTo(ComCode::class, 'hasil_st');
     }
 }

@@ -32,14 +32,7 @@ class FormProsesComponent extends Component
 
     public $users = [];
 
-    protected $rules = [
-        'pemeriksaan.pengajuan_id' => 'required|integer',
-        'pemeriksaan.tanggal_pemeriksaan' => 'required|date',
-        'pemeriksaan.hasil_st' => 'required',
-        'pemeriksaan.hasil_keterangan' =>  'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
-        'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
-        'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
-    ];
+
 
     public function updated($property)
     {
@@ -75,6 +68,7 @@ class FormProsesComponent extends Component
             $a->pengajuan_id =  $id;
             $a->tanggal_pemeriksaan =  date('Y-m-d');
             $a->save();
+
             $this->pemeriksaan = $a;
 
         }
@@ -86,7 +80,17 @@ class FormProsesComponent extends Component
 
     public function save()
     {
-        $this->validate();
+        // dd($this->pemeriksaan);
+        $this->validate([
+            'pemeriksaan.pengajuan_id' => 'required|integer',
+            'pemeriksaan.tanggal_pemeriksaan' => 'required|date',
+            'pemeriksaan.metode' => 'required',
+            'pemeriksaan.telusuran' => 'required',
+            'pemeriksaan.hasil_st' => 'required',
+            'pemeriksaan.hasil_keterangan' =>  'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
+            'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
+            'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
+        ]);
 
         if ($this->upload_cerapan) {
             $path = $this->upload_cerapan->store('cerapan');
@@ -95,6 +99,20 @@ class FormProsesComponent extends Component
 
         // update lokasi file path cerapan
         $this->pemeriksaan['status_st'] = 'PENGAJUAN_ST_03';
+       Pemeriksaan::find($this->pemeriksaan['id'])->update([
+            'metode' => $this->pemeriksaan['metode'],
+            'telusuran' => $this->pemeriksaan['telusuran'],
+            'hasil_st' => $this->pemeriksaan['hasil_st'],
+            'hasil_keterangan' => $this->pemeriksaan['hasil_keterangan'],
+            'pegawai_berhak_id' => $this->pemeriksaan['pegawai_berhak_id'],
+            'penandatanganan_id' => $this->pemeriksaan['penandatanganan_id'],
+        ]);
+
+        if ($this->upload_cerapan) {
+            $path = $this->upload_cerapan->store('cerapan');
+
+            Pemeriksaan::find($this->pemeriksaan['id'])->update(['upload_cerapan' => $path]);
+        }
 
         // $this->pemeriksaan->save();
 
