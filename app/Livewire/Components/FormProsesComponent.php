@@ -39,7 +39,7 @@ class FormProsesComponent extends Component
         // $property: The name of the current property that was updated
 
         if ($property === 'pemeriksaan.hasil_st') {
-            if($this->pemeriksaan['hasil_st'] == 'HASIL_ST_02'){
+            if ($this->pemeriksaan['hasil_st'] == 'HASIL_ST_02') {
                 $this->tampilAlasn = true;
             } else {
                 $this->tampilAlasn = false;
@@ -51,7 +51,9 @@ class FormProsesComponent extends Component
     public function mount($id = null)
     {
         $this->idnya = $id;
-        $this->users = User::all();
+        $this->users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'user');
+        })->get();
         $this->standars = PemeriksaanStandar::where('pemeriksaan_id', $id)->get()->toArray();
         $this->petugas = PemeriksaanPetugas::where('pemeriksaan_id', $id)->get()->toArray();
         $this->hasil = ComCode::where('code_group', 'HASIL_ST')->get();
@@ -64,9 +66,9 @@ class FormProsesComponent extends Component
 
         } else {
 
-            $a  = new Pemeriksaan;
-            $a->pengajuan_id =  $id;
-            $a->tanggal_pemeriksaan =  date('Y-m-d');
+            $a = new Pemeriksaan;
+            $a->pengajuan_id = $id;
+            $a->tanggal_pemeriksaan = date('Y-m-d');
             $a->save();
 
             $this->pemeriksaan = $a;
@@ -87,9 +89,10 @@ class FormProsesComponent extends Component
             'pemeriksaan.metode' => 'required',
             'pemeriksaan.telusuran' => 'required',
             'pemeriksaan.hasil_st' => 'required',
-            'pemeriksaan.hasil_keterangan' =>  'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
+            'pemeriksaan.hasil_keterangan' => 'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
             'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
             'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
+            'petugas.*.user_id' => 'required'
         ]);
 
         if ($this->upload_cerapan) {
@@ -99,7 +102,7 @@ class FormProsesComponent extends Component
 
         // update lokasi file path cerapan
         $this->pemeriksaan['status_st'] = 'PENGAJUAN_ST_03';
-       Pemeriksaan::find($this->pemeriksaan['id'])->update([
+        Pemeriksaan::find($this->pemeriksaan['id'])->update([
             'metode' => $this->pemeriksaan['metode'],
             'telusuran' => $this->pemeriksaan['telusuran'],
             'hasil_st' => $this->pemeriksaan['hasil_st'],
@@ -120,9 +123,11 @@ class FormProsesComponent extends Component
         foreach ($this->standars as $standar) {
             PemeriksaanStandar::updateOrCreate(
                 ['id' => $standar['id'] ?? null],
-                ['pemeriksaan_id' => $this->pemeriksaan['id'],
-                'user_id' => Auth::id(),
-                'nama' => $standar['nama']]
+                [
+                    'pemeriksaan_id' => $this->pemeriksaan['id'],
+                    'user_id' => Auth::id(),
+                    'nama' => $standar['nama']
+                ]
             );
         }
 
@@ -134,10 +139,10 @@ class FormProsesComponent extends Component
         }
         PemeriksaanStandar::whereIn('id', $this->hapusStandar)->delete();
         PemeriksaanPetugas::whereIn('id', $this->hapusPetugas)->delete();
-        Pengajuan::find($this->idnya )->update([
+        Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_04'
         ]);
-        $this->dispatch( 'restart');
+        $this->dispatch('restart');
         session()->flash('message', 'Data saved successfully.');
 
     }
@@ -155,7 +160,7 @@ class FormProsesComponent extends Component
 
     public function removeStandar($index)
     {
-        if($this->standars[$index]['id']??null){
+        if ($this->standars[$index]['id'] ?? null) {
             array_push($this->hapusStandar, $this->standars[$index]['id']);
         }
 
@@ -165,7 +170,7 @@ class FormProsesComponent extends Component
 
     public function removePetugas($index)
     {
-        if($this->petugas[$index]['id']??null){
+        if ($this->petugas[$index]['id'] ?? null) {
             array_push($this->hapusPetugas, $this->petugas[$index]['id']);
         }
         unset($this->petugas[$index]);

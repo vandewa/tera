@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="hasil_st">Hasil</label>
                     <select id="hasil_st" class="form-control" wire:model.live="pemeriksaan.hasil_st">
-                        <option value="">Select Hasil ST</option>
+                        <option value="">Pilih Hasil</option>
                         @foreach ($hasil as $item)
                             <option value="{{ $item->com_cd }}">{{ $item->code_nm }}</option>
                         @endforeach
@@ -58,7 +58,7 @@
                     <label for="pegawai_berhak_id">Pegawai Berhak</label>
                     <select id="pegawai_berhak_id" class="form-control"
                         wire:model.defer="pemeriksaan.pegawai_berhak_id">
-                        <option value="">Select Pegawai Berhak</option>
+                        <option value="">Pilih Pegawai Berhak</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
@@ -73,7 +73,7 @@
                     <label for="penandatanganan_id">Penandatanganan</label>
                     <select id="penandatanganan_id" class="form-control"
                         wire:model.defer="pemeriksaan.penandatanganan_id">
-                        <option value="">Select Penandatanganan</option>
+                        <option value="">Pilih Penandatanganan</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
@@ -114,7 +114,7 @@
 
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-12">
                 <label for="upload_cerapan">Telusuran</label>
                 <div class="input-group">
@@ -138,11 +138,12 @@
                             </input>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
-                                    wire:click="removeStandar({{ $index }})">Remove</button>
+                                    wire:click="removeStandar({{ $index }})">Hapus</button>
                             </div>
                         </div>
                     @endforeach
-                    <button type="button" class="btn btn-primary" wire:click="addStandar">Add Standar</button>
+
+                    <button type="button" class="btn btn-info btn-sm" wire:click="addStandar">Tambah Standar</button>
                 </div>
             </div>
         </div>
@@ -155,22 +156,27 @@
                     @foreach ($petugas as $index => $petugas)
                         <div class="mb-3 input-group">
                             <select class="form-control" wire:model.defer="petugas.{{ $index }}.user_id">
-                                <option value="">Select User</option>
+                                <option value="">Pilih Petugas</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
-                                    wire:click="removePetugas({{ $index }})">Remove</button>
+                                    wire:click="removePetugas({{ $index }})">Hapus</button>
                             </div>
                         </div>
                     @endforeach
-                    <button type="button" class="btn btn-primary" wire:click="addPetugas">Add Petugas</button>
+
+                    <button type="button" class="btn btn-info btn-sm" wire:click="addPetugas">Tambah
+                        Petugas</button>
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save mr-2"></i>Simpan</button>
+        </div>
+
     </form>
 </div>

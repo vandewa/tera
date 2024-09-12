@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-3">
 
-                    <livewire:components.user-profile-component userId="1">
+                    <livewire:components.user-profile-component userId="{{ $isian->user_id }}">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Data Pengajuan</h3>
@@ -47,15 +47,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Proses Penilaian</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                    title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -71,16 +62,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Proses Penilaian</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                            title="Collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"
-                                            title="Remove">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -93,7 +74,7 @@
                             </div>
                         @endif
                         @if ($isian->pengajuan_st == 'PENGAJUAN_ST_04')
-                            <livewire:components.info-pengajuan-component>
+                            <livewire:components.info-pengajuan-component id="{{ $isian->id }}">
                         @endif
                 </div>
 

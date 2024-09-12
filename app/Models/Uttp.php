@@ -17,4 +17,9 @@ class Uttp extends Model
             return $this->where('nama', 'like', "%$value%");
         }
     }
+
+    public function pengajuan()
+    {
+        return $this->hasMany(PengajuanUttp::class, 'uttp_id');
+    }
 }

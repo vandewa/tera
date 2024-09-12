@@ -24,9 +24,6 @@ return [
         'user' => [
             'profile' => 'r,u',
         ],
-        'fo' => [
-            'profile' => 'r,u',
-        ],
         'penera' => [
             'profile' => 'r,u',
         ],

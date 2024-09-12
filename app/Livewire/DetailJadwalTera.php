@@ -158,7 +158,7 @@ class DetailJadwalTera extends Component
     //     $this->js(<<<JS
     //         Swal.fire({
     //         title: "Berhasil!",
-    //         text: "Anda berhasil meengajuak tera!",
+    //         text: "Anda berhasil mengajukan tera!",
     //         icon: "success"
     //         });
     //     JS);
@@ -167,7 +167,8 @@ class DetailJadwalTera extends Component
 
     public function render()
     {
-        $data = User::all();
+        $data = User::whereHasRole('penera')->get();
+
         $peralatan = Peralatan::all();
 
         $userPetugas = User::whereHas('jadwal', function ($a) {

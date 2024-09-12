@@ -1,5 +1,5 @@
 <div>
-    <h1>Data Pengajuan UTTP</h1>
+    <h5>Data Pengajuan UTTP</h5>
     <table class="table">
         <thead>
             <tr>
@@ -14,8 +14,8 @@
         </thead>
         <tbody>
             @foreach ($pengajuanUttps as $pengajuanUttp)
-                <tr>
-                    <td>{{ $pengajuanUttp->id }}</td>
+                <tr wire:key='{{ $pengajuanUttp->id }}'>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $pengajuanUttp->uttp ? $pengajuanUttp->uttp->nama : 'N/A' }}</td>
                     <td>{{ $pengajuanUttp->no_seri }}</td>
                     <td>{{ $pengajuanUttp->merek }}</td>

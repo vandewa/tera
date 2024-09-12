@@ -18,6 +18,7 @@ class PermohonanFormPage extends Component
     public $form = [
         'pengajuan_tp' => null,
         'alamat' => null,
+        'tanggal' => null,
     ];
 
     public $formUttp = [
@@ -40,6 +41,9 @@ class PermohonanFormPage extends Component
 
     public function mount($id = "")
     {
+
+        $this->form['tanggal'] = date('Y-m-d');
+
         if (count($this->formUttp) < 1) {
             $this->tambahUttp();
         }
@@ -74,6 +78,7 @@ class PermohonanFormPage extends Component
             'formUttp.*.uttp_id' => 'required',
             'formUttp.*.jumlah' => 'required',
             'form.pengajuan_tp' => 'required',
+            'form.tanggal' => 'required',
             'form.alamat' => 'required_if:form.pengajuan_tp,PENGAJUAN_TP_02',
         ]);
 
@@ -86,7 +91,7 @@ class PermohonanFormPage extends Component
         $this->js(<<<JS
             Swal.fire({
             title: "Berhasil!",
-            text: "Anda berhasil meengajuak tera!",
+            text: "Anda berhasil mengajukan tera!",
             icon: "success"
             });
         JS);
@@ -100,6 +105,7 @@ class PermohonanFormPage extends Component
             'user_id' => auth()->user()->id,
             'order_no' => genNo(),
             'pengajuan_st' => 'PENGAJUAN_ST_01',
+            'tanggal' => $this->form['tanggal'],
         ] + $this->form);
 
         foreach ($this->formUttp as $item) {

@@ -9,11 +9,13 @@ use App\Models\User as ModelsUser;
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $bukaNoSk = false;
 
     public $form = [
         'name' => null,
         'email' => null,
+        'nip' => null,
+        'no_sk' => null,
         'password' => null,
     ];
 
@@ -21,12 +23,15 @@ class User extends Component
     public function mount($id = '')
     {
         if ($id) {
-            $user = ModelsUser::find($id)->only(['name', 'email']);
+            $user = ModelsUser::find($id)->only(['name', 'email', 'nip']);
             $data = ModelsUser::find($id);
             $this->form = $user;
             $this->role = $data->roles()->first()->id ?? '';
             $this->edit = true;
             $this->user = $id;
+            if ($this->role == '4') {
+                $this->bukaNoSk = true;
+            }
         }
 
         $this->listRole = Role::all()->toArray();
@@ -66,6 +71,7 @@ class User extends Component
             'form.name' => 'required',
             'form.email' => 'required|unique:users,email',
             'role' => 'required',
+            'form.nip' => 'required',
         ]);
 
         $this->form['password'] = bcrypt($this->form['password']);
@@ -80,6 +86,7 @@ class User extends Component
             'form.name' => 'required',
             'form.email' => 'required|email|unique:users,email,' . $this->user,
             'role' => 'required',
+            'form.nip' => 'required',
         ]);
 
         if ($this->form['password'] ?? "") {
@@ -91,9 +98,19 @@ class User extends Component
         $a->syncRoles([$this->role]);
         $this->reset();
         $this->edit = false;
-
     }
 
+    public function updated($property)
+    {
+        if ($property === 'role') {
+            if ($this->role == '4') {
+                $this->bukaNoSk = true;
+            } else {
+                $this->bukaNoSk = false;
+                $this->form['no_sk'] = null;
+            }
+        }
+    }
 
     public function render()
     {

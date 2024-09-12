@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Pengajuan Tera</h1>
+                <h1 class="m-0">Permohonan Tera</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Pengajuan </li>
-                    <li class="breadcrumb-item"><a href="#">Jenis UTTP</a></li>
+                    <li class="breadcrumb-item active">Permohonan </li>
+                    <li class="breadcrumb-item"><a href="#">Tera</a></li>
                 </ol>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inputPassword3"
-                                                                class="col-sm-2 col-form-label">Jadwal Tera</label>
+                                                                class="col-sm-2 col-form-label">Jadwal</label>
                                                             <div class="col-sm-10">
                                                                 <select name="" id=""
                                                                     wire:model.live='form.jadwal_tera_id'

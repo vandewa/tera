@@ -49,6 +49,8 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Nama</th>
+                                                                            <th>NIP</th>
+                                                                            <th>No SK</th>
                                                                             <th>Email</th>
                                                                             <th>Role</th>
                                                                             <th>Aksi</th>
@@ -58,6 +60,8 @@
                                                                         @foreach ($posts as $item)
                                                                             <tr>
                                                                                 <td>{{ $item->name ?? '' }}</td>
+                                                                                <td>{{ $item->nip ?? '-' }}</td>
+                                                                                <td>{{ $item->no_sk ?? '-' }}</td>
                                                                                 <td>{{ $item->email ?? '' }}</td>
                                                                                 <td>{{ $item->roles()->first()->name ?? '-' }}
                                                                                 </td>

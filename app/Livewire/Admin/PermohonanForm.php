@@ -103,7 +103,7 @@ class PermohonanForm extends Component
         $this->js(<<<JS
             Swal.fire({
             title: "Berhasil!",
-            text: "Anda berhasil meengajuak tera!",
+            text: "Anda berhasil mengajukan tera!",
             icon: "success"
             });
         JS);

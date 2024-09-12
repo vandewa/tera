@@ -68,12 +68,31 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="row mb-3">
+                                                                            <div class="row mb-2">
                                                                                 <label for="inputEmail3"
-                                                                                    class="col-sm-3 col-form-label">Role</label>
+                                                                                    class="col-sm-3 col-form-label">NIP
+                                                                                    <small class="text-danger">*</small>
+                                                                                </label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="number"
+                                                                                        class="form-control"
+                                                                                        wire:model='form.nip'
+                                                                                        placeholder="NIP">
+                                                                                    @error('form.nip')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-3 col-form-label">Role
+                                                                                    <small
+                                                                                        class="text-danger">*</small></label>
                                                                                 <div class="col-sm-9">
                                                                                     <select class="form-control"
-                                                                                        wire:model='role'>
+                                                                                        wire:model.live='role'>
                                                                                         <option value="">Pilih
                                                                                             Role</option>
                                                                                         @foreach ($listRole ?? [] as $item)
@@ -89,6 +108,29 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
+
+                                                                            @if ($bukaNoSk)
+                                                                                <div class="row mb-2">
+                                                                                    <label for="inputEmail3"
+                                                                                        class="col-sm-3 col-form-label">Nomor
+                                                                                        SK
+                                                                                        <small
+                                                                                            class="text-danger">*</small>
+                                                                                    </label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            wire:model='form.no_sk'
+                                                                                            placeholder="Nomor SK Penera">
+                                                                                        @error('form.no_sk')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif
+
+
 
                                                                             @if ($edit)
                                                                                 <legend>Ganti Password</legend>

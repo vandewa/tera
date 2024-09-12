@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Pengajuan Tera</h1>
+                <h1 class="m-0">Permohonan Tera</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Pengajuan </li>
-                    <li class="breadcrumb-item"><a href="#">Jenis UTTP</a></li>
+                    <li class="breadcrumb-item active">Permohonan </li>
+                    <li class="breadcrumb-item"><a href="#">Tera</a></li>
                 </ol>
             </div>
         </div>
@@ -36,7 +36,8 @@
                                                     </div>
                                                     <div class="col-md-2 pull-right">
                                                         <a href="{{ route('admin.permohonan.create') }}"
-                                                            class="btn btn-primary">Tambah Permohonan</a>
+                                                            class="btn btn-primary"> <span class="fas fa-plus mr-2">
+                                                            </span>Tambah Permohonan</a>
                                                     </div>
                                                 </div>
 
@@ -44,11 +45,10 @@
                                                     <table class="table">
                                                         <thead>
                                                             <th>Nomor</th>
-                                                            <th>Jadwal</th>
+                                                            <th>Tanggal</th>
                                                             <th>Nama</th>
-                                                            <th>Jenis Permohonan</th>
-                                                            <th>Alamat</th>
-                                                            <th>Status Pengajuan</th>
+                                                            <th>Jenis Pelayanan</th>
+                                                            <th>Status</th>
                                                             <th>UTTP</th>
                                                             <th>Aksi</th>
                                                         </thead>
@@ -60,21 +60,38 @@
                                                                     </td>
                                                                     <td>
                                                                         {{ Carbon\Carbon::parse($datum->jadwal->tanggal_mulai ?? '')->isoFormat(' D MMMM Y') }}
-                                                                        ( {{ $datum->jadwal->lokasi ?? '' }})
+                                                                        @if ($datum->jadwal->lokasi ?? null)
+                                                                            ( {{ $datum->jadwal->lokasi ?? '' }})
+                                                                        @endif
                                                                     </td>
                                                                     <td>
                                                                         {{ $datum->user->name ?? '' }}
                                                                     </td>
                                                                     <td>{{ $datum->jenisPengajuan->code_nm ?? '-' }}
+                                                                        @if ($datum->alamat)
+                                                                            {{ '( ' . $datum->alamat . ' )' }}
+                                                                        @endif
                                                                     </td>
-                                                                    <td>{{ $datum->alamat ?? '-' }}
-                                                                    </td>
-                                                                    <td>{{ $datum->statusPengajuan->code_nm ?? '-' }}
+                                                                    <td>
+                                                                        @if ($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_01')
+                                                                            <span
+                                                                                class="badge badge-dark">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_02')
+                                                                            <span
+                                                                                class="badge badge-info">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_03')
+                                                                            <span
+                                                                                class="badge badge-danger">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_04')
+                                                                            <span
+                                                                                class="badge badge-success">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @endif
                                                                     </td>
                                                                     <td>
                                                                         <ul>
                                                                             @foreach ($datum->uttpItem as $item)
-                                                                                <li> {{ $item->uttp->nama ?? '-' }}</li>
+                                                                                <li> {{ $item->uttp->nama ?? '-' }}
+                                                                                </li>
                                                                             @endforeach
                                                                         </ul>
                                                                     </td>

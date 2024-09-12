@@ -78,13 +78,13 @@
                                                                             </div>
                                                                             <div class="mb-2 row">
                                                                                 <label
-                                                                                    class="col-sm-2 col-form-label">No
+                                                                                    class="col-sm-2 col-form-label">Nomor
                                                                                     SK</label>
                                                                                 <div class="col-sm-10">
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.no_sk'
-                                                                                        placeholder="No SK">
+                                                                                        placeholder="Nomor SK">
                                                                                     @error('form.no_sk')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
@@ -172,19 +172,20 @@
                                                                                                     data-toggle="tooltip"
                                                                                                     data-placement="left"
                                                                                                     title="Edit"><i
-                                                                                                        class="fas fa-pencil-alt"></i>
+                                                                                                        class="fas fa-edit mr-1"></i>
+                                                                                                    Edit
                                                                                                 </button>
                                                                                                 <a href="{{ route('detail-jadwal-tera', $item->id) }}"
                                                                                                     class="btn btn-success btn-flat btn-sm"
                                                                                                     data-toggle="tooltip"
                                                                                                     data-placement="left"
-                                                                                                    title="Detail"><i
-                                                                                                        class="fas fa-plus"></i>
+                                                                                                    title="Pilih Penera"><i
+                                                                                                        class="fas fa-user-plus mr-1"></i>Penera
                                                                                                 </a>
                                                                                                 <button type="button"
                                                                                                     class="btn btn-danger btn-flat btn-sm"
                                                                                                     wire:click="delete('{{ $item->id }}')"><i
-                                                                                                        class="fas fa-trash"></i>
+                                                                                                        class="fas fa-trash-alt mr-1"></i>Hapus
                                                                                                 </button>
                                                                                             </div>
                                                                                         </div>

@@ -35,7 +35,7 @@
                     <h5><i class="bi bi-file-earmark-check-fill"></i> Persetujuan Pengajuan Tera</h5>
                 </div>
                 <div class="card-body">
-                    <h6 class="card-title">Deteail Permohonan</h6>
+                    <h6 class="card-title">Detail Permohonan</h6>
                     <p class="card-text">Apakah anda akan menyetujui permohonan berikut?</p>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>Nomor Permohonan:</strong> {{ $data->order_no ?? '-' }}</li>
