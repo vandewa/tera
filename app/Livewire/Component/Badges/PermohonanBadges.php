@@ -9,7 +9,7 @@ class PermohonanBadges extends Component
 {
     public function render()
     {
-        $data = Pengajuan::where('pengajuan_st', 'PENGAJUAN_ST_01')->count();
+        $data = Pengajuan::where('pengajuan_st', 'PENGAJUAN_ST_01')->where('jadwal_tera_id', null)->count();
 
         return view('livewire.component.badges.permohonan-badges', [
             'data' => $data
