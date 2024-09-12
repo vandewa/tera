@@ -21,6 +21,8 @@ class ModalTambahUser extends Component
         'name' => null,
         'nik' => null,
         'wa' => null,
+        'pekerjaan' => null,
+        'alamat' => null,
         'email' => null,
         'password' => null,
     ];

@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Uttp as ModelUttp;
 
-class Permohonan extends Component
+class SidangTera extends Component
 {
     use WithPagination;
 
@@ -100,9 +100,9 @@ class Permohonan extends Component
 
     public function render()
     {
-        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->where('jadwal_tera_id', null)->paginate(10);
+        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->where('jadwal_tera_id', '!=', null)->paginate(10);
 
-        return view('livewire.admin.permohonan', [
+        return view('livewire.admin.sidang-tera', [
             'post' => $data,
         ]);
     }

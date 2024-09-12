@@ -32,11 +32,11 @@
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Nama Usaha</b> <br>
+                                    <b>Nama Perusahaan</b> <br>
                                     <span>{{ $form['nama_usaha'] ?? '-' }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Nomor WhatsApp</b> <br>
+                                    <b>WhatsApp</b> <br>
                                     <span>{{ $form['wa'] ?? '-' }}</span>
                                 </li>
                                 <li class="list-group-item">
@@ -45,7 +45,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Alamat</b> <br>
-                                    <span>{{ $form['alamat'] ?? '-' }}</span>
+                                    <span>{{ $form['alamat_perusahaan'] ?? '-' }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -61,9 +61,9 @@
                                 <div class="active tab-pane" id="settings">
                                     <legend>Data Diri</legend>
                                     <form class="form-horizontal" wire:submit='save'>
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
-                                            <div class="col-sm-10">
+                                        <div class="row mb-2">
+                                            <label for="inputName" class="col-sm-3 col-form-label">Nama</label>
+                                            <div class="col-sm-9">
                                                 <input type="text" class="form-control" wire:model.blur='form.name'
                                                     placeholder="Nama Pemilik">
                                                 @error('form.name')
@@ -71,9 +71,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">NIK</label>
-                                            <div class="col-sm-10">
+                                        <div class="row mb-2">
+                                            <label for="inputName" class="col-sm-3 col-form-label">NIK</label>
+                                            <div class="col-sm-9">
                                                 <input type="text" class="form-control" wire:model.blur='form.nik'
                                                     placeholder="NIK">
                                                 @error('form.nik')
@@ -81,30 +81,29 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Nama Usaha</label>
-                                            <div class="col-sm-10">
+                                        <div class="row mb-2">
+                                            <label for="inputName" class="col-sm-3 col-form-label">Pekerjaan</label>
+                                            <div class="col-sm-9">
                                                 <input type="text" class="form-control"
-                                                    wire:model.blur='form.nama_usaha' placeholder="Nama Usaha">
-                                                @error('form.nama_usaha')
+                                                    wire:model.blur='form.pekerjaan' placeholder="Pekerjaan">
+                                                @error('form.pekerjaan')
                                                     <span class="form-text text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Nomor
-                                                WhatsApp</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" wire:model.blur='form.wa'
-                                                    placeholder="Nomor WhatsApp">
-                                                @error('form.wa')
+                                        <div class="row mb-2">
+                                            <label for="inputExperience" class="col-sm-3 col-form-label">Alamat</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" wire:model.blur='form.alamat'
+                                                    placeholder="Alamat">
+                                                @error('form.alamat')
                                                     <span class="form-text text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-10">
+                                        <div class="row mb-2">
+                                            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
                                                 <input type="email" class="form-control" wire:model.blur='form.email'
                                                     placeholder="Email">
                                                 @error('form.email')
@@ -112,11 +111,39 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 col-form-label">Alamat</label>
-                                            <div class="col-sm-10">
-                                                <textarea class="form-control" id="inputExperience" placeholder="Alamat" wire:model.blur='form.alamat'></textarea>
-                                                @error('form.alamat')
+                                        <div class="row mb-2">
+                                            <label for="inputName" class="col-sm-3 col-form-label">
+                                                WhatsApp</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" wire:model.blur='form.wa'
+                                                    placeholder="Nomor WhatsApp">
+                                                @error('form.wa')
+                                                    <span class="form-text text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <label for="inputName" class="col-sm-3 col-form-label">Nama
+                                                Perusahaan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control"
+                                                    wire:model.blur='form.nama_usaha' placeholder="Nama Usaha">
+                                                @error('form.nama_usaha')
+                                                    <span class="form-text text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-2">
+                                            <label for="inputExperience" class="col-sm-3 col-form-label">Alamat
+                                                Perusahaan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control"
+                                                    wire:model.blur='form.alamat_perusahaan'
+                                                    placeholder="Alamat Perusahaan">
+                                                @error('form.alamat_perusahaan')
                                                     <span class="form-text text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -170,13 +197,12 @@
                                             </div>
                                         @endif
 
-
-
-                                        <div class="form-group row">
-                                            <div class="offset-sm-2 col-sm-10">
+                                        <div class="row mb-2">
+                                            <div class="ml-auto">
                                                 <button type="submit" class="btn btn-info">Update</button>
                                             </div>
                                         </div>
+
                                     </form>
                                 </div>
                                 <!-- /.tab-pane -->

@@ -17,6 +17,8 @@ class DataDiri extends Component
         'nik' => null,
         'wa' => null,
         'nama_usaha' => null,
+        'alamat_perusahaan' => null,
+        'pekerjaan' => null,
         'alamat' => null,
         'password' => null,
     ];
@@ -37,6 +39,8 @@ class DataDiri extends Component
             'form.wa' => 'required',
             'form.nama_usaha' => 'required',
             'form.alamat' => 'required',
+            'form.alamat_perusahaan' => 'required',
+            'form.pekerjaan' => 'required',
         ];
     }
 

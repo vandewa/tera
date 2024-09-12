@@ -39,6 +39,30 @@
                                         </div>
                                     </div>
                                     <div class="row mb-2">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Pekerjaan
+                                            <small class="text-danger">*</small>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" wire:model='form.pekerjaan'
+                                                placeholder="Pekerjaan">
+                                            @error('form.pekerjaan')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Alamat
+                                            <small class="text-danger">*</small>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" wire:model='form.alamat'
+                                                placeholder="Alamat">
+                                            @error('form.alamat')
+                                                <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
                                         <label for="inputEmail3" class="col-sm-3 col-form-label">Telepon
                                             <small class="text-danger">*</small>
                                         </label>

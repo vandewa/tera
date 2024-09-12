@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CetakController;
+use App\Livewire\Admin\SidangTeraForm;
 use App\Livewire\User;
 use App\Livewire\Uttp;
 use App\Livewire\DataDiri;
@@ -19,6 +20,7 @@ use App\Http\Controllers\HelperController;
 use App\Http\Controllers\PasswordResetController;
 use App\Livewire\Permohonan\PermohonanPage;
 use App\Http\Controllers\RegisterController;
+use App\Livewire\Admin\SidangTera;
 use App\Livewire\Permohonan\PermohonanFormPage;
 
 // Route::get('/', function () {
@@ -53,6 +55,9 @@ Route::middleware([
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('permohonan', Permohonan::class)->name('permohonan');
         Route::get('permohonan/create/{id?}', PermohonanForm::class)->name('permohonan.create');
+        Route::get('sidang-tera', SidangTera::class)->name('sidang.tera');
+        Route::get('sidang-tera/create/{id?}', SidangTeraForm::class)->name('sidang-tera.create');
+
     });
 
     Route::group(['prefix' => 'master', 'as' => 'master.'], function () {

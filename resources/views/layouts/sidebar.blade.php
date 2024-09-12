@@ -101,101 +101,110 @@
                                   <livewire:component.badges.permohonan-badges>
                               </a>
                           </li>
+                          <li class="nav-item">
+                              <a href="{{ route('admin.sidang.tera') }}"
+                                  class="nav-link  {{ Request::segment(2) == 'sidang-tera' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-tools"></i>
+                                  <p class="mr-1">
+                                      Sidang Tera
+                                  </p>
+                              </a>
+                          </li>
                       @endrole
 
                       @role(['superadministrator', 'administrator'])
-                      <li class="nav-item">
-                          <a href="{{ route('jadwal-tera') }}"
-                              class="nav-link
+                          <li class="nav-item">
+                              <a href="{{ route('jadwal-tera') }}"
+                                  class="nav-link
                               {{ Request::segment(1) == 'jadwal-tera' ? 'active' : '' }}
                               {{ Request::segment(1) == 'detail-jadwal-tera' ? 'active' : '' }}
                               ">
-                              <i class="nav-icon fas fa-calendar"></i>
-                              <p>
-                                  Jadwal Tera
-                              </p>
-                          </a>
-                      </li>
-                      <li
-                          class="nav-item
+                                  <i class="nav-icon fas fa-calendar"></i>
+                                  <p>
+                                      Jadwal Tera
+                                  </p>
+                              </a>
+                          </li>
+                          <li
+                              class="nav-item
                             {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'template-dokumen' ? 'menu-is-opening menu-open' : '' }}
                         ">
-                          <a href="#"
-                              class="nav-link
+                              <a href="#"
+                                  class="nav-link
                                 {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}
                                 ">
-                              <i class="nav-icon fa-solid fa-file-lines"></i>
-                              <p>
-                                  Master
-                                  <i class="fas fa-angle-left right"></i>
-                              </p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                              <li class="nav-item">
-                                  <a href="{{ route('master.uttp') }}"
-                                      class="nav-link {{ Request::segment(2) == 'uttp' ? 'active' : '' }}">
-                                      @if (Request::segment(2) == 'uttp')
-                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
-                                      @else
-                                          <i class="ml-2 far fa-circle nav-icon"></i>
-                                      @endif
-                                      <p>Jenis UTTP</p>
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a href="{{ route('master.peralatan') }}"
-                                      class="nav-link {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}">
-                                      @if (Request::segment(2) == 'peralatan')
-                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
-                                      @else
-                                          <i class="ml-2 far fa-circle nav-icon"></i>
-                                      @endif
-                                      <p>Peralatan</p>
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a href="{{ route('master.template-dokumen') }}"
-                                      class="nav-link {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}">
-                                      @if (Request::segment(2) == 'template-dokumen')
-                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
-                                      @else
-                                          <i class="ml-2 far fa-circle nav-icon"></i>
-                                      @endif
-                                      <p>Template Dokumen</p>
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a href="{{ route('master.user-index') }}"
-                                      class="nav-link
+                                  <i class="nav-icon fa-solid fa-file-lines"></i>
+                                  <p>
+                                      Master
+                                      <i class="fas fa-angle-left right"></i>
+                                  </p>
+                              </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.uttp') }}"
+                                          class="nav-link {{ Request::segment(2) == 'uttp' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'uttp')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Jenis UTTP</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.peralatan') }}"
+                                          class="nav-link {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'peralatan')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Peralatan</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.template-dokumen') }}"
+                                          class="nav-link {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'template-dokumen')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Template Dokumen</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.user-index') }}"
+                                          class="nav-link
                                         {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
                                         {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                       ">
-                                      @if (Request::segment(2) == 'user-index')
-                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
-                                      @elseif(Request::segment(2) == 'user')
-                                          <i class="ml-2 far fa-dot-circle nav-icon"></i>
-                                      @else
-                                          <i class="ml-2 far fa-circle nav-icon"></i>
-                                      @endif
-                                      <p>User</p>
-                                  </a>
-                              </li>
+                                          @if (Request::segment(2) == 'user-index')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @elseif(Request::segment(2) == 'user')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>User</p>
+                                      </a>
+                                  </li>
 
-                          </ul>
-                      </li>
-                  @endrole
-              </ul>
+                              </ul>
+                          </li>
+                      @endrole
+                  </ul>
 
-          </nav>
-          <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-  </aside>
+              </nav>
+              <!-- /.sidebar-menu -->
+          </div>
+          <!-- /.sidebar -->
+      </aside>

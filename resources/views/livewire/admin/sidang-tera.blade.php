@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Permohonan Tera</h1>
+                <h1 class="m-0">Sidang Tera</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Permohonan </li>
+                    <li class="breadcrumb-item active">Sidang </li>
                     <li class="breadcrumb-item"><a href="#">Tera</a></li>
                 </ol>
             </div>
@@ -25,7 +25,7 @@
                                         <div class="card card-info card-outline">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    Permohonan Tera
+                                                    Sidang Tera
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -34,20 +34,19 @@
                                                         <input type="text" class="form-control" placeholder="cari"
                                                             wire:model.live='cari'>
                                                     </div>
-                                                    {{-- <div class="col-md-2 pull-right">
-                                                        <a href="{{ route('admin.permohonan.create') }}"
+                                                    <div class="col-md-2 pull-right">
+                                                        <a href="{{ route('admin.sidang-tera.create') }}"
                                                             class="btn btn-primary"> <span class="fas fa-plus mr-2">
-                                                            </span>Tambah Permohonan</a>
-                                                    </div> --}}
+                                                            </span>Tambah Data</a>
+                                                    </div>
                                                 </div>
 
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <thead>
                                                             <th>Nomor</th>
-                                                            <th>Tanggal</th>
+                                                            <th>Jadwal</th>
                                                             <th>Nama</th>
-                                                            <th>Jenis Pelayanan</th>
                                                             <th>Status</th>
                                                             <th>UTTP</th>
                                                             <th>Aksi</th>
@@ -66,11 +65,6 @@
                                                                     </td>
                                                                     <td>
                                                                         {{ $datum->user->name ?? '' }}
-                                                                    </td>
-                                                                    <td>{{ $datum->jenisPengajuan->code_nm ?? '-' }}
-                                                                        @if ($datum->alamat)
-                                                                            {{ '( ' . $datum->alamat . ' )' }}
-                                                                        @endif
                                                                     </td>
                                                                     <td>
                                                                         @if ($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_01')
