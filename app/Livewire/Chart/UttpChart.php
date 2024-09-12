@@ -14,7 +14,12 @@ class UttpChart extends Component
     {
 
         $jingan = Uttp::withCount([
+
             'pengajuan' => function ($a) {
+
+                $a->whereHas('pengajuannya', function ($a) {
+                    $a->where('pengajuan_st', 'PENGAJUAN_ST_04');
+                });
                 if ($this->startDate && $this->endDate) {
                     $this->dispatch('jmbt', start: $this->startDate, end: $this->endDate)->to(UttpChart::class);
                     $a->whereBetween('created_at', [$this->startDate, $this->endDate . ' 23:59:59']);

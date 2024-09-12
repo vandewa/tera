@@ -10,7 +10,13 @@ class PengajuanUttp extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function uttp() {
+    public function uttp()
+    {
         return $this->belongsTo(Uttp::class, 'uttp_id');
+    }
+
+    public function pengajuannya()
+    {
+        return $this->belongsTo(Pengajuan::class, 'pengajuan_id');
     }
 }

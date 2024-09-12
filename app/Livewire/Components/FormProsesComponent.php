@@ -39,7 +39,7 @@ class FormProsesComponent extends Component
         // $property: The name of the current property that was updated
 
         if ($property === 'pemeriksaan.hasil_st') {
-            if ($this->pemeriksaan['hasil_st'] == 'HASIL_ST_02') {
+            if ($this->pemeriksaan['hasil_st'] == 'HASIL_ST_02' || $this->pemeriksaan['hasil_st'] == 'HASIL_ST_03') {
                 $this->tampilAlasn = true;
             } else {
                 $this->tampilAlasn = false;

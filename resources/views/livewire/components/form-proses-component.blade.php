@@ -42,7 +42,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="hasil_keterangan">Hasil Keterangan</label>
-                        <textarea id="hasil_keterangan" class="form-control" rows="4" wire:model.defer="pemeriksaan.hasil_keterangan"></textarea>
+                        <textarea id="hasil_keterangan" class="form-control" rows="2" wire:model.defer="pemeriksaan.hasil_keterangan"></textarea>
                         @error('pemeriksaan.hasil_keterangan')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -118,7 +118,7 @@
             <div class="col-md-12">
                 <label for="upload_cerapan">Telusuran</label>
                 <div class="input-group">
-                    <textarea name="" class="form-control" wire:model="pemeriksaan.telusuran" rows="3"></textarea>
+                    <textarea name="" class="form-control" wire:model="pemeriksaan.telusuran" rows="2"></textarea>
                 </div>
                 @error('pemeriksaan.telusuran')
                     <span class="text-danger">{{ $message }}</span>
