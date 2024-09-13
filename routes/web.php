@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CetakController;
+use App\Livewire\Admin\ProsesSidangTeraPage;
 use App\Livewire\Admin\SidangTeraForm;
 use App\Livewire\User;
 use App\Livewire\Uttp;
@@ -57,6 +58,7 @@ Route::middleware([
         Route::get('permohonan/create/{id?}', PermohonanForm::class)->name('permohonan.create');
         Route::get('sidang-tera', SidangTera::class)->name('sidang.tera');
         Route::get('sidang-tera/create/{id?}', SidangTeraForm::class)->name('sidang-tera.create');
+        Route::get('sidang-tera/proses/{id}', ProsesSidangTeraPage::class)->name('sidang-tera.proses');
 
     });
 

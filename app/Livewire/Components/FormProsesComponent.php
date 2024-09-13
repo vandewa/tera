@@ -32,6 +32,8 @@ class FormProsesComponent extends Component
 
     public $users = [];
 
+    public $penandatangan;
+
 
 
     public function updated($property)
@@ -51,9 +53,13 @@ class FormProsesComponent extends Component
     public function mount($id = null)
     {
         $this->idnya = $id;
-        $this->users = User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'user');
-        })->get();
+        // $this->users = User::whereDoesntHave('roles', function ($query) {
+        //     $query->where('name', 'user');
+        // })->get();
+
+        $this->users = User::whereHasRole(['penera', 'administrator', 'superadministrator'])->get();
+        $this->penandatangan = User::whereHasRole('kepala_dinas')->get();
+
         $this->standars = PemeriksaanStandar::where('pemeriksaan_id', $id)->get()->toArray();
         $this->petugas = PemeriksaanPetugas::where('pemeriksaan_id', $id)->get()->toArray();
         $this->hasil = ComCode::where('code_group', 'HASIL_ST')->get();
@@ -96,7 +102,7 @@ class FormProsesComponent extends Component
         ]);
 
         if ($this->upload_cerapan) {
-            $path = $this->upload_cerapan->store('cerapan');
+            $path = $this->upload_cerapan->store('tera/file', 'gcs');
             $this->pemeriksaan['upload_cerapan'] = $path;
         }
 
@@ -112,9 +118,7 @@ class FormProsesComponent extends Component
         ]);
 
         if ($this->upload_cerapan) {
-            $path = $this->upload_cerapan->store('cerapan');
-
-            Pemeriksaan::find($this->pemeriksaan['id'])->update(['upload_cerapan' => $path]);
+            Pemeriksaan::find($this->pemeriksaan['id'])->update(['upload_cerapan' => $this->pemeriksaan['upload_cerapan']]);
         }
 
         // $this->pemeriksaan->save();

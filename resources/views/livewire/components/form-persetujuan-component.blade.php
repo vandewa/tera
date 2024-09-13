@@ -32,7 +32,7 @@
 
             <div class="card">
                 <div class="text-center card-header">
-                    <h5><i class="bi bi-file-earmark-check-fill"></i> Persetujuan Pengajuan Tera</h5>
+                    <h5><i class="bi bi-file-earmark-check-fill"></i> Persetujuan Permohonan Tera</h5>
                 </div>
                 <div class="card-body">
                     <h6 class="card-title">Detail Permohonan</h6>
@@ -47,10 +47,11 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <button type="button" class="btn btn-custom-reject" wire:click='tolak'><i
-                            class="bi bi-x-circle-fill"></i> Tolak</button>
-                    <button type="button" class="btn btn-custom-approve" wire:click='terima'><i
-                            class="bi bi-check-circle-fill"></i>
-                        Terima</button>
+                            class="fas fa-times-circle mr-1"></i>Tolak</button>
+                    <button type="button" class="btn btn-custom-approve" wire:click='terima'>
+                        <i class="fas fa-check-circle mr-1"></i>
+                        Terima
+                    </button>
                 </div>
             </div>
         </div>

@@ -98,11 +98,11 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"
-                                                                                        href="{{ route('permohonan-proses', $datum->id) }}"><i
+                                                                                        href="{{ route('admin.sidang-tera.proses', $datum->id) }}"><i
                                                                                             class="far fa-arrow-alt-circle-right mr-2"></i>Proses</a>
                                                                                 </li>
                                                                                 <li><a class="dropdown-item"
-                                                                                        href="{{ route('admin.permohonan.create', $datum->id) }}"><i
+                                                                                        href="{{ route('admin.sidang-tera.create', $datum->id) }}"><i
                                                                                             class="far fa-edit mr-2"></i>Edit</a>
                                                                                 </li>
                                                                                 <li><button class="dropdown-item"

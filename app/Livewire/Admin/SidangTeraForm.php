@@ -89,6 +89,7 @@ class SidangTeraForm extends Component
         $this->validate([
             'formUttp.*.uttp_id' => 'required',
             'formUttp.*.jumlah' => 'required',
+            'form.jadwal_tera_id' => 'required',
         ]);
 
         if ($this->edit) {
@@ -112,7 +113,7 @@ class SidangTeraForm extends Component
         $a = Pengajuan::create([
             // 'user_id' => auth()->user()->id,
             'order_no' => genNo(),
-            'pengajuan_st' => 'PENGAJUAN_ST_01',
+            'pengajuan_st' => 'PENGAJUAN_ST_02',
         ] + $this->form);
 
         foreach ($this->formUttp as $item) {

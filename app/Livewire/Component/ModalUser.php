@@ -29,7 +29,7 @@ class ModalUser extends Component
     }
     public function render()
     {
-        $data = User::cari($this->search)->paginate(7);
+        $data = User::whereHasRole('user')->cari($this->search)->paginate(7);
 
         return view('livewire.component.modal-user', [
             'posts' => $data

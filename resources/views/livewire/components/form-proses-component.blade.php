@@ -74,7 +74,7 @@
                     <select id="penandatanganan_id" class="form-control"
                         wire:model.defer="pemeriksaan.penandatanganan_id">
                         <option value="">Pilih Penandatanganan</option>
-                        @foreach ($users as $user)
+                        @foreach ($penandatangan as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
@@ -91,7 +91,8 @@
                 <input type="file" id="upload_cerapan" class="form-control" wire:model="upload_cerapan">
                 <div class="input-group-append">
                     @if ($file_name)
-                        <a href="{{ Storage::url($file_name) }}" class="btn btn-outline-secondary" target="_blank">
+                        <a href="{{ route('helper.show-picture', ['path' => $file_name]) }}"
+                            class="btn btn-outline-secondary" target="_blank">
                             <i class="fa fa-download"></i> {{ $file_name }}
                         </a>
                     @endif
@@ -134,7 +135,8 @@
                     <label>Standar</label>
                     @foreach ($standars as $index => $standar)
                         <div class="mb-3 input-group">
-                            <input class="form-control" wire:model.defer="standars.{{ $index }}.nama">
+                            <input class="form-control" wire:model.defer="standars.{{ $index }}.nama"
+                                id="standar">
                             </input>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
@@ -155,7 +157,8 @@
                     <label>Petugas</label>
                     @foreach ($petugas as $index => $petugas)
                         <div class="mb-3 input-group">
-                            <select class="form-control" wire:model.defer="petugas.{{ $index }}.user_id">
+                            <select class="form-control" wire:model.defer="petugas.{{ $index }}.user_id"
+                                id="petugas">
                                 <option value="">Pilih Petugas</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -180,3 +183,17 @@
 
     </form>
 </div>
+
+@push('js')
+    <script>
+        document.addEventListener('livewire:load', function() {
+            // Fungsi untuk tombol tambah standar
+            document.getElementById('standar').addEventListener('click', function() {
+                // Logika untuk menambah standar
+            });
+            document.getElementById('petugas').addEventListener('click', function() {
+                // Logika untuk menambah standar
+            });
+        });
+    </script>
+@endpush

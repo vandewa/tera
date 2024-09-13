@@ -27,6 +27,9 @@ return [
         'penera' => [
             'profile' => 'r,u',
         ],
+        'kepala_dinas' => [
+            'profile' => 'r,u',
+        ],
     ],
 
     'permissions_map' => [
