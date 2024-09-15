@@ -23,6 +23,7 @@ use App\Livewire\Permohonan\PermohonanPage;
 use App\Http\Controllers\RegisterController;
 use App\Livewire\Admin\SidangTera;
 use App\Livewire\Permohonan\PermohonanFormPage;
+use App\Livewire\UserUttpPage;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -45,6 +46,7 @@ Route::middleware([
 
 ])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
+    Route::get('my-uttp', UserUttpPage::class)->name('user-uttp');
     Route::get('pemohon', PemohonCrud::class)->name('pemohon');
     Route::get('permohonan', PermohonanPage::class)->name('permohonan');
     Route::get('permohonan/proses/{id}', ProsesPermohonanPage::class)->name('permohonan-proses');

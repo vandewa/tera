@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengajuan_uttps', function (Blueprint $table) {
+        Schema::create('uttp_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('uttp_user_id')->nullable();
             $table->unsignedBigInteger('uttp_id')->nullable();
-            $table->unsignedBigInteger('pengajuan_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('no_seri')->nullable();
             $table->string('merek')->nullable();
             $table->string('tipe')->nullable()->comment('tipe / kelas');
             $table->string('kapasitas')->nullable();
             $table->integer('jumlah')->nullable();
-            $table->string('pengajuan_uttp_st')->nullable();
             $table->text('keterangan')->nullable();
+            $table->date('tera-ulang')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengajuan_uttps');
+        Schema::dropIfExists('uttp_users');
     }
 };
