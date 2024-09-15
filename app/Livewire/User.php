@@ -9,13 +9,14 @@ use App\Models\User as ModelsUser;
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $bukaNoSk = false;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $bukaNoSk = false, $bukaPangkat = false;
 
     public $form = [
         'name' => null,
         'email' => null,
         'nip' => null,
         'no_sk' => null,
+        'pangkat' => null,
         'password' => null,
     ];
 
@@ -31,6 +32,9 @@ class User extends Component
             $this->user = $id;
             if ($this->role == '4') {
                 $this->bukaNoSk = true;
+            }
+            if ($this->role == '5') {
+                $this->bukaPangkat = true;
             }
         }
 
@@ -108,6 +112,15 @@ class User extends Component
             } else {
                 $this->bukaNoSk = false;
                 $this->form['no_sk'] = null;
+            }
+        }
+
+        if ($property === 'role') {
+            if ($this->role == '5') {
+                $this->bukaPangkat = true;
+            } else {
+                $this->bukaPangkat = false;
+                $this->form['pangkat'] = null;
             }
         }
     }

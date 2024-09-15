@@ -130,6 +130,25 @@
                                                                                 </div>
                                                                             @endif
 
+                                                                            @if ($bukaPangkat)
+                                                                                <div class="row mb-2">
+                                                                                    <label for="inputEmail3"
+                                                                                        class="col-sm-3 col-form-label">Pangkat
+                                                                                        <small
+                                                                                            class="text-danger">*</small>
+                                                                                    </label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            wire:model='form.pangkat'
+                                                                                            placeholder="Contoh: Pembina Utama Muda">
+                                                                                        @error('form.pangkat')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif
 
 
                                                                             @if ($edit)
@@ -157,7 +176,8 @@
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-3 col-form-label">Konfirmasi
                                                                                     Password
-                                                                                    <small class="text-danger">*</small>
+                                                                                    <small
+                                                                                        class="text-danger">*</small>
                                                                                 </label>
                                                                                 <div class="col-sm-9">
                                                                                     <input type="password"
