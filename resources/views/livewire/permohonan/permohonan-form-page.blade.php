@@ -85,7 +85,7 @@
                                                             <div class="card-body">
                                                                 @foreach ($uttpForm as $index => $item)
                                                                     <div class="mt-2 row">
-                                                                        <div class="row">
+                                                                        <div class=" row bg-light">
                                                                             <div class="col-md-6 row">
                                                                                 <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Jenis UTTP *</label>
@@ -218,7 +218,7 @@
                     </button>
                 </div>
                 <form action="" wire:submit='tambahPengajuan'>
-                    <div class="modal-body">
+                    <div class="modal-body table-responsive">
 
                         <table class="table">
                             <thead>
