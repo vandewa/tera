@@ -8,12 +8,17 @@ use App\Models\Pengajuan;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Uttp as ModelUttp;
+use App\Models\UttpUser;
+use Illuminate\Support\Arr;
 
 class PermohonanFormPage extends Component
 {
     use WithPagination;
 
     public $idHapus, $edit = false, $idnya, $cari, $bukaAlamat;
+    public $showModal = true;
+    public $listUttp;
+    public $selectedUttp = [];
 
     public $form = [
         'pengajuan_tp' => null,
@@ -42,6 +47,10 @@ class PermohonanFormPage extends Component
     public function mount($id = "")
     {
 
+        $this->listUttp = UttpUser::with(['uttp'])
+        ->where('user_id', auth()->user()->id)
+        ->get()
+        ->toArray();
         $this->form['tanggal'] = date('Y-m-d');
 
         if (count($this->formUttp) < 1) {
@@ -56,6 +65,11 @@ class PermohonanFormPage extends Component
                 $this->form = $data->only(['pengajuan_tp', 'alamat', 'jadwal_tera_id', 'user_id']);
                 $this->formUttp = $data->uttpItem->toArray(); // Fetch related records and convert to array
 
+                foreach($this->formUttp as $index=>$datum) {
+                    $this->selectedUttp[$index] = $datum['uttp_user_id'];
+
+                }
+
                 // Form alamat
                 $this->bukaAlamat = $this->form['pengajuan_tp'] === 'PENGAJUAN_TP_02';
 
@@ -68,6 +82,12 @@ class PermohonanFormPage extends Component
 
     public function hapusUttp($index)
     {
+        // dd($this->formUttp[$index]['uttp_user_id']);
+        $filteredArray = array_filter($this->selectedUttp, function ($value) use($index) {
+            return $value != $this->formUttp[$index]['uttp_user_id'];
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $this->selectedUttp =  $filteredArray ;
         unset($this->formUttp[$index]);
     }
 
@@ -132,16 +152,36 @@ class PermohonanFormPage extends Component
 
     public function tambahUttp()
     {
-        $data = [
-            'uttp_id' => null,
-            'no_seri' => null,
-            'merek' => null,
-            'tipe' => null,
-            'kapasitas' => null,
-            'jumlah' => null,
-            'keterangan' => null,
+        $this->showModal = !$this->showModal;
+    }
+
+    public function tambahPengajuan()
+    {
+        $this->tambahUttp();
+        $numericArray = array_map('intval', array_values($this->selectedUttp));
+        $datanya = UttpUser::with(['uttp'])->whereIn('id', $numericArray)->get();
+
+        foreach($datanya as $datum){
+            $data = [
+            'uttp_user_id' => $datum->id,
+            'uttp_id' => $datum->uttp_id,
+            'no_seri' => $datum->no_seri,
+            'tipe' => $datum->tipe,
+            'merek' => $datum->merek,
+            'kapasitas' => $datum->kapasitas,
+            'jumlah' => $datum->jumlah,
+            'keterangan' => $datum->keterangan,
         ];
-        array_push($this->formUttp, $data);
+        $exists = collect($this->formUttp)->contains('uttp_user_id', $datum->id);
+
+        if (!$exists) {
+            array_push($this->formUttp, $data);
+        }
+        }
+
+
+
+        // dd( Arr::flatten($this->selectedUttp));
     }
 
 

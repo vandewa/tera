@@ -87,7 +87,7 @@
                                                                     <div class="mt-2 row">
                                                                         <div class="row">
                                                                             <div class="col-md-6 row">
-                                                                                <div class=" col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Jenis UTTP *</label>
                                                                                     <select name=""
                                                                                         class="form-control @error('formUttp.' . $index . '.uttp_id') is-invalid @enderror"
@@ -104,21 +104,21 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                                <div class=" col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Merek</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='formUttp.{{ $index }}.merek'
                                                                                         placeholder="merek">
                                                                                 </div>
-                                                                                <div class="col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>No Seri</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='formUttp.{{ $index }}.no_seri'
                                                                                         placeholder="No Seri">
                                                                                 </div>
-                                                                                <div class=" col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Jenis</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
@@ -127,21 +127,21 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5 row">
-                                                                                <div class="col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Kapasitas</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='formUttp.{{ $index }}.kapasitas'
                                                                                         placeholder="Kapasitas">
                                                                                 </div>
-                                                                                <div class="col-sm-6 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-6 col-xs-12">
                                                                                     <label>Jumlah</label>
                                                                                     <input type="number"
                                                                                         class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
                                                                                         wire:model='formUttp.{{ $index }}.jumlah'
                                                                                         placeholder="Jumlah">
                                                                                 </div>
-                                                                                <div class="col-sm-12 col-xs-12 mb-3">
+                                                                                <div class="mb-3 col-sm-12 col-xs-12">
                                                                                     <label>Keterangan</label>
                                                                                     <input type="text"
                                                                                         class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
@@ -172,7 +172,7 @@
                                                             <div class="card-footer">
                                                                 <button type="button" wire:click='tambahUttp'
                                                                     class="float-right btn btn-primary"> <span
-                                                                        class="fas fa-plus mr-2"></span>Tambah
+                                                                        class="mr-2 fas fa-plus"></span>Ajukan
                                                                     UTTP</button>
                                                             </div>
 
@@ -181,10 +181,11 @@
                                                     </div>
 
                                                     <div class="card-footer">
+
                                                         <button type="submit"
                                                             class=" btn btn-default">Cancel</button>
                                                         <button type="submit" class="float-right btn btn-info"> <span
-                                                                class="fas fa-paper-plane mr-2"></span>Kirim
+                                                                class="mr-2 fas fa-paper-plane"></span>Kirim
                                                             Pengajuan</button>
                                                     </div>
 
@@ -205,9 +206,59 @@
         </div>
     </section>
 
-    {{-- Modal data --}}
+    <!-- Modal -->
+    <div class="modal fade @if ($showModal) show @endif" tabindex="-1" role="dialog"
+        style="display: @if ($showModal) block @else none @endif;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Daftar Uttp Saya</h5>
+                    <button type="button" class="close" wire:click="tambahUttp" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" wire:submit='tambahPengajuan'>
+                    <div class="modal-body">
 
-    {{-- end modal  --}}
+                        <table class="table">
+                            <thead>
+                                <th>#</th>
+                                <th>Uttp</th>
+                                <th>Merek</th>
+                                <th>No Seri</th>
+                                <th>Tipe</th>
+                                <th>Kapasitas</th>
+                                <th>Keterangan</th>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($listUttp as $item)
+                                    <tr :key="$item['id']">
+                                        <td><input type="checkbox" wire:model='selectedUttp'
+                                                value="{{ $item['id'] }}"></td>
+                                        <td>{{ $item['uttp']['nama'] ?? '-' }}</td>
+                                        <td> {{ $item['merek'] ?? '-' }}
+                                        </td>
+                                        <td> {{ $item['no_seri'] ?? '-' }}
+                                        </td>
+                                        <td> {{ $item['tipe'] ?? '-' }}
+                                        </td>
+                                        <td> {{ $item['kapasitas'] ?? '-' }}
+                                        <td> {{ $item['keterangan'] ?? '-' }}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('user-uttp') }}" class="btn btn-warning">Tambahkan Uttp Saya</a>
+                        <button type="button" class="btn btn-secondary" wire:click="tambahUttp">Close</button>
+                        <button type="Submit" class="btn btn-primary">Ajukan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @push('js')

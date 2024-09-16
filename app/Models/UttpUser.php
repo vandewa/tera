@@ -9,6 +9,12 @@ class UttpUser extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    public function uttp()
+    {
+        return $this->belongsTo(Uttp::class, 'uttp_id');
+    }
+
 
     public function scopeCari($filter, $value)
     {

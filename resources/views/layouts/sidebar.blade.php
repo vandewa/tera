@@ -79,6 +79,15 @@
                               </a>
                           </li>
                           <li class="nav-item">
+                              <a href="{{ route('user-uttp') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'my-uttp' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-pencil-alt"></i>
+                                  <p>
+                                      Uttp Saya
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
                               <a href="{{ route('data-diri') }}"
                                   class="nav-link  {{ Request::segment(1) == 'data-diri' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-user-edit"></i>

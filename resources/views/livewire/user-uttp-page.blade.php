@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Peralatan</h1>
+                <h1 class="m-0">Uttp Saya</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Master</li>
-                    <li class="breadcrumb-item"><a href="#">Peralatan</a></li>
+                    <li class="breadcrumb-item active">Permohonan</li>
+                    <li class="breadcrumb-item"><a href="#">Uttp</a></li>
                 </ol>
             </div>
         </div>
@@ -40,7 +40,7 @@
                                                                                         class="text-danger">*</small></label>
                                                                                 <div class="col-sm-10">
                                                                                     <select name=""
-                                                                                        wire:model='form.listUttp'
+                                                                                        wire:model='form.uttp_id'
                                                                                         class="form-control"
                                                                                         id="">
                                                                                         <option value="">Pilih
@@ -180,13 +180,16 @@
                                                                 </div>
 
                                                                 <div class="table-responsive">
+
                                                                     <table class="table">
                                                                         <thead>
                                                                             <th>No</th>
-                                                                            <th>Nama</th>
-                                                                            <th>Satuan ID</th>
+                                                                            <th>Uttp</th>
+                                                                            <th>Merek</th>
                                                                             <th>No Seri</th>
-                                                                            <th>Status Peralatan</th>
+                                                                            <th>Tipe</th>
+                                                                            <th>Kapasitas</th>
+                                                                            <th>Keterangan</th>
                                                                             <th>Aksi</th>
                                                                         </thead>
                                                                         <tbody>
@@ -194,12 +197,16 @@
                                                                                 <tr wire:key='{{ $item->id }}'>
                                                                                     <td>{{ $loop->index + $post->firstItem() }}
                                                                                     </td>
-                                                                                    <td> {{ $item->nama ?? '-' }}</td>
-                                                                                    <td> {{ $item->satuan_id ?? '-' }}
+                                                                                    <td> {{ $item->uttp->nama ?? '-' }}
+                                                                                    </td>
+                                                                                    <td> {{ $item->merek ?? '-' }}
                                                                                     </td>
                                                                                     <td> {{ $item->no_seri ?? '-' }}
                                                                                     </td>
-                                                                                    <td> {{ $item->status->code_nm ?? '-' }}
+                                                                                    <td> {{ $item->tipe ?? '-' }}
+                                                                                    </td>
+                                                                                    <td> {{ $item->kapasitas ?? '-' }}
+                                                                                    <td> {{ $item->keterangan ?? '-' }}
                                                                                     </td>
                                                                                     <td>
                                                                                         <div

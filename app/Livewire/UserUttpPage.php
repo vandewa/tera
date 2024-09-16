@@ -42,11 +42,11 @@ class UserUttpPage extends Component
     public function save()
     {
         $this->validate([
-            'form.uttp_id' => 'required|string|max:255',
-            'form.no_seri' => 'required|integer',
+            'form.uttp_id' => 'required',
+            'form.no_seri' => 'required',
             'form.merek' => 'max:255',
             'form.tipe' => 'string|max:255',
-            'form.jumlah' => 'required|number|max:255',
+            'form.jumlah' => 'required|numeric|max:255',
             'form.keterangan' => 'string|max:255',
         ]);
 
@@ -61,6 +61,7 @@ class UserUttpPage extends Component
 
     public function store()
     {
+        $this->form['user_id'] = auth()->user()->id;
         UttpUser::create($this->form);
         $this->resetForm();
     }
@@ -123,7 +124,7 @@ class UserUttpPage extends Component
 
     public function render()
     {
-        $data = UttpUser::with(['status'])->cari($this->cari)
+        $data = UttpUser::with(['uttp'])->cari($this->cari)
         ->where('user_id', auth()->user()->id)->paginate(10);
 
         return view('livewire.user-uttp-page', [
