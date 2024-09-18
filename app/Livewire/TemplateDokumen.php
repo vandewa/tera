@@ -96,11 +96,11 @@ class TemplateDokumen extends Component
     public function storeUpdate()
     {
         if ($this->files) {
-            $foto = $this->files->store('tera/file', 'gcs');
+            $foto = $this->files->store('template', 'public');
             $this->form['path'] = $foto;
+            ModelTemplateDokumen::find($this->idHapus)->update($this->form);
         }
 
-        ModelTemplateDokumen::find($this->idHapus)->update($this->form);
         $this->reset();
         $this->edit = false;
     }

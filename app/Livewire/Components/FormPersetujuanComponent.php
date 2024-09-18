@@ -2,24 +2,33 @@
 
 namespace App\Livewire\Components;
 
+use Livewire\Component;
+use App\Jobs\kirimPesan;
+use App\Models\Pengajuan;
 use App\Livewire\Admin\Permohonan;
 use App\Livewire\ProsesPermohonanPage;
-use Livewire\Component;
-use App\Models\Pengajuan;
 
 class FormPersetujuanComponent extends Component
 {
-    public $idnya;
+    public $idnya, $wa;
+
+    public function mount()
+    {
+        $a = Pengajuan::with(['jenisPengajuan', 'pemohon'])->find($this->idnya);
+        $this->wa = $a->pemohon->wa;
+    }
+
     public function render()
     {
 
         $data = Pengajuan::with(['jenisPengajuan', 'pemohon'])->find($this->idnya);
-        return view('livewire.components.form-persetujuan-component',[
+        return view('livewire.components.form-persetujuan-component', [
             'data' => $data
         ]);
     }
 
-    public function terima() {
+    public function terima()
+    {
         $this->js(<<<'JS'
             Swal.fire({
             title: "Anda yakin akan menirma permohonan ini?",
@@ -42,13 +51,23 @@ class FormPersetujuanComponent extends Component
         JS);
     }
 
-    public function terimaPermohonan() {
+    public function terimaPermohonan()
+    {
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_02'
         ]);
+
+        $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
+            'Status pengajuan tera *DITERIMA*. Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .
+            'Disdagkopukm Wonosobo'
+        ;
+
+        // kirimPesan::dispatch($this->wa, $pesan);
+
         $this->refreshPage();
     }
-    public function tolak()  {
+    public function tolak()
+    {
         $this->js(<<<'JS'
         Swal.fire({
         title: "Anda yakin akan menolak permohonan ini?",
@@ -71,14 +90,25 @@ class FormPersetujuanComponent extends Component
     JS);
     }
 
-    public function tolakPermohonan() {
+    public function tolakPermohonan()
+    {
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_03'
         ]);
+
+        $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
+            'Pengajuan tera Anda saat ini *DITOLAK*. Kami mohon maaf atas ketidaknyamanan ini. Tim kami akan segera menghubungi Anda untuk memberikan informasi lebih lanjut dan panduan terkait langkah berikutnya. Terima kasih atas pengertian Anda.' . urldecode('%0D%0A%0D%0A') .
+            'Disdagkopukm Wonosobo'
+        ;
+
+        // kirimPesan::dispatch($this->wa, $pesan);
+
+
         $this->refreshPage();
     }
 
-    public function refreshPage() {
-        $this->dispatch( 'restart');
+    public function refreshPage()
+    {
+        $this->dispatch('restart');
     }
 }

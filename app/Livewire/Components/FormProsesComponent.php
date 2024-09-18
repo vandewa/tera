@@ -3,16 +3,18 @@
 namespace App\Livewire\Components;
 
 
-use App\Models\ComCode;
+use Auth;
 use App\Models\User;
+use App\Models\ComCode;
 use Livewire\Component;
+use App\Jobs\kirimPesan;
+use App\Models\Pengajuan;
 use App\Models\Pemeriksaan;
 use Livewire\WithFileUploads;
 use App\Models\PemeriksaanPetugas;
 use App\Models\PemeriksaanStandar;
-use App\Models\Pengajuan;
+use App\Models\PengajuanUttp;
 use Illuminate\Support\Facades\Storage;
-use Auth;
 
 class FormProsesComponent extends Component
 {
@@ -33,6 +35,8 @@ class FormProsesComponent extends Component
     public $users = [];
 
     public $penandatangan;
+
+    public $wa;
 
 
 
@@ -57,13 +61,20 @@ class FormProsesComponent extends Component
         //     $query->where('name', 'user');
         // })->get();
 
+        // dd($this->idnya);
+
+        $a = PengajuanUttp::with(['pengajuannya.user'])->where('pengajuan_id', $this->idnya)->first();
+        $this->wa = $a->pengajuannya->user->wa;
+
         $this->users = User::whereHasRole(['penera', 'administrator', 'superadministrator'])->get();
         $this->penandatangan = User::whereHasRole('kepala_dinas')->get();
 
         $this->standars = PemeriksaanStandar::where('pemeriksaan_id', $id)->get()->toArray();
         $this->petugas = PemeriksaanPetugas::where('pemeriksaan_id', $id)->get()->toArray();
         $this->hasil = ComCode::where('code_group', 'HASIL_ST')->get();
+
         $data = Pemeriksaan::where('pengajuan_id', $id)->first();
+
         if ($data) {
             $this->pemeriksaan = $data->toArray();
             $this->file_name = $this->pemeriksaan['upload_cerapan'] ? Storage::url($data['upload_cerapan']) : null;
@@ -81,6 +92,7 @@ class FormProsesComponent extends Component
 
         }
     }
+
     public function updatedUploadCerapan()
     {
         $this->file_name = $this->upload_cerapan->getClientOriginalName();
@@ -141,13 +153,31 @@ class FormProsesComponent extends Component
                 ['pemeriksaan_id' => $this->pemeriksaan['id'], 'user_id' => $petugas['user_id']]
             );
         }
+
         PemeriksaanStandar::whereIn('id', $this->hapusStandar)->delete();
         PemeriksaanPetugas::whereIn('id', $this->hapusPetugas)->delete();
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_04'
         ]);
+
         $this->dispatch('restart');
-        session()->flash('message', 'Data saved successfully.');
+
+        // session()->flash('message', 'Data saved successfully.');
+
+        $this->js(<<<'JS'
+        Swal.fire({
+            title: 'Good job!',
+            text: 'You clicked the button!',
+            icon: 'success',
+          })
+        JS);
+
+        $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
+            'Pengajuan tera Anda telah *SELESAI*. Terima kasih atas kerjasama dan kepercayaan Anda. Jika Anda memerlukan bantuan lebih lanjut atau informasi tambahan, jangan ragu untuk menghubungi kami. Semoga hari Anda menyenangkan!' . urldecode('%0D%0A%0D%0A') .
+            'Disdagkopukm Wonosobo'
+        ;
+
+        // kirimPesan::dispatch($this->wa, $pesan);
 
     }
 

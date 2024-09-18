@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Jobs\kirimPesan;
 use App\Models\User;
 use App\Models\ComCode;
 use App\Models\Pemohon;
@@ -107,6 +108,14 @@ class PermohonanForm extends Component
             icon: "success"
             });
         JS);
+
+        $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
+            'Pengajuan tera telah berhasil! Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .
+            'Disdagkopukm Wonosobo'
+        ;
+
+        // kirimPesan::dispatch(auth()->user()->wa, $pesan);
+
     }
 
     public function store()

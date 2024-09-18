@@ -19,6 +19,7 @@ class PasswordResetController extends Controller
         $cek = User::where('email', $request->data)->orWhere('nik', $request->data)->first();
 
         if ($cek) {
+
             // $password = Str::random(8);
 
             // User::where('email', $cek->email)->update([
@@ -37,6 +38,7 @@ class PasswordResetController extends Controller
             return redirect(route('password.index'))->with('status', 'oke');
 
         } else {
+
             return redirect(route('password.index'))->with('wrong', 'ups');
 
         }

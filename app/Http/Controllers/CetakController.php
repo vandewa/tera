@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemeriksaan;
 use App\Models\Pengajuan;
+use App\Models\TemplateDokumen;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\Style\Font;
@@ -28,18 +29,21 @@ class CetakController extends Controller
             'penandatangan',
             'hasil'
         ])->find($request->id);
-        // return $data;
-        $lokasi = storage_path('app/aa.docx');
+
+
+        $dokumen = TemplateDokumen::where('nama', $request->jenis_download)->first();
+
+        $lokasi = public_path('storage/' . $dokumen->path);
+
         $templateProcessor = new TemplateProcessor($lokasi);
 
         $templateVariables = $templateProcessor->getVariables();
-
-
 
         // utttp
         $standar = [
 
         ];
+
         $index = 1;
 
         foreach ($data->standar as $item) {
@@ -81,8 +85,16 @@ class CetakController extends Controller
 
         $tanggalDiterima = Carbon::createFromFormat('Y-m-d H:i:s', $data->pengajuan->created_at)
             ->locale('id')->isoFormat('D MMMM YYYY');
+
         $tanggalPemeriksaan = Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
             ->locale('id')->isoFormat('D MMMM YYYY');
+
+        // Tambah 1 tahun
+        $tanggalPemeriksaanPlusOneYear = Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
+            ->locale('id')
+            ->addYear()
+            ->isoFormat('D MMMM YYYY');
+
         $templateProcessor->setValues([
             'nomor' => '',
             'no_order' => $data->pengajuan->order_no ?? "",
@@ -99,9 +111,11 @@ class CetakController extends Controller
             'tanggal_pengujian' => $tanggalPemeriksaan ?? '',
             'hasil' => $data->hasil->code_nm ?? '',
             'tahun' => date('Y', strtotime($data->tanggal_pemeriksaan)),
-
-            'tera_kembali' => '',
-            'fo' => auth()->user()->name ?? ''
+            'tera_kembali' => $tanggalPemeriksaanPlusOneYear,
+            'fo' => auth()->user()->name ?? '',
+            'nama_ttd' => $data->penandatangan->name ?? "",
+            'nip' => $data->penandatangan->nip ?? "",
+            'pangkat' => $data->penandatangan->pangkat ?? "",
 
         ]);
 
@@ -115,15 +129,17 @@ class CetakController extends Controller
             $templateProcessor->cloneRowAndSetValues('uttp_no', $uttp);
         }
 
-        $randomFileName = Str::random(10) . '.docx';
+        // $randomFileName = Str::random(10) . '.docx';
 
-        // Define the path where the file will be temporarily saved in storage/app/generate
-        $pathToSave = storage_path('app/generate/' . $randomFileName);
+        $randomFileName = $request->jenis_download . '_' . $data->pengajuan->pemohon->name . '_' . $tanggalPemeriksaan . '.docx';
+
+        // Define the path where the file will be temporarily saved in public/template
+        $pathToSave = public_path('template/' . $randomFileName);
 
         // Ensure the directory exists, if not create it
-        if (!Storage::exists('generate')) {
-            Storage::makeDirectory('generate');
-        }
+        // if (!Storage::exists('generate')) {
+        //     Storage::makeDirectory('generate');
+        // }
 
         $templateProcessor->saveAs($pathToSave);
         return response()->download($pathToSave)->deleteFileAfterSend(true);

@@ -42,7 +42,8 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.nama'
-                                                                                        placeholder="Nama">
+                                                                                        placeholder="Nama"
+                                                                                        @if ($edit) readonly @endif>
                                                                                     @error('form.nama')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
@@ -130,7 +131,7 @@
                                                                                     <td> {{ $item->nama ?? '-' }}</td>
                                                                                     <td>
                                                                                         <div class="list-icons">
-                                                                                            <a href="{{ route('helper.show-picture', ['path' => $item->path]) }}"
+                                                                                            <a href="{{ asset('storage/' . $item->path) }}"
                                                                                                 class="btn btn-info rounded-round btn-sm"
                                                                                                 target="_blank"><i
                                                                                                     class="fas fa-file-word mr-2"></i>Lihat
@@ -149,11 +150,11 @@
                                                                                                     title="Edit"><i
                                                                                                         class="fas fa-pencil-alt"></i>
                                                                                                 </button>
-                                                                                                <button type="button"
+                                                                                                {{-- <button type="button"
                                                                                                     class="btn btn-danger btn-flat btn-sm"
                                                                                                     wire:click="delete('{{ $item->id }}')"><i
                                                                                                         class="fas fa-trash"></i>
-                                                                                                </button>
+                                                                                                </button> --}}
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>

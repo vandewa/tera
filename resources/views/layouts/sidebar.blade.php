@@ -81,7 +81,7 @@
                           <li class="nav-item">
                               <a href="{{ route('user-uttp') }}"
                                   class="nav-link  {{ Request::segment(1) == 'my-uttp' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-pencil-alt"></i>
+                                  <i class="nav-icon fas fa-suitcase"></i>
                                   <p>
                                       Uttp Saya
                                   </p>
