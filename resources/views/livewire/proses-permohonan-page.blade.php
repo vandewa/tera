@@ -44,8 +44,8 @@
                                     {{ $isian->statusPengajuan->code_nm ?? '-' }}</strong>
                                 <p class="text-muted"></p>
                                 <hr>
-                                <hr>
-                                <button class="btn btn-block btn-danger" wire:click='confirmPembatalan'>
+
+                                <button class="btn btn-block btn-warning" wire:click='confirmPembatalan'>
                                     Batalkan Persetujuan
                                 </button>
                             </div>
