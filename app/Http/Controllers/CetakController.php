@@ -189,7 +189,7 @@ class CetakController extends Controller
 
         $uttp = [];
         $index = 1;
-        foreach ($data->pengajuan->uttpItem as $item) {
+        foreach ($data->uttpItem as $item) {
 
             array_push($uttp, [
                 'uttp_no' => $index . ".",
@@ -205,17 +205,17 @@ class CetakController extends Controller
             $index = $index + 1;
         }
 
-        $tanggalDiterima = Carbon::createFromFormat('Y-m-d H:i:s', $data->pengajuan->created_at)
+        $tanggalDiterima = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)
             ->locale('id')->isoFormat('D MMMM YYYY');
 
-        $tanggalPemeriksaan = Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
-            ->locale('id')->isoFormat('D MMMM YYYY');
+        $tanggalPemeriksaan ="";// Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
+           // ->locale('id')->isoFormat('D MMMM YYYY');
 
         // Tambah 1 tahun
-        $tanggalPemeriksaanPlusOneYear = Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
-            ->locale('id')
-            ->addYear()
-            ->isoFormat('D MMMM YYYY');
+        $tanggalPemeriksaanPlusOneYear = "";//Carbon::createFromFormat('Y-m-d', $data->tanggal_pemeriksaan)
+            // ->locale('id')
+            // ->addYear()
+            // ->isoFormat('D MMMM YYYY');
 
         $templateProcessor->setValues([
             'nomor' => '',
