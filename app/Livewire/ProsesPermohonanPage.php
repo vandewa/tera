@@ -13,7 +13,7 @@ class ProsesPermohonanPage extends Component
     public $isian;
     public function mount($id) {
         $this->idnya = $id;
-       $this->isian = Pengajuan::with(['statusPengajuan'])->find($id);
+       $this->isian = Pengajuan::with(['statusPengajuan', 'jenisPengajuan'])->find($id);
     }
     public function render()
     {

@@ -42,7 +42,15 @@
                         <li class="list-group-item"><strong>Pemohon:</strong> {{ $data->pemohon->name ?? '-' }}</li>
                         <li class="list-group-item"><strong>Alamat:</strong> {{ $data->pemohon->alamat ?? '-' }}</li>
                         <li class="list-group-item"><strong>Tanggal Pengajuan:</strong>
-                            {{ $data->created_at->locale('id')->translatedFormat('d F Y') }}</li>
+                            {{ $data->created_at->locale('id')->translatedFormat('d F Y') }}
+                        </li>
+                        <li class="list-group-item"><strong>Jenis Pengajuan:</strong>
+                            {{ $data->jenisPengajuan->code_nm ?? '-' }}
+
+                            @if ($data->jenisPengajuan->com_cd == 'PENGAJUAN_TP_02')
+                                ({{ $data->alamat ?? '' }})
+                            @endif
+                        </li>
                     </ul>
                 </div>
                 <div class="card-footer d-flex justify-content-between">

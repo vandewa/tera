@@ -29,6 +29,17 @@
 
                                 </p>
                                 <hr>
+
+                                <strong><i class="mr-1 fas fa-pen-square"></i> Jenis Pengajuan:
+                                    {{ $isian->jenisPengajuan->code_nm ?? '-' }}
+
+                                    @if ($isian->jenisPengajuan->com_cd == 'PENGAJUAN_TP_02')
+                                        ({{ $isian->alamat ?? '' }})
+                                    @endif
+                                </strong>
+
+                                <hr>
+
                                 <strong><i class="mr-1 fas fa-map-marker-alt"></i> Status:
                                     {{ $isian->statusPengajuan->code_nm ?? '-' }}</strong>
                                 <p class="text-muted"></p>
@@ -75,7 +86,7 @@
 
                             </div>
                         @endif
-                        
+
                         @if ($isian->pengajuan_st == 'PENGAJUAN_ST_04')
                             <livewire:components.info-pengajuan-component id="{{ $isian->id }}">
                         @endif
