@@ -36,7 +36,7 @@
                                                     </div>
                                                     {{-- <div class="col-md-2 pull-right">
                                                         <a href="{{ route('admin.permohonan.create') }}"
-                                                            class="btn btn-primary"> <span class="fas fa-plus mr-2">
+                                                            class="btn btn-primary"> <span class="mr-2 fas fa-plus">
                                                             </span>Tambah Permohonan</a>
                                                     </div> --}}
                                                 </div>
@@ -105,15 +105,19 @@
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"
                                                                                         href="{{ route('permohonan-proses', $datum->id) }}"><i
-                                                                                            class="far fa-arrow-alt-circle-right mr-2"></i>Proses</a>
+                                                                                            class="mr-2 far fa-arrow-alt-circle-right"></i>Proses</a>
+                                                                                <li><a class="dropdown-item"
+                                                                                        href="{{ route('helper.cetak-order', ['id' => $datum->id, 'jenis_download' => 'formulir_permohonan']) }}"><i
+                                                                                            class="mr-2 far fa-arrow-alt-circle-right"></i>Formulir</a>
+
                                                                                 </li>
                                                                                 <li><a class="dropdown-item"
                                                                                         href="{{ route('admin.permohonan.create', $datum->id) }}"><i
-                                                                                            class="far fa-edit mr-2"></i>Edit</a>
+                                                                                            class="mr-2 far fa-edit"></i>Edit</a>
                                                                                 </li>
                                                                                 <li><button class="dropdown-item"
                                                                                         wire:click="delete('{{ $datum->id }}')"><i
-                                                                                            class="far fa-trash-alt mr-2"></i>Hapus</button>
+                                                                                            class="mr-2 far fa-trash-alt"></i>Hapus</button>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
