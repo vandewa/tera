@@ -253,7 +253,7 @@ class CetakController extends Controller
 
         // $randomFileName = Str::random(10) . '.docx';
 
-        $randomFileName = $request->jenis_download . '_' . $data->pengajuan->pemohon->name . '_' . $tanggalPemeriksaan . '.docx';
+        $randomFileName = $request->jenis_download . '_' . $data->pemohon->name . '_' . $tanggalPemeriksaan . '.docx';
 
         // Define the path where the file will be temporarily saved in public/template
         $pathToSave = public_path('template/' . $randomFileName);
