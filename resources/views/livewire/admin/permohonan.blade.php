@@ -112,6 +112,12 @@
 
                                                                                 </li>
                                                                                 <li><a class="dropdown-item"
+                                                                                        href="{{ route('helper.cetak-order', ['id' => $datum->id, 'jenis_download' => 'tanda_terima']) }}"><i
+                                                                                            class="mr-2 far fa-arrow-alt-circle-right"></i>Kartu
+                                                                                        Order</a>
+
+                                                                                </li>
+                                                                                <li><a class="dropdown-item"
                                                                                         href="{{ route('admin.permohonan.create', $datum->id) }}"><i
                                                                                             class="mr-2 far fa-edit"></i>Edit</a>
                                                                                 </li>
