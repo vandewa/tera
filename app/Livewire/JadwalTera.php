@@ -5,13 +5,16 @@ namespace App\Livewire;
 use App\Models\ComCode;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\JadwalTera as ModelJadwalTera;
 
 class JadwalTera extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
-    public $idHapus, $edit = false, $idnya, $cari, $listJadwalTera;
+
+    public $idHapus, $edit = false, $idnya, $cari, $listJadwalTera, $uploadSuratTugas;
 
     public $form = [
         'lokasi' => null,
@@ -19,6 +22,7 @@ class JadwalTera extends Component
         'tanggal_selesai' => null,
         'no_sk' => null,
         'jadwal_tera_st' => null,
+        'surat_tugas_path' => null,
     ];
 
     public function mount()
@@ -46,7 +50,6 @@ class JadwalTera extends Component
             'form.lokasi' => 'required|string|max:255',
             'form.tanggal_mulai' => 'required|date',
             'form.tanggal_selesai' => 'required|date|after_or_equal:form.tanggal_mulai',
-            'form.no_sk' => 'required|string|max:255',
             // 'form.jadwal_tera_st' => 'required|string|max:255',
         ]);
 
@@ -61,7 +64,13 @@ class JadwalTera extends Component
 
     public function store()
     {
+        if ($this->uploadSuratTugas) {
+            $path = $this->uploadSuratTugas->store('tera/surat-tugas', 'gcs');
+            $this->form['surat_tugas_path'] = $path;
+        }
+
         ModelJadwalTera::create($this->form);
+
         $this->resetForm();
     }
 
@@ -94,6 +103,11 @@ class JadwalTera extends Component
 
     public function storeUpdate()
     {
+        if ($this->uploadSuratTugas) {
+            $path = $this->uploadSuratTugas->store('tera/surat-tugas', 'gcs');
+            $this->form['surat_tugas_path'] = $path;
+        }
+
         ModelJadwalTera::find($this->idHapus)->update($this->form);
         $this->resetForm();
     }
@@ -107,6 +121,7 @@ class JadwalTera extends Component
     private function resetForm()
     {
         $this->reset('form');
+        $this->uploadSuratTugas = null;
         $this->edit = false;
     }
 

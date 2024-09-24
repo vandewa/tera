@@ -23,15 +23,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card card-info card-outline">
-
-
-                                            {{-- <div class="card-header">
-                                                <div class="card-title">
-                                                    Permohonan Tera
-                                                </div>
-                                            </div> --}}
                                             <div class="card-body">
-
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="mb-2 row">
@@ -66,19 +58,6 @@
                                                                 <input type="date" class="form-control"
                                                                     wire:model='form.tanggal_selesai' disabled>
                                                                 @error('form.tanggal_selesai')
-                                                                    <span
-                                                                        class="form-text text-danger">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-2 row">
-                                                            <label class="col-sm-2 col-form-label">No
-                                                                SK</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control"
-                                                                    wire:model='form.no_sk' placeholder="No SK"
-                                                                    disabled>
-                                                                @error('form.no_sk')
                                                                     <span
                                                                         class="form-text text-danger">{{ $message }}</span>
                                                                 @enderror

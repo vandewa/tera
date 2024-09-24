@@ -2,39 +2,28 @@
 
 namespace App\Livewire;
 
-use App\Models\ComCode;
+use App\Models\Standar as ModelsStandar;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Uttp;
-use App\Models\UttpUser;
 
-class UserUttpPage extends Component
+class Standar extends Component
 {
     use WithPagination;
 
-    public $idHapus, $edit = false, $idnya, $cari, $listUttp;
+    public $idHapus, $edit = false, $idnya, $cari, $listPeralatan;
 
     public $form = [
-        'uttp_id' => null,
-        'no_seri' => null,
-        'merek' => null,
-        'tipe' => null,
-        'kapasitas' => null,
-        'jumlah' => null,
-        'keterangan' => null,
-
+        'nama' => null,
     ];
 
     public function mount()
     {
-        $this->listUttp = Uttp::get()->toArray();
+        //
     }
-
-
 
     public function getEdit($id)
     {
-        $this->form = UttpUser::find($id)->toArray();
+        $this->form = ModelsStandar::find($id)->only(['nid: ama']);
         $this->idHapus = $id;
         $this->edit = true;
     }
@@ -42,12 +31,7 @@ class UserUttpPage extends Component
     public function save()
     {
         $this->validate([
-            'form.uttp_id' => 'required',
-            // 'form.no_seri' => 'required',
-            'form.merek' => 'max:255',
-            'form.tipe' => 'string|max:255',
-            'form.jumlah' => 'required|numeric|max:255',
-            'form.keterangan' => 'string|max:255',
+            'form.nama' => 'required',
         ]);
 
         if ($this->edit) {
@@ -61,8 +45,7 @@ class UserUttpPage extends Component
 
     public function store()
     {
-        $this->form['user_id'] = auth()->user()->id;
-        UttpUser::create($this->form);
+        ModelsStandar::create($this->form);
         $this->resetForm();
     }
 
@@ -89,13 +72,13 @@ class UserUttpPage extends Component
 
     public function hapus()
     {
-        UttpUser::destroy($this->idHapus);
+        ModelsStandar::destroy($this->idHapus);
         $this->showSuccessMessage('Data has been deleted successfully!');
     }
 
     public function storeUpdate()
     {
-        UttpUser::find($this->idHapus)->update($this->form);
+        ModelsStandar::find($this->idHapus)->update($this->form);
         $this->resetForm();
     }
 
@@ -124,12 +107,10 @@ class UserUttpPage extends Component
 
     public function render()
     {
-        $data = UttpUser::with(['uttp'])->cari($this->cari)
-        ->where('user_id', auth()->user()->id)->paginate(10);
+        $data = ModelsStandar::cari($this->cari)->paginate(10);
 
-        return view('livewire.user-uttp-page', [
+        return view('livewire.standar', [
             'post' => $data,
-
         ]);
     }
 

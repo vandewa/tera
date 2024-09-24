@@ -78,14 +78,13 @@
                                                                             </div>
                                                                             <div class="mb-2 row">
                                                                                 <label
-                                                                                    class="col-sm-2 col-form-label">Nomor
-                                                                                    SK</label>
+                                                                                    class="col-sm-2 col-form-label">Upload
+                                                                                    Surat Tugas</label>
                                                                                 <div class="col-sm-10">
-                                                                                    <input type="text"
+                                                                                    <input type="file"
                                                                                         class="form-control"
-                                                                                        wire:model='form.no_sk'
-                                                                                        placeholder="Nomor SK">
-                                                                                    @error('form.no_sk')
+                                                                                        wire:model='uploadSuratTugas'>
+                                                                                    @error('uploadSuratTugas')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
                                                                                     @enderror
@@ -145,7 +144,7 @@
                                                                             <th>Lokasi</th>
                                                                             <th>Tanggal Mulai</th>
                                                                             <th>Tanggal Selesai</th>
-                                                                            <th>No SK</th>
+                                                                            <th>Surat Tugas</th>
                                                                             <th>Status</th>
                                                                             <th>Aksi</th>
                                                                         </thead>
@@ -159,7 +158,19 @@
                                                                                     </td>
                                                                                     <td> {{ $item->tanggal_selesai ?? '-' }}
                                                                                     </td>
-                                                                                    <td> {{ $item->no_sk ?? '-' }}</td>
+                                                                                    <td>
+                                                                                        <div class="list-icons">
+                                                                                            <a href="{{ route('helper.show-picture', ['path' => $item->surat_tugas_path]) }}"
+                                                                                                class="btn btn-info rounded-round btn-sm"
+                                                                                                target="_blank">
+                                                                                                <i
+                                                                                                    class="fas fa-file-word mr-2">
+                                                                                                </i>
+                                                                                                Lihat File
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </td>
+
                                                                                     <td> {{ $item->status->code_nm ?? '-' }}
                                                                                     </td>
                                                                                     <td>

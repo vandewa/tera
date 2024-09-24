@@ -67,7 +67,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.no_seri'
-                                                                                        placeholder="Nomot Seri">
+                                                                                        placeholder="Nomor Seri">
                                                                                     @error('form.no_seri')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
@@ -97,7 +97,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.tipe'
-                                                                                        placeholder="Nomot Seri">
+                                                                                        placeholder="Tipe">
                                                                                     @error('form.tipe')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
@@ -142,7 +142,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.keterangan'
-                                                                                        placeholder="keterangan">
+                                                                                        placeholder="Keterangan">
                                                                                     <small id="emailHelp"
                                                                                         class="form-text text-muted">Isikan
                                                                                         jumlah keterangan lanjutan,
@@ -189,6 +189,7 @@
                                                                             <th>No Seri</th>
                                                                             <th>Tipe</th>
                                                                             <th>Kapasitas</th>
+                                                                            <th>Jumlah</th>
                                                                             <th>Keterangan</th>
                                                                             <th>Aksi</th>
                                                                         </thead>
@@ -206,6 +207,7 @@
                                                                                     <td> {{ $item->tipe ?? '-' }}
                                                                                     </td>
                                                                                     <td> {{ $item->kapasitas ?? '-' }}
+                                                                                    <td> {{ $item->jumlah ?? '-' }}
                                                                                     <td> {{ $item->keterangan ?? '-' }}
                                                                                     </td>
                                                                                     <td>

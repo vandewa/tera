@@ -37,7 +37,7 @@
                   class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
               <img src="{{ asset('pemda.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                   style="opacity: .8">
-              <span class="brand-text font-weight-light">RAINBO</span>
+              <span class="brand-text font-weight-light">SAPTO</span>
           </a>
 
           <!-- Sidebar -->
@@ -140,6 +140,9 @@
                             {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'metode' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'telusuran' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'standar' ? 'menu-is-opening menu-open' : '' }}
                             {{ Request::segment(2) == 'template-dokumen' ? 'menu-is-opening menu-open' : '' }}
                         ">
                               <a href="#"
@@ -148,6 +151,9 @@
                                 {{ Request::segment(2) == 'user' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'metode' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'telusuran' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'standar' ? 'active' : '' }}
                                 {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}
                                 ">
                                   <i class="nav-icon fa-solid fa-file-lines"></i>
@@ -166,6 +172,39 @@
                                               <i class="ml-2 far fa-circle nav-icon"></i>
                                           @endif
                                           <p>Jenis UTTP</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.metode') }}"
+                                          class="nav-link {{ Request::segment(2) == 'metode' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'metode')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Metode</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.telusuran') }}"
+                                          class="nav-link {{ Request::segment(2) == 'telusuran' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'telusuran')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Telusuran</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.standar') }}"
+                                          class="nav-link {{ Request::segment(2) == 'standar' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'standar')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Standar</p>
                                       </a>
                                   </li>
                                   <li class="nav-item">

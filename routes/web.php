@@ -1,29 +1,32 @@
 <?php
 
-use App\Http\Controllers\CetakController;
-use App\Livewire\Admin\ProsesSidangTeraPage;
-use App\Livewire\Admin\SidangTeraForm;
 use App\Livewire\User;
 use App\Livewire\Uttp;
+use App\Livewire\Metode;
 use App\Livewire\DataDiri;
 use App\Livewire\Dashboard;
 use App\Livewire\Peralatan;
 use App\Livewire\UserIndex;
 use App\Livewire\JadwalTera;
 use App\Livewire\PemohonCrud;
+use App\Livewire\UserUttpPage;
 use App\Livewire\TemplateDokumen;
 use App\Livewire\Admin\Permohonan;
+use App\Livewire\Admin\SidangTera;
 use App\Livewire\DetailJadwalTera;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\PermohonanForm;
+use App\Livewire\Admin\SidangTeraForm;
 use App\Livewire\ProsesPermohonanPage;
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\HelperController;
-use App\Http\Controllers\PasswordResetController;
 use App\Livewire\Permohonan\PermohonanPage;
 use App\Http\Controllers\RegisterController;
-use App\Livewire\Admin\SidangTera;
+use App\Livewire\Admin\ProsesSidangTeraPage;
 use App\Livewire\Permohonan\PermohonanFormPage;
-use App\Livewire\UserUttpPage;
+use App\Http\Controllers\PasswordResetController;
+use App\Livewire\Standar;
+use App\Livewire\Telusuran;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -68,6 +71,9 @@ Route::middleware([
         Route::get('user-index', UserIndex::class)->name('user-index');
         Route::get('uttp', Uttp::class)->name('uttp');
         Route::get('peralatan', Peralatan::class)->name('peralatan');
+        Route::get('metode', Metode::class)->name('metode');
+        Route::get('standar', Standar::class)->name('standar');
+        Route::get('telusuran', Telusuran::class)->name('telusuran');
         Route::get('user/{id?}', User::class)->name('user');
         Route::get('template-dokumen', TemplateDokumen::class)->name('template-dokumen');
 

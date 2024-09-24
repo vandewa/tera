@@ -191,8 +191,8 @@
                 <div class="logo">
                     <div><img src="{{ asset('pemda.png') }}" alt=""></div>
                 </div>
-                <h2>Rain<span class="highlight">bo</span></h2>
-                <h3 style="color: white;">Disdagkopukm Kabupaten Wonosobo</h3>
+                <h2>SAP<span class="highlight">TO</span></h2>
+                <h3 style="color: white;">Sistem Aplikasi Pendaftaran Tera Online</h3>
             </div>
             <form method="post" action="{{ route('login') }}">
                 @csrf
