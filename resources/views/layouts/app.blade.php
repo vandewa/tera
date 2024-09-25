@@ -157,6 +157,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('AdminLTE/dist/js/pages/dashboard.js') }}"></script>
     <script src="https://kit.fontawesome.com/bb9305debb.js" crossorigin="anonymous"></script>
+    
     @stack('js')
     @livewireScripts
     @livewireChartsScripts

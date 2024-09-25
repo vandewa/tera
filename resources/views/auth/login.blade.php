@@ -11,8 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -208,7 +208,7 @@
                 <div class="form">
                     <div class="form-field username">
                         <div class="icon">
-                            <i class="far fa-user"></i>
+                            <i class="fas fa-tree"></i>
                         </div>
                         <input type="text" placeholder="Email" name="email">
                     </div>
@@ -247,7 +247,7 @@
         }
 
         if ($request - > session() - > has('pesan')) {
-            alert('asu');
+            // alert('asu');
 
         }
     </script>

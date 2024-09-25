@@ -92,9 +92,10 @@
                                                                     <td>
                                                                         <div class="btn-group">
                                                                             <button type="button"
-                                                                                class="btn btn-default fas fa-bars"
+                                                                                class="btn btn-default "
                                                                                 data-toggle="dropdown"
                                                                                 aria-expanded="false">
+                                                                                <i class="fas fa-bars"></i>
                                                                             </button>
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"

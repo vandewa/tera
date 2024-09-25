@@ -303,7 +303,7 @@
                                   class="nav-link
                                 {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
                                 ">
-                                  <i class="nav-icon fa-solid fa-file-lines"></i>
+                                  <i class="nav-icon fa-solid fas fa-book"></i>
                                   <p>
                                       Laporan
                                       <i class="fas fa-angle-left right"></i>
