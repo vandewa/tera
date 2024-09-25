@@ -14,7 +14,7 @@
                 <b>NIK</b> <a class="float-right">{{ $user->nik }}</a>
             </li>
             <li class="list-group-item">
-                <b>WA</b> <a class="float-right">{{ $user->wa }}</a>
+                <b>WhatsApp</b> <a class="float-right">{{ $user->wa }}</a>
             </li>
             <li class="list-group-item">
                 <b>Alamat</b> <a class="float-right">{{ $user->alamat }}</a>

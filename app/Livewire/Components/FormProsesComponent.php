@@ -8,12 +8,15 @@ use App\Models\User;
 use App\Models\ComCode;
 use Livewire\Component;
 use App\Jobs\kirimPesan;
+use App\Models\Metode;
 use App\Models\Pengajuan;
 use App\Models\Pemeriksaan;
 use Livewire\WithFileUploads;
 use App\Models\PemeriksaanPetugas;
 use App\Models\PemeriksaanStandar;
 use App\Models\PengajuanUttp;
+use App\Models\Standar;
+use App\Models\Telusuran;
 use Illuminate\Support\Facades\Storage;
 
 class FormProsesComponent extends Component
@@ -106,8 +109,8 @@ class FormProsesComponent extends Component
             'pemeriksaan.tanggal_pemeriksaan' => 'required|date',
             'pemeriksaan.metode' => 'required',
             'pemeriksaan.telusuran' => 'required',
-            'pemeriksaan.hasil_st' => 'required',
-            'pemeriksaan.hasil_keterangan' => 'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
+            // 'pemeriksaan.hasil_st' => 'required',
+            // 'pemeriksaan.hasil_keterangan' => 'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
             'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
             'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
             'petugas.*.user_id' => 'required'
@@ -213,6 +216,14 @@ class FormProsesComponent extends Component
 
     public function render()
     {
-        return view('livewire.components.form-proses-component');
+        $metode = Metode::all();
+        $telusuran = Telusuran::all();
+        $standar = Standar::all();
+
+        return view('livewire.components.form-proses-component', [
+            'metode' => $metode,
+            'telusuran' => $telusuran,
+            'standar' => $standar,
+        ]);
     }
 }

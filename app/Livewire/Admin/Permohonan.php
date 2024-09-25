@@ -11,15 +11,22 @@ class Permohonan extends Component
 {
     use WithPagination;
 
-    public $idHapus, $edit = false, $idnya, $cari;
+    public $idHapus, $edit = false, $idnya, $cari, $jenis;
 
     public $form = [
         'nama' => null,
     ];
 
-    public function mount()
+    public function mount($id = '')
     {
-        //
+        $this->idnya = $id;
+
+        if ($this->idnya == 1) {
+            $this->jenis = 'PENGAJUAN_TP_01';
+        } else {
+            $this->jenis = 'PENGAJUAN_TP_02';
+        }
+
     }
 
     public function getEdit($a)
@@ -100,7 +107,10 @@ class Permohonan extends Component
 
     public function render()
     {
-        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])->where('jadwal_tera_id', null)->paginate(10);
+        $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])
+            ->where('jadwal_tera_id', null)
+            ->where('pengajuan_tp', $this->jenis)
+            ->paginate(10);
 
         return view('livewire.admin.permohonan', [
             'post' => $data,

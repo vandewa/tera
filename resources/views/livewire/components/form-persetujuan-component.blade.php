@@ -51,6 +51,41 @@
                                 ({{ $data->alamat ?? '' }})
                             @endif
                         </li>
+
+                        @if ($data->surat_permohonan_path)
+                            <li class="list-group-item"><strong>Surat Permohonan:</strong>
+                                <a href="{{ route('helper.show-picture', ['path' => $data->surat_permohonan_path]) }}"
+                                    class="btn btn-outline-secondary btn-sm" target="_blank">
+                                    <i class="fa fa-download"></i> Lihat File
+                                </a>
+                        @endif
+
+                        @if ($data->jenisPengajuan->com_cd == 'PENGAJUAN_TP_02')
+                            <li class="list-group-item"><strong>Jadwal:</strong>
+                                <textarea rows="2" class="form-control"></textarea>
+                            </li>
+                            <li class="list-group-item"><strong>Petugas:</strong>
+                                @foreach ($petugas as $index => $petugas)
+                                    <div class="mb-3 input-group">
+                                        <select class="form-control"
+                                            wire:model.defer="petugas.{{ $index }}.user_id" id="petugas">
+                                            <option value="">Pilih Petugas</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button"
+                                                wire:click="removePetugas({{ $index }})">Hapus</button>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <button type="button" class="btn btn-info btn-sm" wire:click="addPetugas">Tambah
+                                    Petugas</button>
+                            </li>
+                        @endif
+
                     </ul>
                 </div>
                 <div class="card-footer d-flex justify-content-between">

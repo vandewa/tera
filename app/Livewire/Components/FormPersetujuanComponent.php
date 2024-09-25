@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Jobs\kirimPesan;
 use App\Models\Pengajuan;
@@ -11,11 +12,30 @@ use App\Livewire\ProsesPermohonanPage;
 class FormPersetujuanComponent extends Component
 {
     public $idnya, $wa;
+    public $petugas = [];
+    public $hapusPetugas = [];
+    public $users = [];
 
     public function mount()
     {
         $a = Pengajuan::with(['jenisPengajuan', 'pemohon'])->find($this->idnya);
         $this->wa = $a->pemohon->wa;
+        $this->users = User::whereHasRole(['penera', 'administrator', 'superadministrator'])->get();
+    }
+
+    public function addPetugas()
+    {
+
+        $this->petugas[] = ['user_id' => ''];
+    }
+
+    public function removePetugas($index)
+    {
+        if ($this->petugas[$index]['id'] ?? null) {
+            array_push($this->hapusPetugas, $this->petugas[$index]['id']);
+        }
+        unset($this->petugas[$index]);
+        $this->petugas = array_values($this->petugas);
     }
 
     public function render()
@@ -29,6 +49,10 @@ class FormPersetujuanComponent extends Component
 
     public function terima()
     {
+        $this->validate([
+            // 'petugas.*.user_id' => 'required'
+        ]);
+
         $this->js(<<<'JS'
             Swal.fire({
             title: "Anda yakin akan menirma permohonan ini?",

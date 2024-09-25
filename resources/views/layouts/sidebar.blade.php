@@ -99,7 +99,7 @@
                       @endrole
 
                       @role(['superadministrator', 'administrator', 'penera'])
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('admin.permohonan') }}"
                                   class="nav-link  {{ Request::segment(2) == 'permohonan' ? 'active' : '' }}
                                {{ Request::segment(2) == 'proses' ? 'active' : '' }}">
@@ -109,6 +109,53 @@
                                   </p>
                                   <livewire:component.badges.permohonan-badges>
                               </a>
+                          </li> --}}
+                          <li
+                              class="nav-item
+                        {{ Request::segment(2) == 'permohonan' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'proses' ? 'menu-is-opening menu-open' : '' }}
+                    ">
+                              <a href="#"
+                                  class="nav-link
+                            {{ Request::segment(2) == 'permohonan' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'proses' ? 'active' : '' }}
+                            ">
+                                  <i class="nav-icon fa-solid fas fa-pen-square"></i>
+                                  <p class="mr-1">
+                                      Permohonan
+                                  </p>
+
+                                  <livewire:component.badges.permohonan-badges>
+                                      <i class="fas fa-angle-left right"></i>
+                              </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="{{ route('admin.permohonan', 1) }}"
+                                          class="nav-link {{ Request::segment(3) == '1' ? 'active' : '' }}">
+                                          @if (Request::segment(3) == '1')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p class="mr-1">Kantor</p>
+                                          <livewire:component.badges.permohonan-kantor-badges>
+
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('admin.permohonan', 2) }}"
+                                          class="nav-link {{ Request::segment(3) == '2' ? 'active' : '' }}">
+                                          @if (Request::segment(3) == '2')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p class="mr-1">Lokasi Alat</p>
+                                          <livewire:component.badges.permohonan-loko-badges>
+
+                                      </a>
+                                  </li>
+                              </ul>
                           </li>
                           <li class="nav-item">
                               <a href="{{ route('admin.sidang.tera') }}"
@@ -130,33 +177,33 @@
                               ">
                                   <i class="nav-icon fas fa-calendar"></i>
                                   <p>
-                                      Jadwal Tera
+                                      Jadwal Sidang Tera
                                   </p>
                               </a>
                           </li>
                           <li
                               class="nav-item
-                            {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'metode' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'telusuran' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'standar' ? 'menu-is-opening menu-open' : '' }}
-                            {{ Request::segment(2) == 'template-dokumen' ? 'menu-is-opening menu-open' : '' }}
-                        ">
+                        {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'user' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'uttp' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'peralatan' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'metode' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'telusuran' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'standar' ? 'menu-is-opening menu-open' : '' }}
+                        {{ Request::segment(2) == 'template-dokumen' ? 'menu-is-opening menu-open' : '' }}
+                    ">
                               <a href="#"
                                   class="nav-link
-                                {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'user' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'metode' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'telusuran' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'standar' ? 'active' : '' }}
-                                {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}
-                                ">
-                                  <i class="nav-icon fa-solid fa-file-lines"></i>
+                            {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'user' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'uttp' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'peralatan' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'metode' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'telusuran' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'standar' ? 'active' : '' }}
+                            {{ Request::segment(2) == 'template-dokumen' ? 'active' : '' }}
+                            ">
+                                  <i class="nav-icon fa-solid fas fa-database"></i>
                                   <p>
                                       Master
                                       <i class="fas fa-angle-left right"></i>
@@ -232,9 +279,9 @@
                                   <li class="nav-item">
                                       <a href="{{ route('master.user-index') }}"
                                           class="nav-link
-                                        {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
-                                        {{ Request::segment(2) == 'user' ? 'active' : '' }}
-                                      ">
+                                    {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
+                                    {{ Request::segment(2) == 'user' ? 'active' : '' }}
+                                  ">
                                           @if (Request::segment(2) == 'user-index')
                                               <i class="ml-2 far fa-dot-circle nav-icon"></i>
                                           @elseif(Request::segment(2) == 'user')
@@ -245,6 +292,37 @@
                                           <p>User</p>
                                       </a>
                                   </li>
+
+                              </ul>
+                          </li>
+                          <li
+                              class="nav-item
+                            {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
+                        ">
+                              <a href="#"
+                                  class="nav-link
+                                {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
+                                ">
+                                  <i class="nav-icon fa-solid fa-file-lines"></i>
+                                  <p>
+                                      Laporan
+                                      <i class="fas fa-angle-left right"></i>
+                                  </p>
+                              </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.uttp') }}"
+                                          class="nav-link {{ Request::segment(2) == 'uttp' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'uttp')
+                                              <i class="ml-2 far fa-dot-circle nav-icon"></i>
+                                          @else
+                                              <i class="ml-2 far fa-circle nav-icon"></i>
+                                          @endif
+                                          <p>Jenis UTTP</p>
+                                      </a>
+                                  </li>
+
+
 
                               </ul>
                           </li>

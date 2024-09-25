@@ -4,18 +4,21 @@ namespace App\Livewire\Permohonan;
 
 use App\Models\ComCode;
 use App\Models\Pemohon;
-use App\Models\Pengajuan;
 use Livewire\Component;
-use Livewire\WithPagination;
-use App\Models\Uttp as ModelUttp;
 use App\Models\UttpUser;
+use App\Models\Pengajuan;
 use Illuminate\Support\Arr;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use App\Models\Uttp as ModelUttp;
 
 class PermohonanFormPage extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
-    public $idHapus, $edit = false, $idnya, $cari, $bukaAlamat;
+
+    public $idHapus, $edit = false, $idnya, $cari, $bukaAlamat, $files;
     public $showModal = true;
     public $listUttp;
     public $selectedUttp = [];
@@ -24,6 +27,7 @@ class PermohonanFormPage extends Component
         'pengajuan_tp' => null,
         'alamat' => null,
         'tanggal' => null,
+        'surat_permohonan_path' => null,
     ];
 
     public $formUttp = [
@@ -48,9 +52,10 @@ class PermohonanFormPage extends Component
     {
 
         $this->listUttp = UttpUser::with(['uttp'])
-        ->where('user_id', auth()->user()->id)
-        ->get()
-        ->toArray();
+            ->where('user_id', auth()->user()->id)
+            ->get()
+            ->toArray();
+
         $this->form['tanggal'] = date('Y-m-d');
 
         if (count($this->formUttp) < 1) {
@@ -65,7 +70,7 @@ class PermohonanFormPage extends Component
                 $this->form = $data->only(['pengajuan_tp', 'alamat', 'jadwal_tera_id', 'user_id']);
                 $this->formUttp = $data->uttpItem->toArray(); // Fetch related records and convert to array
 
-                foreach($this->formUttp as $index=>$datum) {
+                foreach ($this->formUttp as $index => $datum) {
                     $this->selectedUttp[$index] = $datum['uttp_user_id'];
 
                 }
@@ -83,11 +88,11 @@ class PermohonanFormPage extends Component
     public function hapusUttp($index)
     {
         // dd($this->formUttp[$index]['uttp_user_id']);
-        $filteredArray = array_filter($this->selectedUttp, function ($value) use($index) {
+        $filteredArray = array_filter($this->selectedUttp, function ($value) use ($index) {
             return $value != $this->formUttp[$index]['uttp_user_id'];
         }, ARRAY_FILTER_USE_BOTH);
 
-        $this->selectedUttp =  $filteredArray ;
+        $this->selectedUttp = $filteredArray;
         unset($this->formUttp[$index]);
     }
 
@@ -100,6 +105,7 @@ class PermohonanFormPage extends Component
             'form.pengajuan_tp' => 'required',
             'form.tanggal' => 'required',
             'form.alamat' => 'required_if:form.pengajuan_tp,PENGAJUAN_TP_02',
+            'files' => 'required_if:form.pengajuan_tp,PENGAJUAN_TP_02',
         ]);
 
         if ($this->edit) {
@@ -121,6 +127,11 @@ class PermohonanFormPage extends Component
 
     public function store()
     {
+        if ($this->files) {
+            $path = $this->files->store('tera/surat-permohonan', 'gcs');
+            $this->form['surat_permohonan_path'] = $path;
+        }
+
         $a = Pengajuan::create([
             'user_id' => auth()->user()->id,
             'order_no' => genNo(),
@@ -138,6 +149,12 @@ class PermohonanFormPage extends Component
     {
         // Find the Pengajuan record and update it
         $pengajuan = Pengajuan::find($this->idnya);
+
+        if ($this->files) {
+            $path = $this->files->store('tera/surat-permohonan', 'gcs');
+            $this->form['surat_permohonan_path'] = $path;
+        }
+
         $pengajuan->update($this->form);
 
         // Delete existing uttpItems
@@ -161,22 +178,22 @@ class PermohonanFormPage extends Component
         $numericArray = array_map('intval', array_values($this->selectedUttp));
         $datanya = UttpUser::with(['uttp'])->whereIn('id', $numericArray)->get();
 
-        foreach($datanya as $datum){
+        foreach ($datanya as $datum) {
             $data = [
-            'uttp_user_id' => $datum->id,
-            'uttp_id' => $datum->uttp_id,
-            'no_seri' => $datum->no_seri,
-            'tipe' => $datum->tipe,
-            'merek' => $datum->merek,
-            'kapasitas' => $datum->kapasitas,
-            'jumlah' => $datum->jumlah,
-            'keterangan' => $datum->keterangan,
-        ];
-        $exists = collect($this->formUttp)->contains('uttp_user_id', $datum->id);
+                'uttp_user_id' => $datum->id,
+                'uttp_id' => $datum->uttp_id,
+                'no_seri' => $datum->no_seri,
+                'tipe' => $datum->tipe,
+                'merek' => $datum->merek,
+                'kapasitas' => $datum->kapasitas,
+                'jumlah' => $datum->jumlah,
+                'keterangan' => $datum->keterangan,
+            ];
+            $exists = collect($this->formUttp)->contains('uttp_user_id', $datum->id);
 
-        if (!$exists) {
-            array_push($this->formUttp, $data);
-        }
+            if (!$exists) {
+                array_push($this->formUttp, $data);
+            }
         }
 
 

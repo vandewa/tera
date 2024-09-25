@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Jadwal Tera</h1>
+                <h1 class="m-0">Jadwal Sidang Tera</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Master</li>
-                    <li class="breadcrumb-item"><a href="#">Jadwal Tera</a></li>
+                    <li class="breadcrumb-item"><a href="#">Jadwal Sidang Tera</a></li>
                 </ol>
             </div>
         </div>
@@ -126,7 +126,7 @@
                                                         <div class="card card-info card-outline">
                                                             <div class="card-header">
                                                                 <div class="card-title">
-                                                                    Jadwal Tera
+                                                                    Jadwal Sidang Tera
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">

@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="upload_cerapan">Upload Cerapan</label>
             <div class="input-group">
                 <input type="file" id="upload_cerapan" class="form-control" wire:model="upload_cerapan">
@@ -101,14 +101,17 @@
             @error('upload_cerapan')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>
+        </div> --}}
 
         <div class="row">
             <div class="col-md-12">
-                <label for="upload_cerapan">Metode</label>
-                <div class="input-group">
-                    <textarea name="" class="form-control" wire:model="pemeriksaan.metode" rows="3"></textarea>
-                </div>
+                <label for="metode">Metode</label>
+                <select id="metode" class="form-control" wire:model.defer="pemeriksaan.metode">
+                    <option value="">Pilih Metode</option>
+                    @foreach ($metode as $list)
+                        <option value="{{ $list->id }}">{{ $list->nama }}</option>
+                    @endforeach
+                </select>
                 @error('pemeriksaan.metode')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -117,10 +120,13 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
-                <label for="upload_cerapan">Telusuran</label>
-                <div class="input-group">
-                    <textarea name="" class="form-control" wire:model="pemeriksaan.telusuran" rows="2"></textarea>
-                </div>
+                <label for="telusuran">Telusuran</label>
+                <select id="telusuran" class="form-control" wire:model.defer="pemeriksaan.telusuran">
+                    <option value="">Pilih Telusuran</option>
+                    @foreach ($telusuran as $list)
+                        <option value="{{ $list->id }}">{{ $list->nama }}</option>
+                    @endforeach
+                </select>
                 @error('pemeriksaan.telusuran')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror

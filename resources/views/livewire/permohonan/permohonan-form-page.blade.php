@@ -35,7 +35,7 @@
                                                             <label for="inputEmail3"
                                                                 class="col-sm-2 col-form-label">Nomor Permohonan</label>
                                                             <div class="col-sm-10">
-                                                                <input type="email" class="form-control"
+                                                                <input type="text" class="form-control"
                                                                     value="{{ genNo() }}" id="inputEmail3"
                                                                     disabled placeholder="Nomor">
                                                             </div>
@@ -47,6 +47,10 @@
                                                                 <input type="date"
                                                                     class="form-control @error('form.tanggal') is-invalid @enderror"
                                                                     wire:model='form.tanggal'>
+                                                                @error('form.tanggal')
+                                                                    <span
+                                                                        class="form-text text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -64,6 +68,10 @@
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('form.pengajuan_tp')
+                                                                    <span
+                                                                        class="form-text text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         @if ($bukaAlamat)
@@ -73,9 +81,35 @@
                                                                 <div class="col-sm-10">
                                                                     <textarea name="" wire:model='form.alamat' class="form-control @error('form.alamat') is-invalid @enderror"
                                                                         id="" cols="30" rows="3"></textarea>
+                                                                    @error('form.alamat')
+                                                                        <span
+                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="inputPassword3"
+                                                                    class="col-sm-2 col-form-label">Upload Surat
+                                                                    Permohonan</label>
+                                                                <div class="col-sm-5">
+                                                                    <input type="file" class="form-control"
+                                                                        wire:model='files'>
+                                                                    @error('files')
+                                                                        <span
+                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <a href="#"
+                                                                        class="btn btn-info rounded-round btn-sm"
+                                                                        target="_blank"><i
+                                                                            class="fas fa-file-download mr-1"></i>
+                                                                        Template Surat Permohonan</a>
                                                                 </div>
                                                             </div>
                                                         @endif
+
+
                                                         <div class="card card-info">
                                                             <div class="card-header">
                                                                 <h3 class="card-title">UTTP Yang Akan Ditera / Tera
@@ -148,13 +182,7 @@
                                                                                         wire:model='formUttp.{{ $index }}.keterangan'
                                                                                         placeholder="Keterangan">
                                                                                 </div>
-                                                                                {{-- <div class="col-sm-12 col-xs-12">
-                                                                                    <label>Keterangan</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control @error('formUttp.' . $index . '.jumlah') is-invalid @enderror"
-                                                                                        wire:model='formUttp.{{ $index }}.keterangan'
-                                                                                        placeholder="keterangan">
-                                                                                </div> --}}
+
                                                                             </div>
                                                                             <div class="col-md-1 ">
                                                                                 <div class="mt-3">
@@ -209,17 +237,17 @@
     <!-- Modal -->
     <div class="modal fade @if ($showModal) show @endif" tabindex="-1" role="dialog"
         style="display: @if ($showModal) block @else none @endif;">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Daftar Uttp Saya</h5>
+                    <h5 class="modal-title">Daftar Uttp Saya</h5><br>
                     <button type="button" class="close" wire:click="tambahUttp" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" wire:submit='tambahPengajuan'>
-                    <div class="modal-body table-responsive">
 
+                <form action="" wire:submit='tambahPengajuan'>
+                    <div class="modal-body table-responsive" style="max-height: 400px; overflow-y: auto;">
                         <table class="table">
                             <thead>
                                 <th>#</th>
@@ -228,37 +256,40 @@
                                 <th>No Seri</th>
                                 <th>Tipe</th>
                                 <th>Kapasitas</th>
+                                <th>Jumlah</th>
                                 <th>Keterangan</th>
                             </thead>
                             <tbody>
-
                                 @foreach ($listUttp as $item)
                                     <tr :key="$item['id']">
                                         <td><input type="checkbox" wire:model='selectedUttp'
                                                 value="{{ $item['id'] }}"></td>
                                         <td>{{ $item['uttp']['nama'] ?? '-' }}</td>
-                                        <td> {{ $item['merek'] ?? '-' }}
-                                        </td>
-                                        <td> {{ $item['no_seri'] ?? '-' }}
-                                        </td>
-                                        <td> {{ $item['tipe'] ?? '-' }}
-                                        </td>
-                                        <td> {{ $item['kapasitas'] ?? '-' }}
-                                        <td> {{ $item['keterangan'] ?? '-' }}
+                                        <td>{{ $item['merek'] ?? '-' }}</td>
+                                        <td>{{ $item['no_seri'] ?? '-' }}</td>
+                                        <td>{{ $item['tipe'] ?? '-' }}</td>
+                                        <td>{{ $item['kapasitas'] ?? '-' }}</td>
+                                        <td>{{ $item['jumlah'] ?? '-' }}</td>
+                                        <td>{{ $item['keterangan'] ?? '-' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal-footer">
+
+                    <div class="modal-footer d-flex justify-content-between">
                         <a href="{{ route('user-uttp') }}" class="btn btn-warning">Tambahkan Uttp Saya</a>
-                        <button type="button" class="btn btn-secondary" wire:click="tambahUttp">Close</button>
-                        <button type="Submit" class="btn btn-primary">Ajukan</button>
+                        <div>
+                            <button type="button" class="btn btn-secondary" wire:click="tambahUttp">Close</button>
+                            <button type="submit" class="btn btn-primary">Ajukan</button>
+                        </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
+
 </div>
 
 @push('js')

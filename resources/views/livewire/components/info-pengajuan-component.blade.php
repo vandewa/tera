@@ -74,25 +74,124 @@
         <hr>
 
         <div class="row">
+
             <div class="col-md-4">
                 <a href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'formulir_permohonan']) }}"
-                    class="btn btn-primary btn-block">
+                    class="btn btn-dark btn-block">
                     <i class="fas fa-download"></i> Formulir Permohonan
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'tanda_terima']) }}"
-                    class="btn btn-info btn-block">
+                    class="btn btn-dark btn-block">
                     <i class="fas fa-download"></i> Kartu Order
                 </a>
             </div>
             <div class="col-md-4">
                 <a href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'skhp']) }}"
-                    class="btn btn-success btn-block">
+                    class="btn btn-dark btn-block">
                     <i class="fas fa-download"></i> Surat Keterangan (SKHP)
                 </a>
             </div>
+        </div>
 
+        <hr>
+
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Upload Dokumen TTE</h3>
+            </div>
+
+            <div class="card-body">
+                <form wire:submit.prevent="save">
+                    <!-- Tanggal Pemeriksaan -->
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-md-2 col-form-label">Kartu Order</label>
+                        <div class="col-md-7">
+                            <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                                x-on:livewire-upload-finish="uploading = false"
+                                x-on:livewire-upload-cancel="uploading = false"
+                                x-on:livewire-upload-error="uploading = false"
+                                x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                <input type="file" wire:model="kartuOrder" class="form-control">
+                                @error('kartuOrder')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
+                                <div x-show="uploading">
+                                    <progress max="100" x-bind:value="progress"></progress>
+                                    <span x-text="progress"><!-- Will output: "bar" -->
+                                    </span> %
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div wire:loading wire:target="save">
+                                <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                            </div>
+                        </div>
+
+                        @if ($pathKartuOrder)
+                            <div class="col-md-3">
+                                <a href="{{ route('helper.show-picture', ['path' => $pathKartuOrder->path]) }}"
+                                    class="btn btn-outline-secondary btn-sm" target="_blank">
+                                    <i class="fa fa-download"></i> Lihat Kartu Order
+                                </a>
+                            </div>
+                        @endif
+
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-md-2 col-form-label">SKHP</label>
+                        <div class="col-md-7">
+                            <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                                x-on:livewire-upload-finish="uploading = false"
+                                x-on:livewire-upload-cancel="uploading = false"
+                                x-on:livewire-upload-error="uploading = false"
+                                x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                <input type="file" wire:model="skhp" class="form-control">
+                                @error('skhp')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
+                                <div x-show="uploading">
+                                    <progress max="100" x-bind:value="progress"></progress>
+                                    <span x-text="progress"><!-- Will output: "bar" -->
+                                    </span> %
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div wire:loading wire:target="save">
+                                <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                            </div>
+                        </div>
+
+                        @if ($pathSkhp)
+                            <div class="col-md-3">
+                                <a href="{{ route('helper.show-picture', ['path' => $pathSkhp->path]) }}"
+                                    class="btn btn-outline-secondary btn-sm" target="_blank">
+                                    <i class="fa fa-download"></i> Lihat SKHP
+                                </a>
+                            </div>
+                        @endif
+
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary btn-block"><i
+                                class="fas fa-save mr-2"></i>Simpan Dokumen</button>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-3">
+                        <a class="btn btn-danger btn-block" wire:click="finish">
+                            <i class="fas fa-check mr-2"></i>
+                            Selesaikan Permohonan
+                        </a>
+                    </div>
+
+                </form>
+            </div>
         </div>
 
     </div>

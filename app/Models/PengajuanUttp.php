@@ -19,4 +19,9 @@ class PengajuanUttp extends Model
     {
         return $this->belongsTo(Pengajuan::class, 'pengajuan_id');
     }
+
+    public function hasil()
+    {
+        return $this->belongsTo(ComCode::class, 'hasil_st');
+    }
 }

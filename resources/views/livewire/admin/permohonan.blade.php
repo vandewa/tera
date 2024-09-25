@@ -2,12 +2,27 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Permohonan Tera</h1>
+                <h1 class="m-0">Permohonan Tera
+                    @if ($idnya == 1)
+                        di Kantor
+                    @else
+                        di Lokasi Alat
+                    @endif
+
+                </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Permohonan </li>
-                    <li class="breadcrumb-item"><a href="#">Tera</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Tera
+                            @if ($idnya == 1)
+                                di Kantor
+                            @else
+                                di Lokasi Alat
+                            @endif
+                        </a>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -26,6 +41,13 @@
                                             <div class="card-header">
                                                 <div class="card-title">
                                                     Permohonan Tera
+
+                                                    @if ($idnya == 1)
+                                                        di Kantor
+                                                    @else
+                                                        di Lokasi Alat
+                                                    @endif
+
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -34,11 +56,6 @@
                                                         <input type="text" class="form-control" placeholder="cari"
                                                             wire:model.live='cari'>
                                                     </div>
-                                                    {{-- <div class="col-md-2 pull-right">
-                                                        <a href="{{ route('admin.permohonan.create') }}"
-                                                            class="btn btn-primary"> <span class="mr-2 fas fa-plus">
-                                                            </span>Tambah Permohonan</a>
-                                                    </div> --}}
                                                 </div>
 
                                                 <div class="table-responsive">
@@ -78,11 +95,14 @@
                                                                                 class="badge badge-dark">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_02')
                                                                             <span
-                                                                                class="badge badge-info">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                                class="badge badge-warning">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_03')
                                                                             <span
                                                                                 class="badge badge-danger">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_04')
+                                                                            <span
+                                                                                class="badge badge-info">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_05')
                                                                             <span
                                                                                 class="badge badge-success">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @endif
@@ -108,12 +128,14 @@
                                                                                             class="mr-2 far fa-arrow-alt-circle-right"></i>Proses</a>
                                                                                 <li><a class="dropdown-item"
                                                                                         href="{{ route('helper.cetak-order', ['id' => $datum->id, 'jenis_download' => 'formulir_permohonan']) }}"><i
-                                                                                            class="mr-2 far fa-arrow-alt-circle-right"></i>Formulir</a>
+                                                                                            class="mr-2 fas fa-download"></i>Download
+                                                                                        Formulir</a>
 
                                                                                 </li>
                                                                                 <li><a class="dropdown-item"
                                                                                         href="{{ route('helper.cetak-order', ['id' => $datum->id, 'jenis_download' => 'tanda_terima']) }}"><i
-                                                                                            class="mr-2 far fa-arrow-alt-circle-right"></i>Kartu
+                                                                                            class="mr-2 fas fa-file-download"></i>Download
+                                                                                        Kartu
                                                                                         Order</a>
 
                                                                                 </li>

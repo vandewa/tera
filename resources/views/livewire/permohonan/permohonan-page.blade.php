@@ -72,11 +72,14 @@
                                                                                 class="badge badge-dark">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_02')
                                                                             <span
-                                                                                class="badge badge-info">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                                class="badge badge-warning">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_03')
                                                                             <span
                                                                                 class="badge badge-danger">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_04')
+                                                                            <span
+                                                                                class="badge badge-info">{{ $datum->statusPengajuan->code_nm }}</span>
+                                                                        @elseif($datum->statusPengajuan->com_cd == 'PENGAJUAN_ST_05')
                                                                             <span
                                                                                 class="badge badge-success">{{ $datum->statusPengajuan->code_nm }}</span>
                                                                         @endif
@@ -84,7 +87,8 @@
                                                                     <td>
                                                                         <ul>
                                                                             @foreach ($datum->uttpItem as $item)
-                                                                                <li> {{ $item->uttp->nama ?? '-' }}</li>
+                                                                                <li> {{ $item->uttp->nama ?? '-' }}
+                                                                                </li>
                                                                             @endforeach
                                                                         </ul>
                                                                     </td>
