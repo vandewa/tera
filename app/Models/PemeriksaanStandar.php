@@ -9,4 +9,9 @@ class PemeriksaanStandar extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function namanya()
+    {
+        return $this->belongsTo(Standar::class, 'nama');
+    }
 }

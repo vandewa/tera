@@ -10,26 +10,42 @@ class Pemeriksaan extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function pengajuan() {
+    public function pengajuan()
+    {
         return $this->belongsTo(Pengajuan::class, 'pengajuan_id');
     }
 
-    public function standar() {
+    public function standar()
+    {
         return $this->hasMany(PemeriksaanStandar::class, 'pemeriksaan_id');
     }
 
-    public function petugas() {
+    public function petugas()
+    {
         return $this->hasMany(PemeriksaanPetugas::class, 'pemeriksaan_id');
     }
 
-    public function berhak() {
-        return $this->belongsTo(User::class, 'pegawai_berhak_id' );
+    public function berhak()
+    {
+        return $this->belongsTo(User::class, 'pegawai_berhak_id');
     }
-    public function penandatangan() {
+    public function penandatangan()
+    {
         return $this->belongsTo(User::class, 'penandatanganan_id');
     }
 
-    public function hasil() {
+    public function hasil()
+    {
         return $this->belongsTo(ComCode::class, 'hasil_st');
+    }
+
+    public function metodenya()
+    {
+        return $this->belongsTo(Metode::class, 'metode');
+    }
+
+    public function telusurannya()
+    {
+        return $this->belongsTo(Telusuran::class, 'telusuran');
     }
 }

@@ -46,7 +46,7 @@
                                 <hr>
 
                                 <button class="btn btn-block btn-warning" wire:click='confirmPembatalan'>
-                                    <i class="fas fa-times-square mr-1"></i>Batalkan Persetujuan
+                                    <i class="fas fa-times mr-1"></i>Batalkan Persetujuan
                                 </button>
                             </div>
 
