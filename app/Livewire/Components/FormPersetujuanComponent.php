@@ -6,7 +6,9 @@ use App\Models\User;
 use Livewire\Component;
 use App\Jobs\kirimPesan;
 use App\Models\Pengajuan;
+use App\Models\Pemeriksaan;
 use App\Livewire\Admin\Permohonan;
+use App\Models\PemeriksaanPetugas;
 use App\Livewire\ProsesPermohonanPage;
 
 class FormPersetujuanComponent extends Component
@@ -50,7 +52,7 @@ class FormPersetujuanComponent extends Component
     public function terima()
     {
         $this->validate([
-            // 'petugas.*.user_id' => 'required'
+            'petugas.*.user_id' => 'required'
         ]);
 
         $this->js(<<<'JS'
@@ -77,9 +79,26 @@ class FormPersetujuanComponent extends Component
 
     public function terimaPermohonan()
     {
-        Pengajuan::find($this->idnya)->update([
+        $data = Pengajuan::find($this->idnya);
+
+        $cekPemeriksaan = Pemeriksaan::where('pengajuan_id', $this->idnya)->first();
+
+        if (!$cekPemeriksaan) {
+            $cekPemeriksaan = Pemeriksaan::create([
+                'pengajuan_id' => $this->idnya,
+            ]);
+        }
+
+        $data->update([
             'pengajuan_st' => 'PENGAJUAN_ST_02'
         ]);
+
+        foreach ($this->petugas as $petugas) {
+            PemeriksaanPetugas::updateOrCreate(
+                ['id' => $petugas['id'] ?? null],
+                ['pemeriksaan_id' => $cekPemeriksaan->id, 'user_id' => $petugas['user_id']]
+            );
+        }
 
         $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
             'Status pengajuan tera *DITERIMA*. Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .

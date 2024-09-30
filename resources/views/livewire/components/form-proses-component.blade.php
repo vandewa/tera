@@ -140,10 +140,24 @@
                 <div class="form-group">
                     <label>Standar</label>
                     @foreach ($standars as $index => $standar)
-                        <div class="mb-3 input-group">
+                        {{-- <div class="mb-3 input-group">
                             <input class="form-control" wire:model.defer="standars.{{ $index }}.nama"
                                 id="standar">
                             </input>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="button"
+                                    wire:click="removeStandar({{ $index }})">Hapus</button>
+                            </div>
+                        </div> --}}
+
+                        <div class="mb-3 input-group">
+                            <select class="form-control" wire:model.defer="standars.{{ $index }}.nama"
+                                id="standar">
+                                <option value="">Pilih Standar</option>
+                                @foreach ($listStandar as $list)
+                                    <option value="{{ $list->id }}">{{ $list->nama }}</option>
+                                @endforeach
+                            </select>
                             <div class="input-group-append">
                                 <button class="btn btn-danger" type="button"
                                     wire:click="removeStandar({{ $index }})">Hapus</button>

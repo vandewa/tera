@@ -20,11 +20,11 @@
                 <tr wire:key='{{ $pengajuanUttp->id }}'>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pengajuanUttp->uttp ? $pengajuanUttp->uttp->nama : 'N/A' }}</td>
-                    <td>{{ $pengajuanUttp->no_seri }}</td>
-                    <td>{{ $pengajuanUttp->merek }}</td>
-                    <td>{{ $pengajuanUttp->tipe }}</td>
-                    <td>{{ $pengajuanUttp->kapasitas }}</td>
-                    <td>{{ $pengajuanUttp->jumlah }}</td>
+                    <td>{{ $pengajuanUttp->no_seri ?? '-' }}</td>
+                    <td>{{ $pengajuanUttp->merek ?? '-' }}</td>
+                    <td>{{ $pengajuanUttp->tipe ?? '-' }}</td>
+                    <td>{{ $pengajuanUttp->kapasitas ?? '-' }}</td>
+                    <td>{{ $pengajuanUttp->jumlah ?? '-' }}</td>
                     <td>
                         @if ($pengajuanUttp->cerapan_path)
                             <a href="{{ route('helper.show-picture', ['path' => $pengajuanUttp->cerapan_path]) }}"

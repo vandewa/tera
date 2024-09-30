@@ -8,8 +8,11 @@
                 <p class="card-text">Nama Pemohon:
                     <span class="text-muted">{{ $items->pengajuan->user->name ?? '-' }}</span></h5>
                 </p>
-                <p class="card-text">Tanggal Pengajuan: <span
-                        class="text-muted">{{ date('d-m-Y', strtotime($items->pengajuan->created_at)) }}</span>
+                <p class="card-text">Tanggal Pengajuan:
+                    <span class="text-muted">
+                        {{-- {{ date('d-m-Y', strtotime($items->pengajuan->created_at)) }} --}}
+                        {{ Carbon\Carbon::parse($items->pengajuan->created_at ?? '')->isoFormat(' D MMMM Y') }}
+                    </span>
                 </p>
                 <p class="card-text">Status:
 
@@ -35,8 +38,9 @@
                         <i class="fa fa-download"></i> Download
                     </a>
                 </p>
-                <p class="card-text">Metode: <span class="text-muted">{{ $items->metode }}</span></p>
-                <p class="card-text">Telusuran: <span class="text-muted">{{ $items->telusuran }}</span></p>
+                <p class="card-text">Metode: <span class="text-muted">{{ $items->metodenya->nama ?? '-' }}</span></p>
+                <p class="card-text">Telusuran: <span class="text-muted">{{ $items->telusurannya->nama ?? '' }}</span>
+                </p>
 
             </div>
 
@@ -54,7 +58,7 @@
                     <p class="mt-2 mr-3 ml-2">Standar:</p>
                     <ul class="list-unstyled">
                         @foreach ($items->standar as $standar)
-                            <li><i class="fas fa-check-circle text-success"></i> {{ $standar->nama }}</li>
+                            <li><i class="fas fa-check-circle text-success"></i> {{ $standar->namanya->nama }}</li>
                         @endforeach
                     </ul>
                 </div>

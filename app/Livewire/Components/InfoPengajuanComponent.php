@@ -98,7 +98,7 @@ class InfoPengajuanComponent extends Component
 
     public function render()
     {
-        $data = Pemeriksaan::with(['pengajuan.user', 'standar', 'petugas', 'penandatangan', 'hasil', 'berhak'])->where('pengajuan_id', $this->idnya)->first();
+        $data = Pemeriksaan::with(['pengajuan.user', 'standar', 'petugas', 'penandatangan', 'hasil', 'berhak', 'telusurannya', 'metodenya'])->where('pengajuan_id', $this->idnya)->first();
 
         $pathKartuOrder = DokumenPemeriksaan::where('pemeriksaan_id', $this->pemeriksaan->id)->where('jenis_dokumen_tp', 'JENIS_DOKUMEN_TP_01')->first();
 

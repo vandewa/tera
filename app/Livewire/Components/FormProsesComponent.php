@@ -32,6 +32,7 @@ class FormProsesComponent extends Component
     public $idnya;
 
     public $standars = [];
+    public $listStandar = [];
     public $hasil = [];
     public $petugas = [];
 
@@ -71,6 +72,8 @@ class FormProsesComponent extends Component
 
         $this->users = User::whereHasRole(['penera', 'administrator', 'superadministrator'])->get();
         $this->penandatangan = User::whereHasRole('kepala_dinas')->get();
+
+        $this->listStandar = Standar::all();
 
         $this->standars = PemeriksaanStandar::where('pemeriksaan_id', $id)->get()->toArray();
         $this->petugas = PemeriksaanPetugas::where('pemeriksaan_id', $id)->get()->toArray();
@@ -113,7 +116,8 @@ class FormProsesComponent extends Component
             // 'pemeriksaan.hasil_keterangan' => 'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
             'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
             'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
-            'petugas.*.user_id' => 'required'
+            'petugas.*.user_id' => 'required',
+            'standars.*.nama' => 'required'
         ]);
 
         if ($this->upload_cerapan) {
@@ -135,8 +139,6 @@ class FormProsesComponent extends Component
         if ($this->upload_cerapan) {
             Pemeriksaan::find($this->pemeriksaan['id'])->update(['upload_cerapan' => $this->pemeriksaan['upload_cerapan']]);
         }
-
-        // $this->pemeriksaan->save();
 
         // Save related data
         foreach ($this->standars as $standar) {
@@ -218,12 +220,10 @@ class FormProsesComponent extends Component
     {
         $metode = Metode::all();
         $telusuran = Telusuran::all();
-        $standar = Standar::all();
 
         return view('livewire.components.form-proses-component', [
             'metode' => $metode,
             'telusuran' => $telusuran,
-            'standar' => $standar,
         ]);
     }
 }
