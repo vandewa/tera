@@ -157,7 +157,7 @@
                                   </li>
                               </ul>
                           </li>
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('admin.sidang.tera') }}"
                                   class="nav-link  {{ Request::segment(2) == 'sidang-tera' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-tools"></i>
@@ -165,7 +165,7 @@
                                       Sidang Tera
                                   </p>
                               </a>
-                          </li>
+                          </li> --}}
                       @endrole
 
                       @role(['superadministrator', 'administrator'])

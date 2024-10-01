@@ -193,7 +193,7 @@
                                                                                                     title="Pilih Penera"><i
                                                                                                         class="fas fa-user-plus mr-1"></i>Penera
                                                                                                 </a>
-                                                                                                <a href="{{ route('detail-jadwal-tera', $item->id) }}"
+                                                                                                <a href="{{ route('jadwal-tera-peserta', $item->id) }}"
                                                                                                     class="btn btn-info btn-flat btn-sm"
                                                                                                     data-toggle="tooltip"
                                                                                                     data-placement="left"
