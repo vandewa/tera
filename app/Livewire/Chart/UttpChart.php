@@ -18,7 +18,7 @@ class UttpChart extends Component
             'pengajuan' => function ($a) {
 
                 $a->whereHas('pengajuannya', function ($a) {
-                    $a->where('pengajuan_st', 'PENGAJUAN_ST_04');
+                    $a->where('pengajuan_st', 'PENGAJUAN_ST_05');
                 });
                 if ($this->startDate && $this->endDate) {
                     $this->dispatch('jmbt', start: $this->startDate, end: $this->endDate)->to(UttpChart::class);
