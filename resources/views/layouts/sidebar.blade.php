@@ -297,11 +297,11 @@
                           </li>
                           <li
                               class="nav-item
-                            {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}
+                            {{ Request::segment(2) == 'rekap' ? 'menu-is-opening menu-open' : '' }}
                         ">
                               <a href="#"
                                   class="nav-link
-                                {{ Request::segment(2) == 'user-index' ? 'active' : '' }}
+                                {{ Request::segment(2) == 'rekap' ? 'active' : '' }}
                                 ">
                                   <i class="nav-icon fa-solid fas fa-book"></i>
                                   <p>
@@ -311,19 +311,16 @@
                               </a>
                               <ul class="nav nav-treeview">
                                   <li class="nav-item">
-                                      <a href="{{ route('master.uttp') }}"
-                                          class="nav-link {{ Request::segment(2) == 'uttp' ? 'active' : '' }}">
-                                          @if (Request::segment(2) == 'uttp')
+                                      <a href="{{ route('rekap') }}"
+                                          class="nav-link {{ Request::segment(2) == 'rekap' ? 'active' : '' }}">
+                                          @if (Request::segment(2) == 'rekap')
                                               <i class="ml-2 far fa-dot-circle nav-icon"></i>
                                           @else
                                               <i class="ml-2 far fa-circle nav-icon"></i>
                                           @endif
-                                          <p>Jenis UTTP</p>
+                                          <p>Rekap</p>
                                       </a>
                                   </li>
-
-
-
                               </ul>
                           </li>
                       @endrole

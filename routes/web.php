@@ -20,6 +20,7 @@ use App\Livewire\Admin\SidangTeraForm;
 use App\Livewire\ProsesPermohonanPage;
 use App\Http\Controllers\CetakController;
 use App\Http\Controllers\HelperController;
+use App\Http\Controllers\LaporanController;
 use App\Livewire\Permohonan\PermohonanPage;
 use App\Http\Controllers\RegisterController;
 use App\Livewire\Admin\ProsesSidangTeraPage;
@@ -58,6 +59,9 @@ Route::middleware([
     Route::get('data-diri', DataDiri::class)->name('data-diri');
     Route::get('jadwal-tera', JadwalTera::class)->name('jadwal-tera');
     Route::get('detail-jadwal-tera/{id?}', DetailJadwalTera::class)->name('detail-jadwal-tera');
+    Route::get('laporan/rekap', [LaporanController::class, 'rekap'])->name('rekap');
+    Route::post('laporan/triwulan', [LaporanController::class, 'storeTriwulan'])->name('store.triwulan');
+    Route::post('laporan/global', [LaporanController::class, 'storeGlobal'])->name('store.global');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('permohonan/{id?}', Permohonan::class)->name('permohonan');
