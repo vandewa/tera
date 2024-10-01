@@ -25,6 +25,7 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\Admin\ProsesSidangTeraPage;
 use App\Livewire\Permohonan\PermohonanFormPage;
 use App\Http\Controllers\PasswordResetController;
+use App\Livewire\JadwalTeraPeserta;
 use App\Livewire\Standar;
 use App\Livewire\Telusuran;
 
@@ -57,6 +58,7 @@ Route::middleware([
     Route::get('permohonan/create/{id?}', PermohonanFormPage::class)->name('permohonan.create');
     Route::get('data-diri', DataDiri::class)->name('data-diri');
     Route::get('jadwal-tera', JadwalTera::class)->name('jadwal-tera');
+    Route::get('jadwal-tera-peserta/{id?}', JadwalTeraPeserta::class)->name('jadwal-tera-peserta');
     Route::get('detail-jadwal-tera/{id?}', DetailJadwalTera::class)->name('detail-jadwal-tera');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

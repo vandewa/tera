@@ -193,6 +193,13 @@
                                                                                                     title="Pilih Penera"><i
                                                                                                         class="fas fa-user-plus mr-1"></i>Penera
                                                                                                 </a>
+                                                                                                <a href="{{ route('detail-jadwal-tera', $item->id) }}"
+                                                                                                    class="btn btn-info btn-flat btn-sm"
+                                                                                                    data-toggle="tooltip"
+                                                                                                    data-placement="left"
+                                                                                                    title="Pilih Penera"><i
+                                                                                                        class="fas fa-user-plus mr-1"></i>Peserta
+                                                                                                </a>
                                                                                                 <button type="button"
                                                                                                     class="btn btn-danger btn-flat btn-sm"
                                                                                                     wire:click="delete('{{ $item->id }}')"><i
