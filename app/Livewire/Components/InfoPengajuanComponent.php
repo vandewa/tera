@@ -12,13 +12,15 @@ class InfoPengajuanComponent extends Component
 {
     use WithFileUploads;
 
-    public $idnya, $kartuOrder, $skhp, $pemeriksaan;
+    public $idnya, $kartuOrder, $skhp, $pemeriksaan, $wa;
 
     public function mount($id)
     {
         $this->idnya = $id;
 
         $this->pemeriksaan = Pemeriksaan::with(['pengajuan.user', 'standar', 'petugas', 'penandatangan', 'hasil', 'berhak'])->where('pengajuan_id', $this->idnya)->first();
+
+        $this->wa = $this->pemeriksaan->pengajuan->user->wa;
 
     }
 
@@ -91,6 +93,14 @@ class InfoPengajuanComponent extends Component
         Pengajuan::find($this->idnya)->update([
             'pengajuan_st' => 'PENGAJUAN_ST_05'
         ]);
+
+        $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
+            'Pengajuan tera *Selesai*. Terima kasih atas kerjasama dan kepercayaan Anda. Jika Anda memerlukan bantuan lebih lanjut atau informasi tambahan, jangan ragu untuk menghubungi kami. Semoga hari Anda menyenangkan!' . urldecode('%0D%0A%0D%0A') .
+            'Disdagkopukm Wonosobo'
+        ;
+
+        // kirimPesan::dispatch($this->wa, $pesan);
+
 
         $this->showSuccessMessage('You clicked the button!');
 

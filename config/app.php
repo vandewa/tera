@@ -54,9 +54,9 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'token_wa' => env('TOKEN_WA', ''),
+    'token_wa' => env('TOKEN_WA', 'NapiBiJLWttR0G9zggmrd9590ToyXS4au4gan7PazBIvlvyCWiNVEQW8p10iOz2Y'),
 
-    'wa_url' => env('WA_URL', ''),
+    'wa_url' => env('WA_URL', 'https://kudus.wablas.com/api'),
 
     /*
     |--------------------------------------------------------------------------
