@@ -100,10 +100,11 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <a href="#"
+                                                                    <a href="{{ asset('template/template_permohonan_pemohon.docx') }}"
                                                                         class="btn btn-info rounded-round btn-sm"
                                                                         target="_blank"><i
                                                                             class="fas fa-file-download mr-1"></i>
+                                                                        Unduh
                                                                         Template Surat Permohonan</a>
                                                                 </div>
                                                             </div>
