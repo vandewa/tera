@@ -20,7 +20,7 @@ class RegisterController extends Controller
                 'nik' => 'required|unique:users,nik',
                 'email' => 'required|unique:users,email',
                 'name' => 'required|string|max:255',
-                'wa' => 'required|numeric',
+                'wa' => 'required|numeric|unique:users,wa',
                 'password' => 'required|confirmed|min:8',
                 'password_confirmation' => 'required|same:password',
             ],
@@ -29,6 +29,8 @@ class RegisterController extends Controller
                 'email.required' => 'Email harus diisi.',
                 'nik.unique' => 'NIK sudah terdaftar.',
                 'email.unique' => 'Email sudah terdaftar.',
+                'wa.required' => 'WhatsApp harus diisi.',
+                'wa.unique' => 'WhatsApp sudah terdaftar.',
             ]
         );
 
