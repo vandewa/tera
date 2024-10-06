@@ -64,6 +64,7 @@ Route::middleware([
     Route::get('laporan/rekap', [LaporanController::class, 'rekap'])->name('rekap');
     Route::post('laporan/triwulan', [LaporanController::class, 'storeTriwulan'])->name('store.triwulan');
     Route::post('laporan/global', [LaporanController::class, 'storeGlobal'])->name('store.global');
+    Route::get('laporan/sidang', [LaporanController::class, 'rekapSidang'])->name('laporan.rekap-sidang');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('permohonan/{id?}', Permohonan::class)->name('permohonan');

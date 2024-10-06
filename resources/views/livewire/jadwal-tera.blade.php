@@ -209,6 +209,14 @@
                                                                                                         title="Pilih Penera"><i
                                                                                                             class="mr-1 fas fa-user-plus"></i>Peserta
                                                                                                     </a>
+                                                                                                    <a href="{{ route('laporan.rekap-sidang', ['id' => $item->id]) }}"
+                                                                                                        target="_blank"
+                                                                                                        class="btn btn-info btn-flat btn-sm"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="left"
+                                                                                                        title="Pilih Penera"><i
+                                                                                                            class="mr-1 fas fa-user-plus"></i>Rekap
+                                                                                                    </a>
                                                                                                 @endrole
                                                                                                 @role(['superadministrator',
                                                                                                     'administrator'])
