@@ -44,10 +44,11 @@
                                     {{ $isian->statusPengajuan->code_nm ?? '-' }}</strong>
                                 <p class="text-muted"></p>
                                 <hr>
-
-                                <button class="btn btn-block btn-warning" wire:click='confirmPembatalan'>
-                                    <i class="fas fa-times mr-1"></i>Batalkan Persetujuan
-                                </button>
+                                @role(['superadministrator', 'administrator'])
+                                    <button class="btn btn-block btn-warning" wire:click='confirmPembatalan'>
+                                        <i class="mr-1 fas fa-times"></i>Batalkan Persetujuan
+                                    </button>
+                                @endrole
                             </div>
 
                         </div>

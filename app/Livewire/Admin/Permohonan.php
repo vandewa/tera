@@ -108,12 +108,20 @@ class Permohonan extends Component
     public function render()
     {
         $data = Pengajuan::with(['jenisPengajuan', 'statusPengajuan', 'uttpItem.uttp'])
-            ->where('jadwal_tera_id', null)
-            ->where('pengajuan_tp', $this->jenis)
-            ->paginate(10);
+        ->where('jadwal_tera_id', null)
+        ->where('pengajuan_tp', $this->jenis);
 
+            if(auth()->user()->hasRole(['penera'])){
+            $data->whereHas('pemeriksaan', function($a){
+                $a->whereHas('petugas', function($b){
+                    $b->where('user_id', auth()->user()->id);
+                });
+            });
+            }
+
+        $hasil = $data->paginate(10);
         return view('livewire.admin.permohonan', [
-            'post' => $data,
+            'post' => $hasil,
         ]);
     }
 }

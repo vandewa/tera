@@ -42,7 +42,7 @@ class Pengajuan extends Model
     }
 
     public function pemeriksaan() {
-        
+       return $this->hasOne(Pemeriksaan::class, 'pengajuan_id');
     }
 
 

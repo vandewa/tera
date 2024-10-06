@@ -27,102 +27,103 @@
                                                 <div class="tab-pane fade show active" id="custom-tabs-six-riwayat-rm"
                                                     role="tabpanel" aria-labelledby="custom-tabs-six-riwayat-rm-tab">
                                                     <div class="card-body">
-                                                        <div class="col-md-12">
-                                                            <form class="mt-2 form-horizontal" wire:submit='save'>
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <div class="mb-2 row">
-                                                                                <label
-                                                                                    class="col-sm-2 col-form-label">Lokasi
-                                                                                    <small
-                                                                                        class="text-danger">*</small></label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        wire:model='form.lokasi'
-                                                                                        placeholder="Lokasi">
-                                                                                    @error('form.lokasi')
-                                                                                        <span
-                                                                                            class="form-text text-danger">{{ $message }}</span>
-                                                                                    @enderror
+                                                        @role(['superadministrator', 'administrator'])
+                                                            <div class="col-md-12">
+                                                                <form class="mt-2 form-horizontal" wire:submit='save'>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="mb-2 row">
+                                                                                    <label
+                                                                                        class="col-sm-2 col-form-label">Lokasi
+                                                                                        <small
+                                                                                            class="text-danger">*</small></label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            wire:model='form.lokasi'
+                                                                                            placeholder="Lokasi">
+                                                                                        @error('form.lokasi')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="mb-2 row">
-                                                                                <label
-                                                                                    class="col-sm-2 col-form-label">Tanggal
-                                                                                    Mulai</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="date"
-                                                                                        class="form-control"
-                                                                                        wire:model='form.tanggal_mulai'>
-                                                                                    @error('form.tanggal_mulai')
-                                                                                        <span
-                                                                                            class="form-text text-danger">{{ $message }}</span>
-                                                                                    @enderror
+                                                                                <div class="mb-2 row">
+                                                                                    <label
+                                                                                        class="col-sm-2 col-form-label">Tanggal
+                                                                                        Mulai</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            wire:model='form.tanggal_mulai'>
+                                                                                        @error('form.tanggal_mulai')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="mb-2 row">
-                                                                                <label
-                                                                                    class="col-sm-2 col-form-label">Tanggal
-                                                                                    Selesai</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="date"
-                                                                                        class="form-control"
-                                                                                        wire:model='form.tanggal_selesai'>
-                                                                                    @error('form.tanggal_selesai')
-                                                                                        <span
-                                                                                            class="form-text text-danger">{{ $message }}</span>
-                                                                                    @enderror
+                                                                                <div class="mb-2 row">
+                                                                                    <label
+                                                                                        class="col-sm-2 col-form-label">Tanggal
+                                                                                        Selesai</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            wire:model='form.tanggal_selesai'>
+                                                                                        @error('form.tanggal_selesai')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="mb-2 row">
-                                                                                <label
-                                                                                    class="col-sm-2 col-form-label">Upload
-                                                                                    Surat Tugas</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="file"
-                                                                                        class="form-control"
-                                                                                        wire:model='uploadSuratTugas'>
-                                                                                    @error('uploadSuratTugas')
-                                                                                        <span
-                                                                                            class="form-text text-danger">{{ $message }}</span>
-                                                                                    @enderror
+                                                                                <div class="mb-2 row">
+                                                                                    <label
+                                                                                        class="col-sm-2 col-form-label">Upload
+                                                                                        Surat Tugas</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="file"
+                                                                                            class="form-control"
+                                                                                            wire:model='uploadSuratTugas'>
+                                                                                        @error('uploadSuratTugas')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row mb-3">
-                                                                                <label for="inputEmail3"
-                                                                                    class="col-sm-2 col-form-label">Status
-                                                                                    Jadwal Tera</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <select class="form-control"
-                                                                                        wire:model='form.jadwal_tera_st'>
-                                                                                        <option value="">Pilih
-                                                                                            Status</option>
-                                                                                        @foreach ($listJadwalTera ?? [] as $item)
-                                                                                            <option
-                                                                                                value="{{ $item['com_cd'] }}">
-                                                                                                {{ $item['code_nm'] }}
-                                                                                            </option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                    @error('form.jadwal_tera_st')
-                                                                                        <span
-                                                                                            class="form-text text-danger">{{ $message }}</span>
-                                                                                    @enderror
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="inputEmail3"
+                                                                                        class="col-sm-2 col-form-label">Status
+                                                                                        Jadwal Tera</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <select class="form-control"
+                                                                                            wire:model='form.jadwal_tera_st'>
+                                                                                            <option value="">Pilih
+                                                                                                Status</option>
+                                                                                            @foreach ($listJadwalTera ?? [] as $item)
+                                                                                                <option
+                                                                                                    value="{{ $item['com_cd'] }}">
+                                                                                                    {{ $item['code_nm'] }}
+                                                                                                </option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                        @error('form.jadwal_tera_st')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="mt-3 card-footer">
+                                                                            <button type="submit"
+                                                                                class="btn btn-info">Simpan</button>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="mt-3 card-footer">
-                                                                        <button type="submit"
-                                                                            class="btn btn-info">Simpan</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <br>
-
+                                                                </form>
+                                                            </div>
+                                                            <br>
+                                                        @endrole
                                                         <div class="card card-info card-outline">
                                                             <div class="card-header">
                                                                 <div class="card-title">
@@ -164,7 +165,7 @@
                                                                                                 class="btn btn-info rounded-round btn-sm"
                                                                                                 target="_blank">
                                                                                                 <i
-                                                                                                    class="fas fa-file-word mr-2">
+                                                                                                    class="mr-2 fas fa-file-word">
                                                                                                 </i>
                                                                                                 Lihat File
                                                                                             </a>
@@ -177,34 +178,46 @@
                                                                                         <div
                                                                                             class="gap-3 table-actions d-flex align-items-center fs-6">
                                                                                             <div class="mr-2">
-                                                                                                <button type="button"
-                                                                                                    wire:click="getEdit('{{ $item->id }}')"
-                                                                                                    class="btn btn-warning btn-flat btn-sm"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="left"
-                                                                                                    title="Edit"><i
-                                                                                                        class="fas fa-edit mr-1"></i>
-                                                                                                    Edit
-                                                                                                </button>
-                                                                                                <a href="{{ route('detail-jadwal-tera', $item->id) }}"
-                                                                                                    class="btn btn-success btn-flat btn-sm"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="left"
-                                                                                                    title="Pilih Penera"><i
-                                                                                                        class="fas fa-user-plus mr-1"></i>Penera
-                                                                                                </a>
-                                                                                                <a href="{{ route('jadwal-tera-peserta', $item->id) }}"
-                                                                                                    class="btn btn-info btn-flat btn-sm"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="left"
-                                                                                                    title="Pilih Penera"><i
-                                                                                                        class="fas fa-user-plus mr-1"></i>Peserta
-                                                                                                </a>
-                                                                                                <button type="button"
-                                                                                                    class="btn btn-danger btn-flat btn-sm"
-                                                                                                    wire:click="delete('{{ $item->id }}')"><i
-                                                                                                        class="fas fa-trash-alt mr-1"></i>Hapus
-                                                                                                </button>
+                                                                                                @role(['superadministrator',
+                                                                                                    'administrator'])
+                                                                                                    <button type="button"
+                                                                                                        wire:click="getEdit('{{ $item->id }}')"
+                                                                                                        class="btn btn-warning btn-flat btn-sm"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="left"
+                                                                                                        title="Edit"><i
+                                                                                                            class="mr-1 fas fa-edit"></i>
+                                                                                                        Edit
+                                                                                                    </button>
+
+
+                                                                                                    <a href="{{ route('detail-jadwal-tera', $item->id) }}"
+                                                                                                        class="btn btn-success btn-flat btn-sm"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="left"
+                                                                                                        title="Pilih Penera"><i
+                                                                                                            class="mr-1 fas fa-user-plus"></i>Penera
+                                                                                                    </a>
+                                                                                                @endrole
+                                                                                                @role(['penera',
+                                                                                                    'superadministrator',
+                                                                                                    'administrator'])
+                                                                                                    <a href="{{ route('jadwal-tera-peserta', $item->id) }}"
+                                                                                                        class="btn btn-info btn-flat btn-sm"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="left"
+                                                                                                        title="Pilih Penera"><i
+                                                                                                            class="mr-1 fas fa-user-plus"></i>Peserta
+                                                                                                    </a>
+                                                                                                @endrole
+                                                                                                @role(['superadministrator',
+                                                                                                    'administrator'])
+                                                                                                    <button type="button"
+                                                                                                        class="btn btn-danger btn-flat btn-sm"
+                                                                                                        wire:click="delete('{{ $item->id }}')"><i
+                                                                                                            class="mr-1 fas fa-trash-alt"></i>Hapus
+                                                                                                    </button>
+                                                                                                @endrole
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>
