@@ -167,7 +167,7 @@
             </div>
             <div class="form-field">
                 <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required>
-                @error('wa')
+                @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

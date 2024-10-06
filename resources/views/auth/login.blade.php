@@ -208,9 +208,9 @@
                 <div class="form">
                     <div class="form-field username">
                         <div class="icon">
-                            <i class="fas fa-tree"></i>
+                            <i class="fas fa-user"></i>
                         </div>
-                        <input type="text" placeholder="Email" name="email">
+                        <input type="text" placeholder="Email / No WhatsApp" name="email" required>
                     </div>
                     <div class="form-field password">
                         <div class="icon">

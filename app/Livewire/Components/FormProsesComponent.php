@@ -178,9 +178,10 @@ class FormProsesComponent extends Component
         JS);
 
         $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
-            'Pengajuan tera Anda telah *SELESAI*. Terima kasih atas kerjasama dan kepercayaan Anda. Jika Anda memerlukan bantuan lebih lanjut atau informasi tambahan, jangan ragu untuk menghubungi kami. Semoga hari Anda menyenangkan!' . urldecode('%0D%0A%0D%0A') .
+            'Status pengajuan tera Anda pada tahap *Proses Penandatanganan*. Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .
             'Disdagkopukm Wonosobo'
         ;
+
 
         // kirimPesan::dispatch($this->wa, $pesan);
 

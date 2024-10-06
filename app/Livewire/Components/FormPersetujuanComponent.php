@@ -101,7 +101,7 @@ class FormPersetujuanComponent extends Component
         }
 
         $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
-            'Status pengajuan tera *DITERIMA*. Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .
+            'Status pengajuan tera diterima dan saat ini pada tahap *Proses Pemeriksaan*. Mohon menunggu notifikasi selanjutnya, Terima kasih atas kesabaran Anda.' . urldecode('%0D%0A%0D%0A') .
             'Disdagkopukm Wonosobo'
         ;
 
@@ -140,7 +140,7 @@ class FormPersetujuanComponent extends Component
         ]);
 
         $pesan = '*Notifikasi*' . urldecode('%0D%0A%0D%0A') .
-            'Pengajuan tera Anda saat ini *DITOLAK*. Kami mohon maaf atas ketidaknyamanan ini. Tim kami akan segera menghubungi Anda untuk memberikan informasi lebih lanjut dan panduan terkait langkah berikutnya. Terima kasih atas pengertian Anda.' . urldecode('%0D%0A%0D%0A') .
+            'Pengajuan tera Anda *Ditolak*. Kami mohon maaf atas ketidaknyamanan ini. Tim kami akan segera menghubungi Anda untuk memberikan informasi lebih lanjut dan panduan terkait langkah berikutnya. Terima kasih atas pengertian Anda.' . urldecode('%0D%0A%0D%0A') .
             'Disdagkopukm Wonosobo'
         ;
 
