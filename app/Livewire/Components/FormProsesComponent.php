@@ -183,7 +183,7 @@ class FormProsesComponent extends Component
         ;
 
 
-        // kirimPesan::dispatch($this->wa, $pesan);
+        kirimPesan::dispatch($this->wa, $pesan);
 
     }
 

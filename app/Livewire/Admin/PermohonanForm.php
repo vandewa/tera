@@ -114,7 +114,7 @@ class PermohonanForm extends Component
             'Disdagkopukm Wonosobo'
         ;
 
-        // kirimPesan::dispatch(auth()->user()->wa, $pesan);
+        kirimPesan::dispatch(auth()->user()->wa, $pesan);
 
     }
 

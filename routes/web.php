@@ -27,6 +27,7 @@ use App\Livewire\Admin\ProsesSidangTeraPage;
 use App\Livewire\Permohonan\PermohonanFormPage;
 use App\Http\Controllers\PasswordResetController;
 use App\Livewire\JadwalTeraPeserta;
+use App\Livewire\SidangTeraBeritaAcara;
 use App\Livewire\Standar;
 use App\Livewire\Telusuran;
 
@@ -72,6 +73,7 @@ Route::middleware([
         Route::get('sidang-tera', SidangTera::class)->name('sidang.tera');
         Route::get('sidang-tera/create/{id?}', SidangTeraForm::class)->name('sidang-tera.create');
         Route::get('sidang-tera/proses/{id}', ProsesSidangTeraPage::class)->name('sidang-tera.proses');
+        Route::get('sidang-tera/berita-acara/', SidangTeraBeritaAcara::class)->name('sidang-tera.berita-acara');
 
     });
 

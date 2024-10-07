@@ -99,7 +99,7 @@ class InfoPengajuanComponent extends Component
             'Disdagkopukm Wonosobo'
         ;
 
-        // kirimPesan::dispatch($this->wa, $pesan);
+        kirimPesan::dispatch($this->wa, $pesan);
 
 
         $this->showSuccessMessage('You clicked the button!');

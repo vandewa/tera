@@ -12,8 +12,8 @@ class RekapPertanggalExport implements FromView
 {
     /**
      * @return \Illuminate\Support\Collection
-     * 
-     * 
+     *
+     *
      */
 
     public $request;

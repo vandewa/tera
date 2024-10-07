@@ -105,7 +105,7 @@ class FormPersetujuanComponent extends Component
             'Disdagkopukm Wonosobo'
         ;
 
-        // kirimPesan::dispatch($this->wa, $pesan);
+        kirimPesan::dispatch($this->wa, $pesan);
 
         $this->refreshPage();
     }
@@ -144,7 +144,7 @@ class FormPersetujuanComponent extends Component
             'Disdagkopukm Wonosobo'
         ;
 
-        // kirimPesan::dispatch($this->wa, $pesan);
+        kirimPesan::dispatch($this->wa, $pesan);
 
 
         $this->refreshPage();

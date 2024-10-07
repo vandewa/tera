@@ -202,21 +202,48 @@
                                                                                                 @role(['penera',
                                                                                                     'superadministrator',
                                                                                                     'administrator'])
-                                                                                                    <a href="{{ route('jadwal-tera-peserta', $item->id) }}"
-                                                                                                        class="btn btn-info btn-flat btn-sm"
-                                                                                                        data-toggle="tooltip"
-                                                                                                        data-placement="left"
-                                                                                                        title="Pilih Penera"><i
-                                                                                                            class="mr-1 fas fa-user-plus"></i>Peserta
-                                                                                                    </a>
-                                                                                                    <a href="{{ route('laporan.rekap-sidang', ['id' => $item->id]) }}"
-                                                                                                        target="_blank"
-                                                                                                        class="btn btn-info btn-flat btn-sm"
-                                                                                                        data-toggle="tooltip"
-                                                                                                        data-placement="left"
-                                                                                                        title="Pilih Penera"><i
-                                                                                                            class="mr-1 fas fa-user-plus"></i>Rekap
-                                                                                                    </a>
+                                                                                                    <div class="btn-group">
+                                                                                                        <button
+                                                                                                            type="button"
+                                                                                                            class="btn btn-default "
+                                                                                                            data-toggle="dropdown"
+                                                                                                            aria-expanded="false">
+                                                                                                            <i class="fas fa-bars"
+                                                                                                                aria-hidden="true"></i>
+                                                                                                        </button>
+                                                                                                        <ul class="dropdown-menu"
+                                                                                                            style="">
+
+                                                                                                            <li><a href="{{ route('jadwal-tera-peserta', $item->id) }}"
+                                                                                                                    class="dropdown-item"
+                                                                                                                    data-toggle="tooltip"
+                                                                                                                    data-placement="left"
+                                                                                                                    title="Pilih Penera"><i
+                                                                                                                        class="mr-1 fas fa-user-plus"></i>Peserta
+                                                                                                                </a>
+
+                                                                                                            </li>
+                                                                                                            <li><a href="{{ route('laporan.rekap-sidang', ['id' => $item->id]) }}"
+                                                                                                                    target="_blank"
+                                                                                                                    class="dropdown-item"
+                                                                                                                    data-toggle="tooltip"
+                                                                                                                    data-placement="left"
+                                                                                                                    title="Pilih Penera"><i
+                                                                                                                        class="mr-1 fas fa-user-plus"></i>Rekap
+                                                                                                                </a>
+                                                                                                            </li>
+                                                                                                            <li><a href="{{ route('admin.sidang-tera.berita-acara', $item->id) }}"
+                                                                                                                    target="_blank"
+                                                                                                                    class="dropdown-item"
+                                                                                                                    data-toggle="tooltip"
+                                                                                                                    data-placement="left"
+                                                                                                                    title="Pilih Penera"><i
+                                                                                                                        class="mr-1 fas fa-user-plus"></i>Berita
+                                                                                                                    Acara
+                                                                                                                </a>
+                                                                                                            </li>
+                                                                                                        </ul>
+                                                                                                    </div>
                                                                                                 @endrole
                                                                                                 @role(['superadministrator',
                                                                                                     'administrator'])
