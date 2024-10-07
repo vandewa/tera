@@ -30,6 +30,7 @@ class SidangTeraBeritaAcara extends Component
 
     public function simpan() {
         BeritaAcara::where('jadwal_tera_id', $this->idnya)->update($this->form);
+        session()->flash('status', 'Data berhasil di simpan');
 
     }
     public function render()

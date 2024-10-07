@@ -38,6 +38,14 @@
                                             <input type="number" wire:model='form.tidak_sah' class="form-control"
                                                 wire:model='form.telepon' placeholder="Telepon">
                                         </div>
+                                        <div>
+                                            @if (session('status'))
+                                                <div class="alert alert-success">
+                                                    {{ session('status') }}
+                                                </div>
+                                            @endif
+
+                                        </div>
                                         <div class="text-right col-md-12">
                                             <a href="#" class="btn btn-info" data-toggle="tooltip"
                                                 data-placement="top" title="Downbload Berita Acara"><span
