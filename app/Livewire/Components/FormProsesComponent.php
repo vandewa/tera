@@ -111,13 +111,15 @@ class FormProsesComponent extends Component
             'pemeriksaan.pengajuan_id' => 'required|integer',
             'pemeriksaan.tanggal_pemeriksaan' => 'required|date',
             'pemeriksaan.metode' => 'required',
-            'pemeriksaan.telusuran' => 'required',
+            // 'pemeriksaan.telusuran' => 'required',
             // 'pemeriksaan.hasil_st' => 'required',
             // 'pemeriksaan.hasil_keterangan' => 'required_if:pemeriksaan.hasil_st,HASIL_ST_02|string|nullable',
             'pemeriksaan.pegawai_berhak_id' => 'nullable|exists:users,id',
             'pemeriksaan.penandatanganan_id' => 'nullable|exists:users,id',
             'petugas.*.user_id' => 'required',
-            'standars.*.nama' => 'required'
+            'standars.*.nama' => 'required',
+            'pemeriksaan.dasar' => 'required',
+
         ]);
 
         if ($this->upload_cerapan) {
@@ -134,6 +136,7 @@ class FormProsesComponent extends Component
             'hasil_keterangan' => $this->pemeriksaan['hasil_keterangan'],
             'pegawai_berhak_id' => $this->pemeriksaan['pegawai_berhak_id'],
             'penandatanganan_id' => $this->pemeriksaan['penandatanganan_id'],
+            'dasar' => $this->pemeriksaan['dasar'],
         ]);
 
         if ($this->upload_cerapan) {

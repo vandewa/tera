@@ -53,7 +53,7 @@
 
         <div class="row">
             <!-- Pegawai Berhak and Penandatanganan -->
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <div class="form-group">
                     <label for="pegawai_berhak_id">Pegawai Berhak</label>
                     <select id="pegawai_berhak_id" class="form-control"
@@ -67,8 +67,8 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-            </div>
-            <div class="col-md-6">
+            </div> --}}
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="penandatanganan_id">Penandatanganan</label>
                     <select id="penandatanganan_id" class="form-control"
@@ -118,7 +118,7 @@
 
             </div>
         </div>
-        <div class="row mt-3">
+        {{-- <div class="row mt-3">
             <div class="col-md-12">
                 <label for="telusuran">Telusuran</label>
                 <select id="telusuran" class="form-control" wire:model.defer="pemeriksaan.telusuran">
@@ -128,6 +128,18 @@
                     @endforeach
                 </select>
                 @error('pemeriksaan.telusuran')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+
+            </div>
+        </div> --}}
+
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label for="metode">Dasar Pengujian</label>
+                <input type="text" class="form-control" wire:model='pemeriksaan.dasar'>
+                @error('pemeriksaan.dasar')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
 

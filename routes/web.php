@@ -43,6 +43,7 @@ Route::post('/registrasi', [RegisterController::class, 'store'])->name('registra
 
 Route::get('a', [CetakController::class, 'generateData'])->name('helper.generate-data');
 Route::get('b', [CetakController::class, 'cetakOrder'])->name('helper.cetak-order');
+Route::get('c/{id?}', [CetakController::class, 'cetakSkhp'])->name('helper.cetak-skhp');
 
 
 

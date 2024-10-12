@@ -1,51 +1,89 @@
 <div>
     <h5>Data Pengajuan UTTP</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nama UTTP</th>
-                <th>No Seri</th>
-                <th>Merek</th>
-                <th>Tipe</th>
-                <th>Kapasitas</th>
-                <th>Jumlah</th>
-                <th>Cerapan</th>
-                <th>Hasil</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pengajuanUttps as $pengajuanUttp)
-                <tr wire:key='{{ $pengajuanUttp->id }}'>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pengajuanUttp->uttp ? $pengajuanUttp->uttp->nama : 'N/A' }}</td>
-                    <td>{{ $pengajuanUttp->no_seri ?? '-' }}</td>
-                    <td>{{ $pengajuanUttp->merek ?? '-' }}</td>
-                    <td>{{ $pengajuanUttp->tipe ?? '-' }}</td>
-                    <td>{{ $pengajuanUttp->kapasitas ?? '-' }}</td>
-                    <td>{{ $pengajuanUttp->jumlah ?? '-' }}</td>
-                    <td>
-                        @if ($pengajuanUttp->cerapan_path)
-                            <a href="{{ route('helper.show-picture', ['path' => $pengajuanUttp->cerapan_path]) }}"
-                                class="btn btn-outline-primary btn-sm" target="_blank">
-                                <i class="fa fa-download"></i>
-                            </a>
-                        @else
-                            -
-                        @endif
-
-                    </td>
-                    <td>{{ $pengajuanUttp->hasil->code_nm ?? '-' }}</td>
-                    <td>
-                        <a class="btn btn-info btn-sm" wire:click.prevent="Add({{ $pengajuanUttp->id }})">
-                            Proses
-                        </a>
-                    </td>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama UTTP</th>
+                    <th>No Seri</th>
+                    <th>Merek</th>
+                    <th>Tipe</th>
+                    <th>Kapasitas</th>
+                    <th>Jumlah</th>
+                    <th>Cerapan</th>
+                    <th>Hasil</th>
+                    <th>SKHP (TTE)</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($pengajuanUttps as $pengajuanUttp)
+                    <tr wire:key='{{ $pengajuanUttp->id }}'>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pengajuanUttp->uttp ? $pengajuanUttp->uttp->nama : 'N/A' }}</td>
+                        <td>{{ $pengajuanUttp->no_seri ?? '-' }}</td>
+                        <td>{{ $pengajuanUttp->merek ?? '-' }}</td>
+                        <td>{{ $pengajuanUttp->tipe ?? '-' }}</td>
+                        <td>{{ $pengajuanUttp->kapasitas ?? '-' }}</td>
+                        <td>{{ $pengajuanUttp->jumlah ?? '-' }}</td>
+                        <td>
+                            @if ($pengajuanUttp->cerapan_path)
+                                <a href="{{ route('helper.show-picture', ['path' => $pengajuanUttp->cerapan_path]) }}"
+                                    class="btn btn-outline-primary btn-sm" target="_blank">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            @else
+                                -
+                            @endif
+
+                        </td>
+                        <td>{{ $pengajuanUttp->hasil->code_nm ?? '-' }}</td>
+
+                        <td>
+                            @if ($pengajuanUttp->skhp_path)
+                                <a href="{{ route('helper.show-picture', ['path' => $pengajuanUttp->skhp_path]) }}"
+                                    class="btn btn-outline-primary btn-sm" target="_blank">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            @else
+                                -
+                            @endif
+
+                        </td>
+
+                        {{-- <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default " data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="">
+                                    <li>
+                                        <a class="dropdown-item" wire:click.prevent="Add({{ $pengajuanUttp->id }})">
+                                            <i class="far fa-edit mr-2"></i>Proses
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{ route('helper.cetak-skhp', $pengajuanUttp->id) }}">
+                                            <i class="fas fa-download mr-2"></i>Template SKHP
+                                        </a>
+                                    </li>
+                            </div>
+                        </td> --}}
+
+                        <td>
+                            <a class="btn btn-info btn-sm" wire:click.prevent="Add({{ $pengajuanUttp->id }})">
+                                Proses
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
 
     <!-- Add/Edit Task Modal -->
     <div class="modal fade" id="modal-form" wire:ignore.self>
@@ -76,6 +114,23 @@
                                                 </div>
                                             @enderror
                                         </div>
+
+                                        <div wire:loading wire:target="files">Uploading...</div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Upload SKHP (TTE)</label>
+                                            <input type="file"
+                                                class="form-control @error('fileSkhp') is-invalid @enderror"
+                                                wire:model='fileSkhp'>
+                                            @error('fileSkhp')
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('fileSkhp') }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div wire:loading wire:target="fileSkhp">Uploading...</div>
+
                                         <div class="mb-3">
                                             <label class="form-label">Hasil</label>
                                             <select id="hasil_st" class="form-control" wire:model.live="form.hasil_st">

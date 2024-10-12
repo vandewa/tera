@@ -13,12 +13,13 @@ class UttpProsesComponent extends Component
 {
     use WithFileUploads;
 
-    public $pengajuanUttps, $files, $idnya, $bukaKeterangan = false;
+    public $pengajuanId, $pengajuanUttps, $files, $fileSkhp, $idnya, $bukaKeterangan = false;
 
     public $form = [
         'cerapan_path' => null,
         'hasil_st' => null,
-        'keterangan_hasil' => null
+        'keterangan_hasil' => null,
+        'skhp_path' => null
     ];
 
     public function mount($id)
@@ -26,14 +27,15 @@ class UttpProsesComponent extends Component
         // Mengambil data dari tabel pengajuan_uttps beserta data dari tabel uttps
         $this->pengajuanUttps = PengajuanUttp::with(['uttp', 'hasil'])->where('pengajuan_id', $id)->get();
 
+        $this->pengajuanId = $id;
     }
 
     public function Add($id)
     {
         $this->idnya = $id;
-        $this->form = PengajuanUttp::find($id)->only(['hasil_st', 'keterangan_hasil']);
+        $this->form = PengajuanUttp::find($id)->only(['hasil_st', 'keterangan_hasil', 'cerapan_path']);
 
-        if ($this->form['hasil_st'] != 'HASIL_ST_01') {
+        if ($this->form['hasil_st'] == 'HASIL_ST_02' || $this->form['hasil_st'] == 'HASIL_ST_03') {
             $this->bukaKeterangan = true;
         }
 
@@ -53,6 +55,11 @@ class UttpProsesComponent extends Component
             $this->form['cerapan_path'] = $path;
         }
 
+        if ($this->fileSkhp) {
+            $path = $this->fileSkhp->store('tera/skhp', 'gcs');
+            $this->form['skhp_path'] = $path;
+        }
+
         PengajuanUttp::find($this->idnya)->update($this->form);
 
         $this->resetInputFields();
@@ -64,8 +71,17 @@ class UttpProsesComponent extends Component
             title: 'Good job!',
             text: 'You clicked the button!',
             icon: 'success',
-          })
+            }).then((result) => {
+                if (result.isConfirmed) {
+                $wire.kembali()
+                }
+            });
         JS);
+    }
+
+    public function kembali()
+    {
+        redirect(route('permohonan-proses', $this->pengajuanId));
     }
 
     public function cancelForm()

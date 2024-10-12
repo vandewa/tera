@@ -233,7 +233,7 @@
                                               <p>Metode</p>
                                           </a>
                                       </li>
-                                      <li class="nav-item">
+                                      {{-- <li class="nav-item">
                                           <a href="{{ route('master.telusuran') }}"
                                               class="nav-link {{ Request::segment(2) == 'telusuran' ? 'active' : '' }}">
                                               @if (Request::segment(2) == 'telusuran')
@@ -243,7 +243,7 @@
                                               @endif
                                               <p>Telusuran</p>
                                           </a>
-                                      </li>
+                                      </li> --}}
                                       <li class="nav-item">
                                           <a href="{{ route('master.standar') }}"
                                               class="nav-link {{ Request::segment(2) == 'standar' ? 'active' : '' }}">

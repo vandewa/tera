@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Components;
 
-use App\Models\DokumenPemeriksaan;
 use Livewire\Component;
-use App\Models\Pemeriksaan;
+use App\Jobs\kirimPesan;
 use App\Models\Pengajuan;
+use App\Models\Pemeriksaan;
 use Livewire\WithFileUploads;
+use App\Models\DokumenPemeriksaan;
+use App\Models\PengajuanUttp;
+use App\Models\Uttp;
 
 class InfoPengajuanComponent extends Component
 {
@@ -40,14 +43,14 @@ class InfoPengajuanComponent extends Component
             ]);
         }
 
-        if ($this->skhp) {
-            $path_skhp = $this->skhp->store('tera/dokumen-pemeriksaan', 'gcs');
-            DokumenPemeriksaan::create([
-                'pemeriksaan_id' => $this->pemeriksaan->id,
-                'jenis_dokumen_tp' => 'JENIS_DOKUMEN_TP_01',
-                'path' => $path_skhp,
-            ]);
-        }
+        // if ($this->skhp) {
+        //     $path_skhp = $this->skhp->store('tera/dokumen-pemeriksaan', 'gcs');
+        //     DokumenPemeriksaan::create([
+        //         'pemeriksaan_id' => $this->pemeriksaan->id,
+        //         'jenis_dokumen_tp' => 'JENIS_DOKUMEN_TP_01',
+        //         'path' => $path_skhp,
+        //     ]);
+        // }
 
 
         $this->showSuccessMessage('You clicked the button!');
@@ -110,6 +113,10 @@ class InfoPengajuanComponent extends Component
     {
         $data = Pemeriksaan::with(['pengajuan.user', 'standar', 'petugas', 'penandatangan', 'hasil', 'berhak', 'telusurannya', 'metodenya'])->where('pengajuan_id', $this->idnya)->first();
 
+        $uttp = Uttp::with('pengajuan')->whereHas('pengajuan', function ($a) {
+            $a->where('pengajuan_id', $this->idnya);
+        })->get();
+
         $pathKartuOrder = DokumenPemeriksaan::where('pemeriksaan_id', $this->pemeriksaan->id)->where('jenis_dokumen_tp', 'JENIS_DOKUMEN_TP_01')->first();
 
         $pathSkhp = DokumenPemeriksaan::where('pemeriksaan_id', $this->pemeriksaan->id)->where('jenis_dokumen_tp', 'JENIS_DOKUMEN_TP_02')->first();
@@ -119,6 +126,7 @@ class InfoPengajuanComponent extends Component
             'items' => $data,
             'pathKartuOrder' => $pathKartuOrder,
             'pathSkhp' => $pathSkhp,
+            'uttp' => $uttp,
         ]);
     }
 }

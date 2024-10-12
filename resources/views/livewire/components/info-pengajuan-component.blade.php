@@ -39,16 +39,16 @@
                     </a>
                 </p>
                 <p class="card-text">Metode: <span class="text-muted">{{ $items->metodenya->nama ?? '-' }}</span></p>
-                <p class="card-text">Telusuran: <span class="text-muted">{{ $items->telusurannya->nama ?? '' }}</span>
-                </p>
+                {{-- <p class="card-text">Telusuran: <span class="text-muted">{{ $items->telusurannya->nama ?? '' }}</span>
+                </p> --}}
 
             </div>
 
             <div class="col-md-6">
 
-                <p class="card-text">Pegawai Berhak:
+                {{-- <p class="card-text">Pegawai Berhak:
                     <span class="text-muted">{{ $items->berhak->name ?? '' }}</span>
-                </p>
+                </p> --}}
 
                 <p class="card-text">Penandatangan:
                     <span class="text-muted">{{ $items->penandatangan->name ?? '' }}</span>
@@ -92,10 +92,26 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'skhp']) }}"
+                <div class="btn-group">
+                    <button type="button" class="btn btn-dark"> <i class="fas fa-download mr-2"></i>Surat Keterangan
+                        (SKHP)
+                    </button>
+                    <button type="button" class="btn btn-dark dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+                        @foreach ($uttp as $list)
+                            <a class="dropdown-item"
+                                href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'skhp', 'uttp_id' => $list->id]) }}">
+                                {{ $list->nama }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- <a href="{{ route('helper.generate-data', ['id' => $items->id, 'jenis_download' => 'skhp']) }}"
                     class="btn btn-dark btn-block">
                     <i class="fas fa-download"></i> Surat Keterangan (SKHP)
-                </a>
+                </a> --}}
             </div>
         </div>
 
@@ -145,7 +161,7 @@
 
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="inputEmail3" class="col-md-2 col-form-label">SKHP</label>
                         <div class="col-md-7">
                             <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
@@ -179,10 +195,10 @@
                             </div>
                         @endif
 
-                    </div>
+                    </div> --}}
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-primary btn-block"><i
-                                class="fas fa-save mr-2"></i>Simpan Dokumen</button>
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save mr-2"></i>Simpan
+                            Dokumen</button>
                     </div>
 
                     <hr>
