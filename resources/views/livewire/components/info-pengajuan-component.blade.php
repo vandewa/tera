@@ -50,6 +50,10 @@
                     <span class="text-muted">{{ $items->berhak->name ?? '' }}</span>
                 </p> --}}
 
+                <p class="card-text">Dasar Pengujian:
+                    <span class="text-muted">{{ $items->dasar ?? '' }}</span>
+                </p>
+
                 <p class="card-text">Penandatangan:
                     <span class="text-muted">{{ $items->penandatangan->name ?? '' }}</span>
                 </p>
