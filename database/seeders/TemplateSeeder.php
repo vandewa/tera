@@ -21,6 +21,7 @@ class TemplateSeeder extends Seeder
             ['nama' => 'formulir_permohonan'],
             ['nama' => 'skhp'],
             ['nama' => 'tanda_terima'],
+            ['nama' => 'ba'],
         ];
 
         foreach ($data as $datum) {

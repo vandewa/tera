@@ -47,9 +47,9 @@
 
                                         </div>
                                         <div class="text-right col-md-12">
-                                            <a href="#" class="btn btn-info" data-toggle="tooltip"
-                                                data-placement="top" title="Downbload Berita Acara"><span
-                                                    class="fas fa-download"></span></a>
+                                            <a href="{{ route('laporan.ba-cetak', ['id' => $idnya, 'jenis_download' => 'ba']) }}"
+                                                class="btn btn-info" data-toggle="tooltip" data-placement="top"
+                                                title="Downbload Berita Acara"><span class="fas fa-download"></span></a>
                                             <button class="btn btn-primary"><span class="fas fa-pencil"
                                                     data-toggle="tooltip" data-placement="top"
                                                     title="Update data sah dan tidak sah"></span></button>

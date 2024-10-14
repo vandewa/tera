@@ -102,6 +102,10 @@
                                                                             </button>
                                                                             <ul class="dropdown-menu" style="">
                                                                                 <li><a class="dropdown-item"
+                                                                                        href="{{ route('permohonan.detail.show', $datum->id) }}"><i
+                                                                                            class="fas fa-download mr-2"></i>Unduh</a>
+                                                                                </li>
+                                                                                <li><a class="dropdown-item"
                                                                                         href="{{ route('permohonan.create', $datum->id) }}"><i
                                                                                             class="far fa-edit mr-2"></i>Edit</a>
                                                                                 </li>

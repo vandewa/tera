@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalTera;
 use App\Models\Pemeriksaan;
 use App\Models\Pengajuan;
 use App\Models\PengajuanUttp;
@@ -13,6 +14,7 @@ use PhpOffice\PhpWord\Style\Font;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -449,6 +451,67 @@ class CetakController extends Controller
 
         $templateProcessor->saveAs($pathToSave);
         return response()->download($pathToSave)->deleteFileAfterSend(true);
+    }
+
+    public function baCetak(Request $request) {
+
+        Carbon::setLocale('id');
+        $dokumen = TemplateDokumen::where('nama', $request->jenis_download)->first();
+
+
+
+        $lokasi = public_path('' . $dokumen->path);
+
+        $lokasi = public_path('' . $dokumen->path);
+
+        $templateProcessor = new TemplateProcessor($lokasi);
+        $data = JadwalTera::find($request->id);
+
+        $tanggalPemeriksaanPlusOneYear = Carbon::createFromFormat('Y-m-d', $data->tanggal_mulai)
+        ->locale('id')
+        ->addYear()
+        ->isoFormat('D MMMM YYYY');
+
+        $results = DB::table('peserta_sidangs as ps')
+        ->join('peserta_sidang_uttps as psu', 'ps.id', '=', 'psu.peserta_sidang_id')
+        ->join('uttps as u', 'u.id', '=', 'psu.uttp_id')
+        ->select('u.nama', DB::raw('SUM(psu.jumlah) as jumlah'))
+        ->where('ps.jadwal_tera_id', $request->id)
+        ->groupBy('u.nama')
+        ->get();
+
+        $uttp = [];
+        $index = 1;
+        $totalJumlah = 0;
+
+        foreach ($results ?? [] as $item) {
+            array_push($uttp, [
+                'uttp_no' => $index.".",
+                'nama' => $item->nama . ".",
+                'jumlah' => $item->jumlah ?? ""
+            ]);
+            $totalJumlah += (is_numeric($item->jumlah) ? $item->jumlah : 0);
+            $index = $index + 1;
+        }
+
+        $templateProcessor->cloneRowAndSetValues('uttp_no', $uttp);
+
+        $templateProcessor->setValues([
+            'hari' => Carbon::parse($data->tanggal_mulai)->translatedFormat('l'),
+            'tanggal' => Carbon::parse($data->tanggal_mulai)->translatedFormat('d F Y'),
+            'tanggal_mulai' => Carbon::parse($data->tanggal_mulai)->translatedFormat('d F Y'),
+            'lokasi' => $data->lokasi,
+            'total' => $totalJumlah,
+            'sah' => '',
+            'batal' => ''
+        ]);
+
+        $randomFileName = Str::random(16).".docx";
+
+        $pathToSave = public_path('template/' . $randomFileName);
+        $templateProcessor->saveAs($pathToSave);
+        return response()->download($pathToSave)->deleteFileAfterSend(true);
+
     }
 
 }

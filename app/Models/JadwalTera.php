@@ -32,4 +32,8 @@ class JadwalTera extends Model
     {
         return $this->belongsTo(ComCode::class, 'jadwal_tera_st');
     }
+
+    public function peserta() {
+
+    }
 }

@@ -26,6 +26,7 @@ use App\Http\Controllers\RegisterController;
 use App\Livewire\Admin\ProsesSidangTeraPage;
 use App\Livewire\Permohonan\PermohonanFormPage;
 use App\Http\Controllers\PasswordResetController;
+use App\Livewire\DetailPermohonanPage;
 use App\Livewire\JadwalTeraPeserta;
 use App\Livewire\SidangTeraBeritaAcara;
 use App\Livewire\Standar;
@@ -67,6 +68,8 @@ Route::middleware([
     Route::post('laporan/triwulan', [LaporanController::class, 'storeTriwulan'])->name('store.triwulan');
     Route::post('laporan/global', [LaporanController::class, 'storeGlobal'])->name('store.global');
     Route::get('laporan/sidang', [LaporanController::class, 'rekapSidang'])->name('laporan.rekap-sidang');
+    Route::get('laporan/ba', [CetakController::class, 'baCetak'])->name('laporan.ba-cetak');
+    Route::get('permohonan/show/{id}', DetailPermohonanPage::class)->name('permohonan.detail.show');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('permohonan/{id?}', Permohonan::class)->name('permohonan');
