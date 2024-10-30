@@ -36,7 +36,12 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $datum->uttp->nama ?? '-' }}</td>
-                                            <td></td>
+                                            <td>
+                                                @if ($datum->skhp_path)
+                                                    <a href="{{ route('helper.show-picture', $datum->skhp_path) }}"
+                                                        class="btn btn-primary">Unduh SKHP</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
