@@ -133,7 +133,7 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">Hasil</label>
-                                            <select id="hasil_st" class="form-control" wire:model.live="form.hasil_st">
+                                            <select class="form-control" wire:model.live="form.hasil_st">
                                                 <option value="">Pilih Hasil</option>
                                                 @foreach ($hasil as $item)
                                                     <option value="{{ $item->com_cd }}">{{ $item->code_nm }}</option>

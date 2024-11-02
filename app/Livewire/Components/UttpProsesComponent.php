@@ -47,8 +47,11 @@ class UttpProsesComponent extends Component
         $this->validate([
             'files' => 'required_if:form.cerapan_path,null',
             'form.hasil_st' => 'required',
-            'form.keterangan_hasil' => 'required_if:form.hasil_st,HASIL_ST_02,HASIL_ST_03|string',
+            'form.keterangan_hasil' => [
+                'required_if:form.hasil_st,HASIL_ST_02,HASIL_ST_03'
+            ],
         ]);
+
 
         if ($this->files) {
             $path = $this->files->store('tera/cerapan', 'gcs');
