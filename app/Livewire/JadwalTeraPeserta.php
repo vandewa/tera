@@ -33,16 +33,19 @@ class JadwalTeraPeserta extends Component
 
 
 
-    public function namaUttp($id) {
+    public function namaUttp($id)
+    {
         return Uttp::find($id);
     }
 
-    public function mount($id = "") {
+    public function mount($id = "")
+    {
         $this->idnya = $id;
         $this->listUttp = Uttp::all();
     }
 
-    public function tambahUttp() {
+    public function tambahUttp()
+    {
         // Validasi input
         try {
             $this->validate([
@@ -79,20 +82,23 @@ class JadwalTeraPeserta extends Component
             }
         } else {
             // Jika tidak ada, tambahkan data baru ke uttpPeserta
-            array_push($this->uttpPeserta, (array)$this->uttp);
+            array_push($this->uttpPeserta, (array) $this->uttp);
         }
 
-        $this->uttp = ['uttp_id' => null,
-        'jumlah' => null];
+        $this->uttp = [
+            'uttp_id' => null,
+            'jumlah' => null
+        ];
     }
 
-    public function simpan() {
+    public function simpan()
+    {
         $this->validate([
             'form.nama' => 'required',
             'form.telepon' => 'required'
         ]);
 
-        if(!count($this->uttpPeserta)) {
+        if (!count($this->uttpPeserta)) {
             $this->js(<<<JS
                 Swal.fire({
                 icon: 'error',
@@ -101,18 +107,18 @@ class JadwalTeraPeserta extends Component
                 });
             JS);
 
-         return;
+            return;
         }
-        if(!$this->idEdit){
-            $data = PesertaSidang::create($this->form+['jadwal_tera_id' => $this->idnya]);
-            foreach($this->uttpPeserta as $item){
+        if (!$this->idEdit) {
+            $data = PesertaSidang::create($this->form + ['jadwal_tera_id' => $this->idnya]);
+            foreach ($this->uttpPeserta as $item) {
                 $data->uttpPesertaSidang()->create($item);
             }
         } else {
             PesertaSidang::where('id', $this->idEdit)->update($this->form);
             PesertaSidangUttp::where('peserta_sidang_id', $this->idEdit)->delete();
-            foreach($this->uttpPeserta as $item){
-                PesertaSidangUttp::create($item+['peserta_sidang_id' => $this->idEdit]);
+            foreach ($this->uttpPeserta as $item) {
+                PesertaSidangUttp::create($item + ['peserta_sidang_id' => $this->idEdit]);
             }
 
         }
@@ -122,36 +128,39 @@ class JadwalTeraPeserta extends Component
 
     }
 
-    public function bersihkan() {
+    public function bersihkan()
+    {
         $this->uttpPeserta = [];
         $this->form = [
             'nama' => null,
             'telepon' => null
         ];
-        $this->idnya =  null;
+        // $this->idnya =  null;
     }
 
-    public function hapusTemporartyUttp($id) {
+    public function hapusTemporartyUttp($id)
+    {
 
         unset($this->uttpPeserta[$id]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $this->bersihkan();
         $this->idEdit = $id;
         $data = PesertaSidang::with(['uttpPesertaSidang'])->find($id);
         $this->form['nama'] = $data->nama;
         $this->form['telepon'] = $data->telepon;
-        foreach($data->uttpPesertaSidang??[] as $item){
+        foreach ($data->uttpPesertaSidang ?? [] as $item) {
             array_push($this->uttpPeserta, ['uttp_id' => $item->uttp_id, 'jumlah' => $item->jumlah]);
         }
     }
 
     public function render()
     {
-       $data =  PesertaSidang::with(['uttpPesertaSidang.uttp'])->where('jadwal_tera_id', $this->idnya)
-       ->orderBy('updated_at', 'desc')
-       ->paginate(10);
+        $data = PesertaSidang::with(['uttpPesertaSidang.uttp'])->where('jadwal_tera_id', $this->idnya)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
         return view('livewire.jadwal-tera-peserta', [
             'data' => $data
         ]);
