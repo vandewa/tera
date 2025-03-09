@@ -12,7 +12,7 @@ class InfoJadwalTera extends Component
     public function mount($id = "")
     {
         // Mengambil satu instance JadwalTera, misalnya yang pertama
-        $this->jadwalTera = JadwalTera::find($id);
+        $this->jadwalTera = JadwalTera::with(['status'])->find($id);
     }
     public function render()
     {

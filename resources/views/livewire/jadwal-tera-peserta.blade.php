@@ -138,7 +138,10 @@
                                                         </ul>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-sm">Hapus</button>
+                                                        <button type="button" class="btn btn-danger btn-flat btn-sm"
+                                                            wire:click="delete('{{ $item->id }}')"><i
+                                                                class="fas fa-trash"></i>
+                                                        </button>
                                                         <button class="btn btn-warning btn-sm"
                                                             wire:click='edit({{ $item->id }})'>Edit</button>
                                                     </td>
