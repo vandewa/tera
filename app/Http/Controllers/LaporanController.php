@@ -26,8 +26,8 @@ class LaporanController extends Controller
         ]);
 
 
-        dd($request);
-        return Excel::download(new SidangTeraExport($request), 'laporan-triwulan.xlsx');
+
+        return Excel::download(new TriwulanExport($request), 'laporan-triwulan.xlsx');
 
     }
 
