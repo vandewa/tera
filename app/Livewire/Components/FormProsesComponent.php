@@ -68,7 +68,7 @@ class FormProsesComponent extends Component
         // dd($this->idnya);
 
         $a = PengajuanUttp::with(['pengajuannya.user'])->where('pengajuan_id', $this->idnya)->first();
-        $this->wa = $a->pengajuannya->user->wa;
+        $this->wa = $a->pengajuannya->user->wa??"-";
 
         $this->users = User::whereHasRole(['penera', 'administrator', 'superadministrator'])->get();
         $this->penandatangan = User::whereHasRole('kepala_dinas')->get();
