@@ -37,6 +37,8 @@
                 <th>ORDER</th>
                 <th>TANGGAL</th>
                 <th>PEMILIK</th>
+                <th>NAMA PERUSAHAAN</th>
+                <th>NO HP</th>
                 <th>LOKASI</th>
                 <th>UTTP</th>
                 <th>JUMLAH</th>
@@ -56,6 +58,8 @@
                                 <td rowspan="{{ $itemCount }}">{{ str_pad($rowNumber, 3, '0', STR_PAD_LEFT) }}'</td>
                                 <td rowspan="{{ $itemCount }}">{{ \Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y') }}</td>
                                 <td rowspan="{{ $itemCount }}" style="text-align:left;">{{ $pengajuan->user->name ?? '-' }}</td>
+                                <td rowspan="{{ $itemCount }}" style="text-align:left;">{{ $pengajuan->user->nama_usaha ?? '-' }}</td>
+                                <td rowspan="{{ $itemCount }}">{{ $pengajuan->user->wa ?? '-' }}</td>
                                 <td rowspan="{{ $itemCount }}" style="text-align:left;">{{ $pengajuan->alamat ?? '-' }}</td>
                                 @php $firstItem = false; @endphp
                             @endif
@@ -68,6 +72,8 @@
                         <td>{{ str_pad($rowNumber, 3, '0', STR_PAD_LEFT) }}'</td>
                         <td>{{ \Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y') }}</td>
                         <td style="text-align:left;">{{ $pengajuan->user->name ?? '-' }}</td>
+                        <td style="text-align:left;">{{ $pengajuan->user->nama_usaha ?? '-' }}</td>
+                        <td>{{ $pengajuan->user->wa ?? '-' }}</td>
                         <td style="text-align:left;">{{ $pengajuan->alamat ?? '-' }}</td>
                         <td style="text-align:left;">-</td>
                         <td>0</td>

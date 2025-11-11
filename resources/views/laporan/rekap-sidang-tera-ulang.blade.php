@@ -37,6 +37,9 @@
                 <th>NO</th>
                 <th>TANGGAL</th>
                 <th>LOKASI</th>
+                <th>PEMILIK</th>
+                <th>NAMA PERUSAHAAN</th>
+                <th>NO HP</th>
                 <th>UTTP</th>
                 <th>JUMLAH</th>
                 <th>TOTAL</th>
@@ -55,6 +58,9 @@
                                 <td rowspan="{{ $uttpCount }}">{{ $item['no'] }}</td>
                                 <td rowspan="{{ $uttpCount }}">{{ \Carbon\Carbon::parse($item['tanggal_mulai'])->format('d/m/Y') }}</td>
                                 <td rowspan="{{ $uttpCount }}" style="text-align:left;">{{ $item['lokasi'] }}</td>
+                                <td rowspan="{{ $uttpCount }}" style="text-align:left;">{{ $item['user_name'] }}</td>
+                                <td rowspan="{{ $uttpCount }}" style="text-align:left;">{{ $item['nama_usaha'] }}</td>
+                                <td rowspan="{{ $uttpCount }}">{{ $item['wa'] }}</td>
                                 @php $firstRow = false; @endphp
                             @endif
                             <td style="text-align:left;">{{ $uttpNama }}</td>
@@ -69,6 +75,9 @@
                         <td>{{ $item['no'] }}</td>
                         <td>{{ \Carbon\Carbon::parse($item['tanggal_mulai'])->format('d/m/Y') }}</td>
                         <td style="text-align:left;">{{ $item['lokasi'] }}</td>
+                        <td style="text-align:left;">{{ $item['user_name'] }}</td>
+                        <td style="text-align:left;">{{ $item['nama_usaha'] }}</td>
+                        <td>{{ $item['wa'] }}</td>
                         <td style="text-align:left;">-</td>
                         <td>0</td>
                         <td><b>0</b></td>
@@ -76,7 +85,7 @@
                 @endif
             @endforeach
             <tr>
-                <th colspan="5">TOTAL KESELURUHAN</th>
+                <th colspan="8">TOTAL KESELURUHAN</th>
                 <th>{{ $data->sum('total') }}</th>
             </tr>
         </tbody>
