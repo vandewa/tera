@@ -460,9 +460,9 @@ class CetakController extends Controller
 
 
 
-        $lokasi = public_path('' . $dokumen->path);
 
-        $lokasi = public_path('' . $dokumen->path);
+
+        $lokasi = public_path('storage/' . $dokumen->path);
 
         $templateProcessor = new TemplateProcessor($lokasi);
         $data = JadwalTera::find($request->id);

@@ -119,7 +119,7 @@ class Permohonan extends Component
             });
             }
 
-        $hasil = $data->paginate(10);
+        $hasil = $data->orderby('created_at', 'desc')->paginate(10);
         return view('livewire.admin.permohonan', [
             'post' => $hasil,
         ]);
