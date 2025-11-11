@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SidangTeraExport;
 use Illuminate\Support\Facades\DB;
 use App\Exports\TriwulanExport;
+use App\Exports\RekapPelayananExport;
+use App\Exports\RekapSidangTeraUlangExport;
 
 class LaporanController extends Controller
 {
@@ -53,4 +55,28 @@ class LaporanController extends Controller
     //     // return Excel::download(new RekapPertanggalExport($request), 'namafiledownload.xlsx');
 
     // }
+
+    public function rekapPelayanan(Request $request)
+    {
+        $request->validate([
+            'tahun' => 'required|numeric|digits:4',
+        ]);
+
+        return Excel::download(
+            new RekapPelayananExport($request->tahun),
+            'rekap-pelayanan-' . $request->tahun . '.xlsx'
+        );
+    }
+
+    public function rekapSidangTeraUlang(Request $request)
+    {
+        $request->validate([
+            'tahun' => 'required|numeric|digits:4',
+        ]);
+
+        return Excel::download(
+            new RekapSidangTeraUlangExport($request->tahun),
+            'rekap-sidang-tera-ulang-' . $request->tahun . '.xlsx'
+        );
+    }
 }

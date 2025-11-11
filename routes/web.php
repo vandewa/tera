@@ -69,6 +69,8 @@ Route::middleware([
     Route::post('laporan/global', [LaporanController::class, 'storeGlobal'])->name('store.global');
     Route::get('laporan/sidang', [LaporanController::class, 'rekapSidang'])->name('laporan.rekap-sidang');
     Route::get('laporan/ba', [CetakController::class, 'baCetak'])->name('laporan.ba-cetak');
+    Route::post('laporan/rekap-pelayanan', [LaporanController::class, 'rekapPelayanan'])->name('laporan.rekap-pelayanan');
+    Route::post('laporan/rekap-sidang-tera-ulang', [LaporanController::class, 'rekapSidangTeraUlang'])->name('laporan.rekap-sidang-tera-ulang');
     Route::get('permohonan/show/{id}', DetailPermohonanPage::class)->name('permohonan.detail.show');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

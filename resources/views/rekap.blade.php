@@ -74,6 +74,62 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card card-success card-outline card-tabs">
+                    <form class="mt-2 form-horizontal" action="{{ route('laporan.rekap-pelayanan') }}" method="post">
+                        @csrf
+                        <div class="card-header">
+                            <h5>Rekap Pelayanan</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-2 row">
+                                <label for="tahun_pelayanan" class="col-sm-12 col-form-label">Tahun
+                                    <small class="text-danger">*</small>
+                                </label>
+                                <div class="col-sm-12">
+                                    <input type="number" name="tahun" id="tahun_pelayanan" class="form-control"
+                                           placeholder="Contoh: 2025" value="{{ date('Y') }}" min="2020" max="{{ date('Y') + 1 }}">
+                                    @error('tahun')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 card-footer">
+                            <button type="submit" class="btn btn-success">Download Excel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-success card-outline card-tabs">
+                    <form class="mt-2 form-horizontal" action="{{ route('laporan.rekap-sidang-tera-ulang') }}" method="post">
+                        @csrf
+                        <div class="card-header">
+                            <h5>Rekap Sidang Tera/Tera Ulang</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-2 row">
+                                <label for="tahun_sidang" class="col-sm-12 col-form-label">Tahun
+                                    <small class="text-danger">*</small>
+                                </label>
+                                <div class="col-sm-12">
+                                    <input type="number" name="tahun" id="tahun_sidang" class="form-control"
+                                           placeholder="Contoh: 2025" value="{{ date('Y') }}" min="2020" max="{{ date('Y') + 1 }}">
+                                    @error('tahun')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 card-footer">
+                            <button type="submit" class="btn btn-success">Download Excel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 @endsection
